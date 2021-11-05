@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="edu.uw.tcss450.lab3_authentication.ui.HomeFragment"
+        android:name="edu.uw.tcss450.messaging_final_project.ui.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/navigation_account"
-        android:name="edu.uw.tcss450.lab3_authentication.ui.account.AccountFragment"
+        android:name="edu.uw.tcss450.messaging_final_project.ui.account.AccountFragment"
         android:label="@string/title_account"
         tools:layout="@layout/fragment_account" />
     <fragment
         android:id="@+id/navigation_contacts"
-        android:name="edu.uw.tcss450.lab3_authentication.ui.contacts.ContactsFragment"
+        android:name="edu.uw.tcss450.messaging_final_project.ui.contacts.ContactsFragment"
         android:label="@string/title_contacts"
         tools:layout="@layout/fragment_contacts" />
     <fragment
         android:id="@+id/navigation_messages"
-        android:name="edu.uw.tcss450.lab3_authentication.ui.messages.MessagesFragment"
+        android:name="edu.uw.tcss450.messaging_final_project.ui.messages.MessagesFragment"
         android:label="@string/title_messages"
         tools:layout="@layout/fragment_messages" />
     <fragment
         android:id="@+id/navigation_weather"
-        android:name="edu.uw.tcss450.lab3_authentication.ui.weather.WeatherFragment"
+        android:name="edu.uw.tcss450.messaging_final_project.ui.weather.WeatherFragment"
         android:label="@string/title_weather"
         tools:layout="@layout/fragment_weather" />
 </navigation>
