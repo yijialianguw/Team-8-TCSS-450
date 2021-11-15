@@ -116,8 +116,8 @@ public class RegisterFragment extends Fragment {
                 result -> binding.editPassword1.setError("Please enter a valid Password.\n\n" +
                         "Must include: \n" +
                         "- At least 7 characters \n" +
-                        "- Includes a special character \n" +
-                        "- Includes a number"));
+                        "- A special character \n" +
+                        "- A number"));
     }
 
     private void verifyAuthWithServer() {
