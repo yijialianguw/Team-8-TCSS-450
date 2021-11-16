@@ -22,9 +22,9 @@
         tools:layout="@layout/fragment_contacts" />
     <fragment
         android:id="@+id/navigation_messages"
-        android:name="edu.uw.tcss450.messaging_final_project.ui.messages.MessagesFragment"
+        android:name="edu.uw.tcss450.messaging_final_project.ui.chat.ChatFragment"
         android:label="@string/title_messages"
-        tools:layout="@layout/fragment_messages" />
+        tools:layout="@layout/fragment_chat" />
     <fragment
         android:id="@+id/navigation_weather"
         android:name="edu.uw.tcss450.messaging_final_project.ui.weather.WeatherFragment"
