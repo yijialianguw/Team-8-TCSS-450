@@ -17,6 +17,7 @@ public class RequestQueueSingleton {
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
 
+    // this class seems to be responsible for sending http requests
     private RequestQueueSingleton(Context context) {
         RequestQueueSingleton.context = context;
         mRequestQueue = getmRequestQueue();

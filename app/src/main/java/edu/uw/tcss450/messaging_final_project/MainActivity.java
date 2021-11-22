@@ -39,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        /*
+         * These bundle values come from when SingInFragment navigates to MainActivity.
+         * It passes 'jwt' and 'email' as arguments.
+         * This can be seen in the auth_graph.xml where there is a 'action_loginFragment_to_mainActivity' action.
+         * This action has those 'jwt' and 'email' arguments.
+         */
         MainActivityArgs args = MainActivityArgs.fromBundle(getIntent().getExtras());
 
         new ViewModelProvider(this,

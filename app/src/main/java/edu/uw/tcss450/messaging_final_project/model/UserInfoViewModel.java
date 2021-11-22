@@ -24,6 +24,9 @@ public class UserInfoViewModel extends ViewModel {
 
     public static class UserInfoViewModelFactory implements ViewModelProvider.Factory {
 
+        /*
+         * This factory is used in the onCreate() in MainActivity
+         */
         private final String email;
         private final String jwt;
 
