@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import edu.uw.tcss450.messaging_final_project.MainActivity;
 import edu.uw.tcss450.messaging_final_project.R;
 
 /**
@@ -21,4 +22,5 @@ public class AccountFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_account, container, false);
     }
+
 }

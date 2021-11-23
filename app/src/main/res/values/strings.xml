@@ -20,6 +20,12 @@
     <string name="title_account">Account</string>
 
     <string name="base_url">https://team8-tcss450-server.herokuapp.com/</string>
+
+    <string name="switch_sign_in">Stay Signed in</string>
+    <string name="keys_shared_prefs">My App Shared Prefs</string>
+    <string name="keys_prefs_jwt">Sharded Prefs JWT</string>
+    <string name="action_sign_out">Sign Out</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

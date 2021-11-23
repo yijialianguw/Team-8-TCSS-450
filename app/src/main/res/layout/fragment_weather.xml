@@ -8,12 +8,7 @@
     android:background="@color/black_shade_1"
     tools:context=".ui.weather.WeatherFragment">
 
-    <ProgressBar
-        android:id="@+id/idPBLoading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="visible"/>
+    //PROGRESS BAR
 
     <RelativeLayout
         android:id="@+id/RLHome"
