@@ -37,7 +37,7 @@ public class PushReceiver extends BroadcastReceiver {
         //for your project, the WS needs to send different types of push messages.
         //So perform logic/routing based on the "type"
         //feel free to change the key or type of values.
-        String typeOfMessage = intent.getStringExtra("type");
+        String typeOfMessage = intent.getStringExtra("type");// TODO: change the "type" string?
         ChatMessage message = null;
         int chatId = -1;
         try{

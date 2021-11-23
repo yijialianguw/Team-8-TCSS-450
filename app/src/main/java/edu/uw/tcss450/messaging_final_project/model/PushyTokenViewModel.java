@@ -106,6 +106,7 @@ public class PushyTokenViewModel extends AndroidViewModel{
 
     /**
      * Send this Pushy device token to the web service.
+     * Pushy Register.
      * @param jwt
      * @throws IllegalStateException when this method is called before the token is retrieve
      */
