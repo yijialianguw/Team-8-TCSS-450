@@ -88,6 +88,11 @@ public class PushyTokenViewModel extends AndroidViewModel{
             return deviceToken;
         }
 
+        /**
+         * Once Pushy sends back the token, we set the token value in the view model.
+         * This method is executed automatically when the token is sent back by Pushy.
+         * @param token the Pushy token that Pushy sends back
+         */
         @Override
         protected void onPostExecute(String token) {
             if (token.isEmpty()) {
@@ -101,6 +106,7 @@ public class PushyTokenViewModel extends AndroidViewModel{
 
     /**
      * Send this Pushy device token to the web service.
+     * Pushy Register.
      * @param jwt
      * @throws IllegalStateException when this method is called before the token is retrieve
      */

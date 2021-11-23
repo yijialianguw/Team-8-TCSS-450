@@ -21,7 +21,7 @@
         android:label="@string/title_contacts"
         tools:layout="@layout/fragment_contacts" />
     <fragment
-        android:id="@+id/navigation_messages"
+        android:id="@+id/navigation_chat"
         android:name="edu.uw.tcss450.messaging_final_project.ui.chat.ChatFragment"
         android:label="@string/title_messages"
         tools:layout="@layout/fragment_chat" />
