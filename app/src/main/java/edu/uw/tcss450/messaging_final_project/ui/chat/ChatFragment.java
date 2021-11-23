@@ -17,6 +17,7 @@ import edu.uw.tcss450.messaging_final_project.model.UserInfoViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
+ * Contains chat messages for a single chat room.
  */
 public class ChatFragment extends Fragment {
 

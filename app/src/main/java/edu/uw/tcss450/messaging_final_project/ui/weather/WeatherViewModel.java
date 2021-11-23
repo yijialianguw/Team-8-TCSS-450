@@ -27,6 +27,9 @@ import java.util.Objects;
 import edu.uw.tcss450.messaging_final_project.R;
 import edu.uw.tcss450.messaging_final_project.io.RequestQueueSingleton;
 
+/**
+ * The View Model for Weather data.
+ */
 public class WeatherViewModel extends AndroidViewModel {
 
     private MutableLiveData<JSONObject> mResponse;

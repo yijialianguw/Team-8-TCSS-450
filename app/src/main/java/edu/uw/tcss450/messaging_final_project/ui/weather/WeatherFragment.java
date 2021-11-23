@@ -31,6 +31,7 @@ import edu.uw.tcss450.messaging_final_project.ui.chat.ChatViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
+ * Contains the weather information.
  */
 public class WeatherFragment extends Fragment {
 
@@ -66,7 +67,7 @@ public class WeatherFragment extends Fragment {
         mWeatherViewModel.addResponseObserver(getViewLifecycleOwner(), response -> {
             try {
                 JSONObject curr = response.getJSONObject("current");
-                String str = "Temperature: " + curr.getString("temp") + "\nSunrise: " + curr.getString("sunrise") + "\nSunset: " + curr.getString("sunset")+ "\nWeather: " + curr.getJSONArray("weather").getJSONObject(0).getString("main");
+                String str = "Temperature: " + curr.getString("temp") + " F\nSunrise: " + curr.getString("sunrise") + "\nSunset: " + curr.getString("sunset")+ "\nWeather: " + curr.getJSONArray("weather").getJSONObject(0).getString("main");
                 binding.editWeather.setText(str);
             } catch(Exception e){
 
