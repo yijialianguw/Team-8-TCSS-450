@@ -41,11 +41,12 @@ public class ChatListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentChatListBinding.bind(getView());
+
         chatListRVA = new ChatListRecyclerViewAdapter(new ArrayList<>(), this);
+
+        binding.listRoot.setAdapter(chatListRVA);
         mModel.addChatListObserver(getViewLifecycleOwner(), chatList -> {
-            if (!chatList.isEmpty()) {
-                chatListRVA.setChatroom(chatList);
-            }
+            chatListRVA.setChatroom(chatList);
         });
     }
 

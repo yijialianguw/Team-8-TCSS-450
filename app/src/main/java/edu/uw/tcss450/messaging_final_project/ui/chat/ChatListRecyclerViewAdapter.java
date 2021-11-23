@@ -22,13 +22,14 @@ import edu.uw.tcss450.messaging_final_project.databinding.FragmentChatCardBindin
 public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRecyclerViewAdapter.ChatViewHolder>{
 
     private List<Chatroom> mChats;
-    private final Map<Chatroom, Boolean> mExpandedFlags;
+    //private final Map<Chatroom, Boolean> mExpandedFlags;
     private final ChatListFragment chatListFragment;
 
+    //come back to this
     public ChatListRecyclerViewAdapter(List<Chatroom> chats, ChatListFragment frag) {
         this.mChats = chats;
         this.chatListFragment = frag;
-        mExpandedFlags = mChats.stream().collect(Collectors.toMap(Function.identity(), blog->false));
+        //mExpandedFlags = mChats.stream().collect(Collectors.toMap(Function.identity(), blog->false));
     }
 
     @NonNull
@@ -71,7 +72,7 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
             binding.buttonOpen.setOnClickListener(view ->
                     Navigation.findNavController(mView)
                             .navigate(ChatListFragmentDirections
-                                    .actionNavigationChatListToNavigationChat()));
+                                    .actionNavigationChatListToNavigationChat(mChat.getChatId(), mChat.getChatName())));
         }
     }
 
