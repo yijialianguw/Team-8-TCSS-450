@@ -88,8 +88,10 @@ public class SignInFragment extends Fragment {
         binding.editPassword.setText(args.getPassword().equals("default") ? "" : args.getPassword());
 
         //don't allow sign in until pushy token retrieved
-        mPushyTokenViewModel.addTokenObserver(getViewLifecycleOwner(), token ->
-                binding.buttonSignIn.setEnabled(!token.isEmpty()));
+        mPushyTokenViewModel.addTokenObserver(getViewLifecycleOwner(), token ->{
+                //Log.e("SignInFragment", "pushy token received?");
+                binding.buttonSignIn.setEnabled(!token.isEmpty());
+        });
 
         mPushyTokenViewModel.addResponseObserver(
                 getViewLifecycleOwner(),

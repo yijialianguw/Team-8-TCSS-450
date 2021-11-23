@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Messaging App</string>
+    <string name="app_name">SpookChats</string>
 
     <string name="hint_first">First Name</string>
     <string name="hint_last">Last Name</string>
