@@ -5,7 +5,7 @@
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_shade_1"
+    android:background="@color/colorPrimaryDark"
     android:foregroundTint="@color/colorAccent"
     tools:context=".ui.weather.WeatherFragment">
 
@@ -19,47 +19,58 @@
 
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/idTVCityName"
         android:layout_width="115dp"
         android:layout_height="43dp"
         android:text="City Name"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="24dp"
-        tools:layout_editor_absoluteY="58dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.179"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.101" />
 
     <ImageView
         android:id="@+id/idSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_search_black_24dp"
-        app:tint="@color/colorWhite"
-        tools:layout_editor_absoluteX="371dp"
-        tools:layout_editor_absoluteY="14dp"></ImageView>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.927"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.099"
+        app:tint="@color/colorWhite"></ImageView>
 
     <TextView
         android:id="@+id/idTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="308dp"
+        android:layout_marginBottom="296dp"
         android:gravity="center_horizontal"
         android:text="23"
         android:textColor="@color/colorWhite"
         android:textSize="85dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/idIcon"
+        android:id="@+id/idIVIcon"
         android:layout_width="133dp"
         android:layout_height="121dp"
         android:layout_marginBottom="8dp"
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintBottom_toTopOf="@+id/idTemp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.963" />
 
     <TextView
         android:id="@+id/idTitle"
@@ -70,22 +81,23 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
+        app:layout_constraintVertical_bias="0.019" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/idRvWeather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="196dp"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.733" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editCity"
@@ -102,11 +114,5 @@
         android:textSize="14sp">
 
     </com.google.android.material.textfield.TextInputEditText>
-
-    <TextView
-        android:id="@+id/edit_weather"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

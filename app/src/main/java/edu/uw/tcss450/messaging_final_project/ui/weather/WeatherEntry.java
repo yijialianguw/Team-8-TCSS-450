@@ -1,13 +1,13 @@
 package edu.uw.tcss450.messaging_final_project.ui.weather;
 
-public class WeatherRVModal {
+public class WeatherEntry {
 
     private String time;
     private String temperature;
     private String icon;
     private String windSpeed;
 
-    public WeatherRVModal (String time, String temperature, String icon, String windSpeed){
+    public WeatherEntry(String time, String temperature, String icon, String windSpeed){
         this.time = time;
         this.temperature = temperature;
         this.icon = icon;

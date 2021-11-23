@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.auth0.android.jwt.JWT;
 import com.google.android.material.badge.BadgeDrawable;
@@ -37,10 +38,12 @@ public class MainActivity extends AppCompatActivity {
     private MainPushMessageReceiver mPushMessageReceiver;
     private ActivityMainBinding binding;
     private NewMessageCountViewModel mNewMessageModel;
+    private TextView cityNameTV, temperatureTV, conditionTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        temperatureTV = findViewById(R.id.idTVtemperature);
 
         /*
          * These bundle values come from when SingInFragment navigates to MainActivity.
@@ -93,17 +96,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            //TODO open a settings fragment
-            Log.d("SETTINGS", "Clicked");
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

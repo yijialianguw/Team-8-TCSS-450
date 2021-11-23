@@ -3,8 +3,7 @@
     android:layout_width="100dp"
     android:layout_gravity="center"
     android:layout_margin="4dp"
-    android:cardElevation="6dp"
-    android:cardCornerRadius ="10dp"
+
     android:background="@android:color/transparent"
     android:layout_height="wrap_content">
 
@@ -39,8 +38,8 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_below="@+id/idIVCondition"
-            android:id="@+id/idTVCondition"
+            android:layout_below="@+id/idTVtemperature"
+            android:id="@+id/idIVCondition"
             android:layout_centerHorizontal="true"
             android:layout_margin="5dp"
             android:padding="4dp"
@@ -51,7 +50,7 @@
             android:id="@+id/idTVWindSpeed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/idTVCondition"
+            android:layout_below="@+id/idIVCondition"
             android:layout_centerHorizontal="true"
             android:layout_margin="4dp"
             android:gravity="center"

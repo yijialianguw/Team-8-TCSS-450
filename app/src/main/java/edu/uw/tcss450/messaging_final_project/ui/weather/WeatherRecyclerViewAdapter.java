@@ -19,26 +19,27 @@ import java.util.Date;
 
 import edu.uw.tcss450.messaging_final_project.R;
 
-public class WeatherRVAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class WeatherRecyclerViewAdapter extends RecyclerView.Adapter<WeatherRecyclerViewAdapter.WeatherViewHolder> {
 
     private Context context;
-    private ArrayList<WeatherRVModal> weatherRVModalArrayList;
+    private ArrayList<WeatherEntry> weatherEntryArrayList;
 
-    public WeatherRVAdaptor(Context context, ArrayList<WeatherRVModal> weatherRVModalArrayList) {
+    public WeatherRecyclerViewAdapter(Context context, ArrayList<WeatherEntry> weatherEntryArrayList) {
         this.context = context;
-        this.weatherRVModalArrayList = weatherRVModalArrayList;
+        this.weatherEntryArrayList = weatherEntryArrayList;
     }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       View view = LayoutInflater.from(context).inflate(R.layout.fragment_weather_rv_item, parent, false);
-       return new ViewHolder(view);
+    public WeatherViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.fragment_weather_rv_item,
+                parent, false);
+        return new WeatherViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        WeatherRVModal modal = weatherRVModalArrayList.get(position);
+    public void onBindViewHolder(@NonNull WeatherViewHolder holder, int position) {
+        WeatherEntry modal = weatherEntryArrayList.get(position);
         holder.temperatureTV.setText(modal.getTemperature() + "°F");
         Picasso.get().load("https://openweathermap.org/img/wn/".concat(modal.getIcon()).concat(".png")).into(holder.conditionIV);
         holder.windTV.setText(modal.getWindSpeed() + "Km/h");
@@ -50,25 +51,29 @@ public class WeatherRVAdaptor extends RecyclerView.Adapter<RecyclerView.ViewHold
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
     public int getItemCount() {
-        return weatherRVModalArrayList.size();
+        return weatherEntryArrayList.size();
     }
 
-    private class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView windTV, temperatureTV, timeTV;
-        private ImageView conditionIV;
+    public class WeatherViewHolder extends RecyclerView.ViewHolder{
+        public TextView windTV, temperatureTV, timeTV;
+        public ImageView conditionIV;
 
-        public ViewHolder (@NonNull View itemView) {
+        public WeatherViewHolder(@NonNull View itemView) {
             super(itemView);
             windTV = itemView.findViewById(R.id.idTVWindSpeed);
             temperatureTV = itemView.findViewById(R.id.idTVtemperature);
             timeTV = itemView.findViewById(R.id.idTVtime);
             conditionIV = itemView.findViewById(R.id.idIVCondition);
         }
+    }
+
+    void setWeather (final WeatherEntry weather) {
 
     }
 }
+
+
