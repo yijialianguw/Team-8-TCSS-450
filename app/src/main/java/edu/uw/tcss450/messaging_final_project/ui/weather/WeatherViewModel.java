@@ -1,7 +1,6 @@
 package edu.uw.tcss450.messaging_final_project.ui.weather;
 
 import android.app.Application;
-import android.util.Base64;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -9,7 +8,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -24,12 +22,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import edu.uw.tcss450.messaging_final_project.R;
 import edu.uw.tcss450.messaging_final_project.io.RequestQueueSingleton;
 
 public class WeatherViewModel extends AndroidViewModel {
 
     private MutableLiveData<JSONObject> mResponse;
+
 
     public WeatherViewModel(@NonNull Application application) {
         super(application);
@@ -73,7 +71,7 @@ public class WeatherViewModel extends AndroidViewModel {
                 Request.Method.GET,
                 url,
                 null, //no body for this get request
-                this::handelSuccess,
+                this::handleSuccess,
                 this::handleError) {
 
             @Override
@@ -95,7 +93,7 @@ public class WeatherViewModel extends AndroidViewModel {
 
     }
 
-    private void handelSuccess(final JSONObject response){
+    private void handleSuccess(final JSONObject response){
         mResponse.setValue(response);
     }
 
