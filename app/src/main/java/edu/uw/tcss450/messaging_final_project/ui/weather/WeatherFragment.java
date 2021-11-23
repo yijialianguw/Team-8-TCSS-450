@@ -26,8 +26,6 @@ import edu.uw.tcss450.messaging_final_project.R;
 import edu.uw.tcss450.messaging_final_project.databinding.FragmentChatBinding;
 import edu.uw.tcss450.messaging_final_project.databinding.FragmentWeatherBinding;
 import edu.uw.tcss450.messaging_final_project.model.UserInfoViewModel;
-import edu.uw.tcss450.messaging_final_project.ui.chat.ChatSendViewModel;
-import edu.uw.tcss450.messaging_final_project.ui.chat.ChatViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
