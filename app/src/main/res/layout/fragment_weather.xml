@@ -7,14 +7,14 @@
     android:foregroundTint="@color/colorAccent"
     android:background="@color/black_shade_1"
     tools:context=".ui.weather.WeatherFragment">
-
+    <!--
     <ProgressBar
         android:id="@+id/idPBLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:visibility="visible"/>
-
+-->
     <RelativeLayout
         android:id="@+id/RLHome"
         android:layout_width="match_parent"
@@ -140,5 +140,11 @@
 
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/edit_weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 
 </RelativeLayout>

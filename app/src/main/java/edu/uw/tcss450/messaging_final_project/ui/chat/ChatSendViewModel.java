@@ -1,7 +1,6 @@
-package edu.uw.tcss450.messaging_final_project.ui.weather;
+package edu.uw.tcss450.messaging_final_project.ui.chat;
 
 import android.app.Application;
-import android.util.Base64;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -9,7 +8,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -27,11 +25,11 @@ import java.util.Objects;
 import edu.uw.tcss450.messaging_final_project.R;
 import edu.uw.tcss450.messaging_final_project.io.RequestQueueSingleton;
 
-public class WeatherViewModel extends AndroidViewModel {
+public class ChatSendViewModel extends AndroidViewModel {
 
-    private MutableLiveData<JSONObject> mResponse;
+    private final MutableLiveData<JSONObject> mResponse;
 
-    public WeatherViewModel(@NonNull Application application) {
+    public ChatSendViewModel(@NonNull Application application) {
         super(application);
         mResponse = new MutableLiveData<>();
         mResponse.setValue(new JSONObject());
@@ -42,38 +40,23 @@ public class WeatherViewModel extends AndroidViewModel {
         mResponse.observe(owner, observer);
     }
 
-    private void handleError(final VolleyError error) {
-        if (Objects.isNull(error.networkResponse)) {
-            try {
-                mResponse.setValue(new JSONObject("{" +
-                        "error:\"" + error.getMessage() +
-                        "\"}"));
-            } catch (JSONException e) {
-                Log.e("JSON PARSE", "JSON Parse Error in handleError");
-            }
-        } else {
-            String data = new String(error.networkResponse.data, Charset.defaultCharset())
-                    .replace('\"', '\'');
-            try {
-                JSONObject response = new JSONObject();
-                response.put("code", error.networkResponse.statusCode);
-                response.put("data", new JSONObject(data));
-                mResponse.setValue(response);
-            } catch (JSONException e) {
-                Log.e("JSON PARSE", "JSON Parse Error in handleError");
-            }
-        }
-    }
+    public void sendMessage(final int chatId, final String jwt, final String message) {
+        String url = getApplication().getResources().getString(R.string.base_url) +
+                "messages";
 
-    public void connect(final String lat, final String lon, final String jwt) {
-        // TODO: like all of this
-        String url = "https://team8-tcss450-server.herokuapp.com/weather" + "?lat=" + lat + "&" + "lon=" + lon;
+        JSONObject body = new JSONObject();
+        try {
+            body.put("message", message);
+            body.put("chatId", chatId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         Request request = new JsonObjectRequest(
-                Request.Method.GET,
+                Request.Method.POST,
                 url,
-                null, //no body for this get request
-                this::handelSuccess,
+                body, //push token found in the JSONObject body
+                mResponse::setValue, // we get a response but do nothing with it
                 this::handleError) {
 
             @Override
@@ -92,11 +75,21 @@ public class WeatherViewModel extends AndroidViewModel {
         //Instantiate the RequestQueue and add the request to the queue
         RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
                 .addToRequestQueue(request);
-
     }
 
-    private void handelSuccess(final JSONObject response){
-        mResponse.setValue(response);
-    }
 
+
+    private void handleError(final VolleyError error) {
+        if (Objects.isNull(error.networkResponse)) {
+            Log.e("NETWORK ERROR", error.getMessage());
+        }
+        else {
+            String data = new String(error.networkResponse.data, Charset.defaultCharset());
+            Log.e("CLIENT ERROR",
+                    error.networkResponse.statusCode +
+                            " " +
+                            data);
+        }
+    }
 }
+
