@@ -49,8 +49,11 @@ public class ContactsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         FragmentContactsBinding binding = FragmentContactsBinding.bind(getView());
-        //SetRefreshing shows the internal Swiper view progress bar. Show this until messages load
 
+        binding.swipeContainer.setRefreshing(true);
+
+        final RecyclerView rv = binding.recyclerContacts;
+        rv.setAdapter(new ContactsRecyclerViewAdapter(getContext(), mContactsViewModel.getContacts()));
 
         //When the user scrolls to the top of the RV, the swiper list will "refresh"
         //The user is out of messages, go out to the service and get more
@@ -60,16 +63,13 @@ public class ContactsFragment extends Fragment {
             mContactsViewModel.getContacts(mUserInfoViewModel.getmJwt());
         });
 
-        binding.swipeContainer.setRefreshing(true);
-
 
         mContactsViewModel.addResponseObserver(getViewLifecycleOwner(), response ->{
             Log.e("ContactFrag","response refresh");
             binding.swipeContainer.setRefreshing(false);
         });
 
-        final RecyclerView rv = binding.recyclerContacts;
-        rv.setAdapter(new ContactsRecyclerViewAdapter(getContext(), mContactsViewModel.getContacts()));
+
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         mContactsViewModel.addContactListObserver(getViewLifecycleOwner(),
@@ -97,19 +97,4 @@ public class ContactsFragment extends Fragment {
 //        });
 
     }
-
-
-//    public List<ContactEntry> getMessageListByChatId(final int chatId) {
-//        return getOrCreateMapEntry(chatId).getValue();
-//    }
-//
-//    private MutableLiveData<List<ContactEntry>> getOrCreateMapEntry(final int chatId) {
-//        if(!mMessages.containsKey(chatId)) {
-//            mMessages.put(chatId, new MutableLiveData<>(new ArrayList<>()));
-//        }
-//        return mMessages.get(chatId);
-//    }
-
-
-
 }

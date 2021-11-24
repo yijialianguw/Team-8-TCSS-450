@@ -4,5 +4,7 @@ import androidx.lifecycle.ViewModel;
 
 public class AccountViewModel extends ViewModel {
 
-
+    public void onSignOutSelected() {
+    //signOut();
+    }
 }
