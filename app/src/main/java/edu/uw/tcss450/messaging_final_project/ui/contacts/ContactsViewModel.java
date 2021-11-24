@@ -29,32 +29,48 @@ import java.util.Objects;
 import java.util.function.IntFunction;
 
 import edu.uw.tcss450.messaging_final_project.R;
+import edu.uw.tcss450.messaging_final_project.databinding.FragmentContactCardBinding;
+import edu.uw.tcss450.messaging_final_project.databinding.FragmentContactsBinding;
 
 
 public class ContactsViewModel extends AndroidViewModel {
 
-    //private MutableLiveData<JSONObject> mResponse;
+    private MutableLiveData<JSONObject> mResponse;
 
     private MutableLiveData<ArrayList<ContactEntry>> mContactList;
 
     public ContactsViewModel(@NonNull Application application) {
         super(application);
-//        mResponse = new MutableLiveData<>();
-//        mResponse.setValue(new JSONObject());
+        mResponse = new MutableLiveData<>();
+        mResponse.setValue(new JSONObject());
         mContactList = new MutableLiveData<>();
         mContactList.setValue(new ArrayList<>());
+
+    }
+
+    public ArrayList<ContactEntry> getContacts(){
+        return mContactList.getValue();
     }
     public void addContactListObserver(@NonNull LifecycleOwner owner,
                                        @NonNull Observer<? super ArrayList<ContactEntry>> observer) {
         mContactList.observe(owner, observer);
     }
 
+
 //    public void addResponseObserver(@NonNull LifecycleOwner owner,
-//                                    @NonNull Observer<? super JSONObject> observer){
-//        mResponse.observe(owner,observer);
+//                                       @NonNull Observer<? super JSONObject > observer) {
+//        mResponse.observe(owner, observer);
 //    }
 
+
+
+    public void addResponseObserver(@NonNull LifecycleOwner owner,
+                                    @NonNull Observer<? super JSONObject> observer){
+        mResponse.observe(owner,observer);
+    }
+
     private void handleError(final VolleyError error) { // TODO: better handling
+        //FragmentContactsBinding binding= FragmentContactsBinding.bind(R.layout.fragment_contacts);
         if (Objects.isNull(error.networkResponse)) {
             Log.e("NETWORK ERROR", error.getMessage());
         }
@@ -71,7 +87,7 @@ public class ContactsViewModel extends AndroidViewModel {
 //        IntFunction<String> getString =
 //                getApplication().getResources()::getString;
 
-        // TODO: add contacts to contact list
+        mResponse.setValue(result);
 
         try {
             JSONArray jsonArray = result.getJSONArray("rows");
@@ -92,6 +108,8 @@ public class ContactsViewModel extends AndroidViewModel {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        mContactList.setValue(mContactList.getValue());
+
 /*
         try {
             JSONObject root = result;
@@ -140,7 +158,7 @@ public class ContactsViewModel extends AndroidViewModel {
         //mContactList.setValue(mContactList.getValue());
     }
 
-    public void connectGet(final String jwt) {
+    public void getContacts(final String jwt) {
         String url =
                 getApplication().getResources().getString(R.string.base_url)+"contacts";
         Request request = new JsonObjectRequest(

@@ -11,10 +11,10 @@ import edu.uw.tcss450.messaging_final_project.R;
  * A simple {@link Fragment} subclass.
  *
  */
-public class ContactEntryFragment extends Fragment {
+public class ContactCardFragment extends Fragment {
 
 
-    public ContactEntryFragment() {
+    public ContactCardFragment() {
         // Required empty public constructor
     }
 
@@ -28,6 +28,6 @@ public class ContactEntryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contact_entry, container, false);
+        return inflater.inflate(R.layout.fragment_contact_card, container, false);
     }
 }
