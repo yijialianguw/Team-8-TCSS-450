@@ -5,21 +5,9 @@
     android:id="@+id/layout_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list_root"
-        android:name="edu.uw.tcss450.messaging_final.ui.blog.ContactsFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:orientation="vertical"
-        app:layoutManager="LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:context="edu.uw.tcss450.messaging_final.ui.blog.ContactsFragment"
-        tools:listitem="@layout/fragment_contact_card" />
+    tools:context=".ui.contacts.ContactsFragment">
+
+<!--
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_wait"
         android:layout_width="match_parent"
@@ -39,4 +27,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+    -->
+    <!--  Used for loading new messages  -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_contacts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="vertical"
+            app:layoutManager="LinearLayoutManager"
+            tools:context="edu.uw.tcss450.messaging_final_project.ui.contacts.ContactCardFragment"
+            tools:listitem="@layout/fragment_contact_card" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

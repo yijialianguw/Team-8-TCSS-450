@@ -4,20 +4,35 @@ public class ContactEntry {
     // variables for our user name
     // and contact number.
     private String userName;
+    private String memberId;
+    private String firstName;
+    private String lastName;
+
 
     // constructor
-    public ContactEntry(String userName) {
+    public ContactEntry(final String memberId,
+                        final String userName,
+                        final String firstName,
+                        final String lastName) {
+        this.memberId = memberId;
         this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-    // on below line we have
-    // created getter and setter
     public String getUserName() {
         return userName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public String getFirstName() {
+        return firstName;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getMemberId() {
+        return memberId;
+    }
 }
