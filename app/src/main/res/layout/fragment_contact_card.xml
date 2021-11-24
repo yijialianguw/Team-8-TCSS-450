@@ -28,4 +28,22 @@
         android:text="Contact Name"
         android:textColor="@color/primaryDarkColor" />
 
+    <Button
+        android:id="@+id/button_yes"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="240dp"
+        android:text="Yes" />
+
+    <Button
+        android:id="@+id/button_no"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="320dp"
+        android:text="No" />
+
+
+
 </RelativeLayout>
