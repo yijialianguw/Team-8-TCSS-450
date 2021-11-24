@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,17 +28,9 @@ public class ContactsFragment extends Fragment {
     UserInfoViewModel mUserInfoViewModel;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        //Log.e("ContactsFragment", "asdfafafasfasdfasfas");
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contacts, container, false);
-    }
-
-    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Log.e("ContactsFragment", "asdfafafasfasdfasfas");
+        Log.e("ContactsFragment", "onCreate");
 
         mUserInfoViewModel = new ViewModelProvider(getActivity()).get(UserInfoViewModel.class);
         mContactsViewModel = new ViewModelProvider(getActivity()).get(ContactsViewModel.class);
@@ -45,19 +38,30 @@ public class ContactsFragment extends Fragment {
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        Log.e("ContactsFragment", "onCreateView");
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_contacts, container, false);
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         FragmentContactsBinding binding = FragmentContactsBinding.bind(getView());
         //SetRefreshing shows the internal Swiper view progress bar. Show this until messages load
-        binding.swipeContainer.setRefreshing(true);
+
 
         //When the user scrolls to the top of the RV, the swiper list will "refresh"
         //The user is out of messages, go out to the service and get more
         binding.swipeContainer.setOnRefreshListener(() -> {
             //mContactsViewModel.getNextMessages(HARD_CODED_CHAT_ID, mUserModel.getmJwt());
             Log.e("ContactFrag","adfafa");
-            mContactsViewModel.getContacts();
+            mContactsViewModel.getContacts(mUserInfoViewModel.getmJwt());
         });
+
+        binding.swipeContainer.setRefreshing(true);
+
 
         mContactsViewModel.addResponseObserver(getViewLifecycleOwner(), response ->{
             Log.e("ContactFrag","response refresh");
@@ -80,6 +84,7 @@ public class ContactsFragment extends Fragment {
                     rv.getAdapter().notifyDataSetChanged();
                     rv.scrollToPosition(rv.getAdapter().getItemCount() - 1);
                     binding.swipeContainer.setRefreshing(false);
+                    //binding.layoutWait.setVisibility(View.GONE);
                 });
 
 
