@@ -24,6 +24,9 @@ import edu.uw.tcss450.messaging_final_project.model.UserInfoViewModel;
  */
 public class ContactsFragment extends Fragment {
 
+    // TODO: have button on contact to delete
+
+
     ContactsViewModel mContactsViewModel;
     UserInfoViewModel mUserInfoViewModel;
 
@@ -54,6 +57,13 @@ public class ContactsFragment extends Fragment {
 
         //When the user scrolls to the top of the RV, the swiper list will "refresh"
         //The user is out of messages, go out to the service and get more
+
+
+        final RecyclerView rv = binding.recyclerContacts;
+        rv.setAdapter(new ContactsRecyclerViewAdapter(getContext(), mContactsViewModel.getContacts()));
+        //rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
         binding.swipeContainer.setOnRefreshListener(() -> {
             //mContactsViewModel.getNextMessages(HARD_CODED_CHAT_ID, mUserModel.getmJwt());
             Log.e("ContactFrag","adfafa");
@@ -67,10 +77,6 @@ public class ContactsFragment extends Fragment {
             Log.e("ContactFrag","response refresh");
             binding.swipeContainer.setRefreshing(false);
         });
-
-        final RecyclerView rv = binding.recyclerContacts;
-        rv.setAdapter(new ContactsRecyclerViewAdapter(getContext(), mContactsViewModel.getContacts()));
-        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         mContactsViewModel.addContactListObserver(getViewLifecycleOwner(),
                 list -> {
@@ -86,6 +92,11 @@ public class ContactsFragment extends Fragment {
                     binding.swipeContainer.setRefreshing(false);
                     //binding.layoutWait.setVisibility(View.GONE);
                 });
+
+
+        binding.buttonAddContact.setOnClickListener(button ->{
+            mContactsViewModel.addContacts(binding.contactTextInput.getText().toString(), mUserInfoViewModel.getmJwt());
+        });
 
 
 //        mContactsViewModel.addContactListObserver(getViewLifecycleOwner(), contactList -> {
