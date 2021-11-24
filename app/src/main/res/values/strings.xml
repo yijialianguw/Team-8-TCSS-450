@@ -19,6 +19,8 @@
     <string name="title_weather">Weather</string>
     <string name="title_account">Account</string>
 
+    <string name="contact_link">Open</string>
+
     <string name="base_url">https://team8-tcss450-server.herokuapp.com/</string>
 
     <string name="switch_sign_in">Stay Signed in</string>
