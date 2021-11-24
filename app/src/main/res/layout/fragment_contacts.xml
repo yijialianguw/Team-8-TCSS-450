@@ -57,20 +57,24 @@
         android:id="@+id/contact_text_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="150dp"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_add_contact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="30dp"
         android:layout_marginBottom="8dp"
-        android:text="Add Contact"
+        android:text="Invite"
         app:layout_constraintBottom_toTopOf="@+id/swipe_container"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_marginBottom="10dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -101,6 +101,7 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
                 binding.buttonYes.setOnClickListener(button -> {
                     Log.e("ContactCardFragment", "afsaffasfsaf");
                 });
+                // TODO: have a delete button for deleting contacts
 
             }
 
