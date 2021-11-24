@@ -34,6 +34,7 @@ import edu.uw.tcss450.messaging_final_project.model.UserInfoViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
+ * Contains the weather information.
  */
 public class WeatherFragment extends Fragment {
 
