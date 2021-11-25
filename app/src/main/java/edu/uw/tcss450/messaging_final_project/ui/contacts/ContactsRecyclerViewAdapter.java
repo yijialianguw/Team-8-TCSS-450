@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -51,9 +52,11 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.setContactName(contactEntryArrayList.get(position).getUserName());
+        ContactEntry contact = contactEntryArrayList.get(position);
+        holder.setContactName(contact.getUserName());
         //Log.e("Recycler", "onBindViewHolder");
         // set click listener
+        // holder.setButtonListener(contact.getChatId());
     }
 
     // below method is use for filtering data in our array list
@@ -101,10 +104,13 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
         private ImageView contactIV;
         private TextView contactTV;
         private FragmentContactCardBinding binding;
+        private View mItemView;
 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            this.mItemView = itemView;
             // initializing our image view and text view.
             contactIV = itemView.findViewById(R.id.idIVContact);
             contactTV = itemView.findViewById(R.id.idTVContactName);
@@ -128,13 +134,21 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
             binding.idTVContactName.setText(contactName);
         }
 
-        void setButtonListener(final int chatId){
+    //    void setChatButtonListener(final int chatId){
             // set on click listener to button
-            // get contacts view model
             // use view model to send a request to web service
             // once response gets back, naviagte to chat
             // contactsfragment should have a navigateToChat method
-        }
+
+//            binding.buttonYes.setOnClickListener(button -> {
+//                Navigation.findNavController(mItemView)
+//                        .navigate(ContactsFragmentDirections
+//                                .actionNavigationChatListToNavigationChat()));
+//        }
+//
+//        void getChatRoom(JSONObject jsonObject){
+//
+//        }
 
 
 
