@@ -27,6 +27,18 @@ public class ContactsFragment extends Fragment {
     // TODO: have button on contact to delete
 
 
+
+    // TODO: when user click on contact, it take you to a chat with them
+    // TODO: this means that whenever a new contact is created, we must create a kind of 'DM' chat for them
+    // TODO: give this chat a generic name like "UserA and UserB chat"
+    // TODO: add column to Contacts table: chatId
+    // TODO: this will be the chatID of the auto generated chat room
+
+    // TODO: OR
+    // TODO: contact card will have a button for creating a new chat with that person
+
+
+
     ContactsViewModel mContactsViewModel;
     UserInfoViewModel mUserInfoViewModel;
 
@@ -34,9 +46,9 @@ public class ContactsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.e("ContactsFragment", "onCreate");
-
-        mUserInfoViewModel = new ViewModelProvider(getActivity()).get(UserInfoViewModel.class);
-        mContactsViewModel = new ViewModelProvider(getActivity()).get(ContactsViewModel.class);
+        ViewModelProvider provider = new ViewModelProvider(getActivity());
+        mUserInfoViewModel = provider.get(UserInfoViewModel.class);
+        mContactsViewModel = provider.get(ContactsViewModel.class);
         mContactsViewModel.getContacts(mUserInfoViewModel.getmJwt());
     }
 
@@ -44,6 +56,7 @@ public class ContactsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.e("ContactsFragment", "onCreateView");
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_contacts, container, false);
     }
@@ -52,15 +65,13 @@ public class ContactsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         FragmentContactsBinding binding = FragmentContactsBinding.bind(getView());
+
         //SetRefreshing shows the internal Swiper view progress bar. Show this until messages load
-
-
-        //When the user scrolls to the top of the RV, the swiper list will "refresh"
-        //The user is out of messages, go out to the service and get more
+        binding.swipeContainer.setRefreshing(true);
 
 
         final RecyclerView rv = binding.recyclerContacts;
-        rv.setAdapter(new ContactsRecyclerViewAdapter(getContext(), mContactsViewModel.getContacts()));
+        rv.setAdapter(new ContactsRecyclerViewAdapter(mContactsViewModel.getContacts()));
         //rv.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
@@ -70,13 +81,12 @@ public class ContactsFragment extends Fragment {
             mContactsViewModel.getContacts(mUserInfoViewModel.getmJwt());
         });
 
-        binding.swipeContainer.setRefreshing(true);
 
 
-        mContactsViewModel.addResponseObserver(getViewLifecycleOwner(), response ->{
-            Log.e("ContactFrag","response refresh");
-            binding.swipeContainer.setRefreshing(false);
-        });
+//        mContactsViewModel.addResponseObserver(getViewLifecycleOwner(), response ->{
+//            Log.e("ContactFrag","response refresh");
+//            binding.swipeContainer.setRefreshing(false);
+//        });
 
         mContactsViewModel.addContactListObserver(getViewLifecycleOwner(),
                 list -> {
@@ -87,6 +97,7 @@ public class ContactsFragment extends Fragment {
                      * solution for when the keyboard is on the screen.
                      */
                     //inform the RV that the underlying list has (possibly) changed
+
                     rv.getAdapter().notifyDataSetChanged();
                     rv.scrollToPosition(rv.getAdapter().getItemCount() - 1);
                     binding.swipeContainer.setRefreshing(false);
