@@ -55,7 +55,7 @@ public class ContactsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.e("ContactsFragment", "onCreateView");
+        //Log.e("ContactsFragment", "onCreateView");
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_contacts, container, false);
@@ -64,6 +64,8 @@ public class ContactsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        //Log.e("ContactsFrag", "onViewCreated");
         FragmentContactsBinding binding = FragmentContactsBinding.bind(getView());
 
         //SetRefreshing shows the internal Swiper view progress bar. Show this until messages load
@@ -77,7 +79,7 @@ public class ContactsFragment extends Fragment {
 
         binding.swipeContainer.setOnRefreshListener(() -> {
             //mContactsViewModel.getNextMessages(HARD_CODED_CHAT_ID, mUserModel.getmJwt());
-            Log.e("ContactFrag","adfafa");
+            //Log.e("ContactFrag","adfafa");
             mContactsViewModel.getContacts(mUserInfoViewModel.getmJwt());
         });
 
@@ -99,9 +101,9 @@ public class ContactsFragment extends Fragment {
                      * solution for when the keyboard is on the screen.
                      */
                     //inform the RV that the underlying list has (possibly) changed
-
+                    //Log.e("Contact Frag", "list observed" + list.size());
                     rv.getAdapter().notifyDataSetChanged();
-                    rv.scrollToPosition(rv.getAdapter().getItemCount() - 1);
+                    rv.scrollToPosition(0);
                     binding.swipeContainer.setRefreshing(false);
                     //binding.layoutWait.setVisibility(View.GONE);
                 });

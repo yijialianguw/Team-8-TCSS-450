@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import edu.uw.tcss450.messaging_final_project.R;
 import edu.uw.tcss450.messaging_final_project.databinding.FragmentContactCardBinding;
 
-public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRecyclerViewAdapter.ViewHolder> {
+public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRecyclerViewAdapter.MyViewHolder> {
 
     // creating variables for context and array list.
     //private Context context;
@@ -30,25 +30,29 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
     public ContactsRecyclerViewAdapter(ArrayList<ContactEntry> contactEntryArrayList) {
         //this.context = context;
         this.contactEntryArrayList = contactEntryArrayList;
+        //Log.e("Recycler", "Constructor");
     }
 
     public void setContactEntryArrayList(ArrayList<ContactEntry> contactEntryArrayList) {
+
         this.contactEntryArrayList = contactEntryArrayList;
     }
 
     @NonNull
     @Override
-    public ContactsRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ContactsRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // passing our layout file for displaying our card item
-        return new ContactsRecyclerViewAdapter.ViewHolder(LayoutInflater
+        //Log.e("Recycler", "onCreateViewHolder");
+        return new MyViewHolder(LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.fragment_contact_card, parent, false));
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.setContactName(contactEntryArrayList.get(position).getUserName());
+        //Log.e("Recycler", "onBindViewHolder");
         // set click listener
     }
 
@@ -86,10 +90,12 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
 
     @Override
     public int getItemCount() {
+        //Log.e("Recycler", "getItemCount" + contactEntryArrayList.size());
+
         return contactEntryArrayList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         // on below line creating a variable
         // for our image view and text view.
         private ImageView contactIV;
@@ -97,7 +103,7 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
         private FragmentContactCardBinding binding;
 
 
-        public ViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             // initializing our image view and text view.
             contactIV = itemView.findViewById(R.id.idIVContact);
@@ -106,7 +112,7 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
             //binding.buttonNo.setVisibility(View.GONE);
             //binding.buttonYes.setVisibility(View.GONE);
             binding.buttonYes.setOnClickListener(button -> {
-                Log.e("ContactCardFragment", "afsaffasfsaf");
+                //Log.e("ContactCardFragment", "afsaffasfsaf");
             });
 
             // binding.{username-should-be-a-button}.setOnClickListener( button -> {
