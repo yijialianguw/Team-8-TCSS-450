@@ -176,6 +176,7 @@ public class ChatViewModel extends AndroidViewModel {
         getOrCreateMapEntry(chatId).setValue(list);
     }
 
+
     private void handelSuccess(final JSONObject response) {
         List<ChatMessage> list;
         if (!response.has("chatId")) {
