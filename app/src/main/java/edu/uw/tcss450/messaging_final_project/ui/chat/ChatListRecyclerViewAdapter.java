@@ -47,6 +47,7 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
     @Override
     public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
         holder.setChatroomName(mChats.get(position).getChatName());
+        holder.setChatRoom(mChats.get(position));
     }
 
     public void filterList(ArrayList<Chatroom> filterlist) {
@@ -71,9 +72,11 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
         public FragmentChatCardBinding binding;
         private Chatroom mChat;
         private TextView chatTV;
+        private View mView;
 
         public ChatViewHolder(View view) {
             super(view);
+            mView = view;
             //chatIV = itemView.findViewById(R.id.idIVChat);
             chatTV = itemView.findViewById(R.id.idTVChatName);
             binding = FragmentChatCardBinding.bind(itemView);
@@ -84,6 +87,16 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
         void setChatroomName(final String chatName) {
             binding.idTVChatName.setText(chatName);
         }
+
+        void setChatRoom(final Chatroom chatroom) {
+            mChat = chatroom;
+            chatTV.setText(mChat.getChatName());
+            binding.buttonOpen.setOnClickListener(view ->
+                    Navigation.findNavController(mView)
+                            .navigate(ChatListFragmentDirections
+                                    .actionNavigationChatListToNavigationChat()));
+        }
+
 
     }
 

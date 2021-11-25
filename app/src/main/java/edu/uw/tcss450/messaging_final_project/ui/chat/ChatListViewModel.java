@@ -97,9 +97,10 @@ public class ChatListViewModel extends AndroidViewModel {
             for(int i = 0;i < jsonArray.length();i++){
                 JSONObject json = jsonArray.getJSONObject(i);
                 Chatroom chat = new Chatroom(json.getInt("chatid"),
-                        json.getString("chatname"));
+                        json.getString("name"));
 
                 chatList.add(chat);
+                //Log.e("chatids", chat.getChatId());
                 Log.e("Chats",chat.getChatName());
             }
 
@@ -108,7 +109,7 @@ public class ChatListViewModel extends AndroidViewModel {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        mChatroomList.setValue(mChatroomList.getValue());
+        //mChatroomList.setValue(mChatroomList.getValue());
     }
 
     private void handleError(final VolleyError error) {
