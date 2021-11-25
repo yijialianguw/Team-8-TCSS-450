@@ -90,6 +90,13 @@ public class ContactsViewModel extends AndroidViewModel {
                         json.getString("firstname"),
                         json.getString("lastname"));
                 contactList.add(entry);
+                contactList.add(entry);
+                contactList.add(entry);
+                contactList.add(entry);
+                contactList.add(entry);
+                contactList.add(entry);
+                contactList.add(entry);
+               
                 Log.e("Contacts",entry.getUserName());
             }
 

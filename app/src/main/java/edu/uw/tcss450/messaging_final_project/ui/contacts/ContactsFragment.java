@@ -81,6 +81,8 @@ public class ContactsFragment extends Fragment {
             mContactsViewModel.getContacts(mUserInfoViewModel.getmJwt());
         });
 
+        rv.setLayoutManager(new LinearLayoutManager(getContext()));
+
 
 
 //        mContactsViewModel.addResponseObserver(getViewLifecycleOwner(), response ->{

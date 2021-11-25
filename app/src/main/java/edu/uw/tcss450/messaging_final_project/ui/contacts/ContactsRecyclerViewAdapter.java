@@ -49,6 +49,7 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.setContactName(contactEntryArrayList.get(position).getUserName());
+        // set click listener
     }
 
     // below method is use for filtering data in our array list
@@ -102,8 +103,8 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
             contactIV = itemView.findViewById(R.id.idIVContact);
             contactTV = itemView.findViewById(R.id.idTVContactName);
             binding = FragmentContactCardBinding.bind(itemView);
-            binding.buttonNo.setVisibility(View.GONE);
-            binding.buttonYes.setVisibility(View.GONE);
+            //binding.buttonNo.setVisibility(View.GONE);
+            //binding.buttonYes.setVisibility(View.GONE);
             binding.buttonYes.setOnClickListener(button -> {
                 Log.e("ContactCardFragment", "afsaffasfsaf");
             });
