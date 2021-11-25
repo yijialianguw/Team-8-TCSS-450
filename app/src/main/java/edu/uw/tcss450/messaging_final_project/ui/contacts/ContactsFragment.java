@@ -69,7 +69,7 @@ public class ContactsFragment extends Fragment {
         FragmentContactsBinding binding = FragmentContactsBinding.bind(getView());
 
         //SetRefreshing shows the internal Swiper view progress bar. Show this until messages load
-        binding.swipeContainer.setRefreshing(true);
+        binding.swipeContainer.setRefreshing(true); // TODO: why doesnt this actaully work
 
 
         final RecyclerView rv = binding.recyclerContacts;
