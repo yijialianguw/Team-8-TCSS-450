@@ -92,7 +92,8 @@ public class ChatListViewModel extends AndroidViewModel {
 
         try {
             JSONArray jsonArray = result.getJSONArray("rows");
-            ArrayList<Chatroom> chatList = new ArrayList<>();
+            ArrayList<Chatroom> chatList = mChatroomList.getValue();
+            chatList.clear();
 
             for(int i = 0;i < jsonArray.length();i++){
                 JSONObject json = jsonArray.getJSONObject(i);
