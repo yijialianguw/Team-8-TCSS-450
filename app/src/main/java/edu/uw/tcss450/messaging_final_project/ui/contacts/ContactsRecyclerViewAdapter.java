@@ -56,7 +56,7 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
         holder.setContactName(contact.getUserName());
         //Log.e("Recycler", "onBindViewHolder");
         // set click listener
-        // holder.setButtonListener(contact.getChatId());
+        holder.setChatButtonListener(1);
     }
 
     // below method is use for filtering data in our array list
@@ -134,18 +134,19 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
             binding.idTVContactName.setText(contactName);
         }
 
-    //    void setChatButtonListener(final int chatId){
+        void setChatButtonListener(final int chatId){
             // set on click listener to button
             // use view model to send a request to web service
             // once response gets back, naviagte to chat
             // contactsfragment should have a navigateToChat method
 
-//            binding.buttonYes.setOnClickListener(button -> {
-//                Navigation.findNavController(mItemView)
-//                        .navigate(ContactsFragmentDirections
-//                                .actionNavigationChatListToNavigationChat()));
-//        }
-//
+            binding.buttonYes.setOnClickListener(button -> {
+                Navigation.findNavController(mItemView)
+                        .navigate(ContactsFragmentDirections
+                                .actionNavigationContactsToNavigationChat());
+            });
+        }
+
 //        void getChatRoom(JSONObject jsonObject){
 //
 //        }
