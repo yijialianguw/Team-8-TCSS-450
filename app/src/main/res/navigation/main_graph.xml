@@ -30,4 +30,13 @@
         android:name="edu.uw.tcss450.messaging_final_project.ui.weather.WeatherFragment"
         android:label="@string/title_weather"
         tools:layout="@layout/fragment_weather" />
+    <fragment
+        android:id="@+id/navigation_chat_list"
+        android:name="edu.uw.tcss450.messaging_final_project.ui.chat.ChatListFragment"
+        android:label="Chats"
+        tools:layout="@layout/fragment_chat_list">
+        <action
+            android:id="@+id/action_navigation_chat_list_to_navigation_chat"
+            app:destination="@id/navigation_chat" />
+    </fragment>
 </navigation>
