@@ -115,8 +115,8 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
             contactIV = itemView.findViewById(R.id.idIVContact);
             contactTV = itemView.findViewById(R.id.idTVContactName);
             binding = FragmentContactCardBinding.bind(itemView);
-            //binding.buttonNo.setVisibility(View.GONE);
-            //binding.buttonYes.setVisibility(View.GONE);
+            binding.buttonNo.setVisibility(View.GONE);
+            binding.buttonYes.setVisibility(View.GONE);
             binding.buttonYes.setOnClickListener(button -> {
                 //Log.e("ContactCardFragment", "afsaffasfsaf");
             });
