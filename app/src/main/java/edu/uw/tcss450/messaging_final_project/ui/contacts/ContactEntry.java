@@ -7,7 +7,7 @@ public class ContactEntry {
     private String memberId;
     private String firstName;
     private String lastName;
-
+    private int chatId; // chatId of DM
 
     // constructor
     public ContactEntry(final String memberId,

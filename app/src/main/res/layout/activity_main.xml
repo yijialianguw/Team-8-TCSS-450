@@ -1,6 +1,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -31,9 +32,6 @@
         app:navGraph="@navigation/main_graph" />
 
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -47,16 +45,7 @@
             android:layout_height="match_parent" />
 
         <!--fab for adding a new contact-->
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/idFABadd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="20dp"
 
-            app:fabCustomSize="40dp"
-            app:tint="@color/primaryLightColor" />
 
     </RelativeLayout>
 

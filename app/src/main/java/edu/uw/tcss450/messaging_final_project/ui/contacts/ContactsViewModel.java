@@ -35,14 +35,14 @@ import edu.uw.tcss450.messaging_final_project.databinding.FragmentContactsBindin
 
 public class ContactsViewModel extends AndroidViewModel {
 
-    private MutableLiveData<JSONObject> mResponse;
+    //private MutableLiveData<JSONObject> mResponse;
 
     private MutableLiveData<ArrayList<ContactEntry>> mContactList;
 
     public ContactsViewModel(@NonNull Application application) {
         super(application);
-        mResponse = new MutableLiveData<>();
-        mResponse.setValue(new JSONObject());
+        //mResponse = new MutableLiveData<>();
+        //mResponse.setValue(new JSONObject());
         mContactList = new MutableLiveData<>();
         mContactList.setValue(new ArrayList<>());
 
@@ -58,13 +58,12 @@ public class ContactsViewModel extends AndroidViewModel {
 
 
 
-    public void addResponseObserver(@NonNull LifecycleOwner owner,
-                                    @NonNull Observer<? super JSONObject> observer){
-        mResponse.observe(owner,observer);
-    }
+//    public void addResponseObserver(@NonNull LifecycleOwner owner,
+//                                    @NonNull Observer<? super JSONObject> observer){
+//        mResponse.observe(owner,observer);
+//    }
 
     private void handleError(final VolleyError error) { // TODO: better handling
-        //FragmentContactsBinding binding= FragmentContactsBinding.bind(R.layout.fragment_contacts);
         if (Objects.isNull(error.networkResponse)) {
             Log.e("NETWORK ERROR", error.getMessage());
         }
@@ -78,11 +77,12 @@ public class ContactsViewModel extends AndroidViewModel {
     }
 
     private void handleResult(final JSONObject result) {
-        mResponse.setValue(result);
+        //mResponse.setValue(result);
 
         try {
             JSONArray jsonArray = result.getJSONArray("rows");
-            ArrayList<ContactEntry> contactList = new ArrayList<>();
+            ArrayList<ContactEntry> contactList = mContactList.getValue();
+            contactList.clear();
 
             for(int i = 0;i < jsonArray.length();i++){
                 JSONObject json = jsonArray.getJSONObject(i);
@@ -91,6 +91,13 @@ public class ContactsViewModel extends AndroidViewModel {
                         json.getString("firstname"),
                         json.getString("lastname"));
                 contactList.add(entry);
+                contactList.add(entry);
+                contactList.add(entry);
+                contactList.add(entry);
+                contactList.add(entry);
+                contactList.add(entry);
+                contactList.add(entry);
+               
                 Log.e("Contacts",entry.getUserName());
             }
 

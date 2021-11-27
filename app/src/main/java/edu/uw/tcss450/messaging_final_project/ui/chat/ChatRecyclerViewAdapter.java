@@ -1,6 +1,7 @@
 package edu.uw.tcss450.messaging_final_project.ui.chat;
 
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
