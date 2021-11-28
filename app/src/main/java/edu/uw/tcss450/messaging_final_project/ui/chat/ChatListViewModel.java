@@ -34,6 +34,10 @@ public class ChatListViewModel extends AndroidViewModel {
     private MutableLiveData<ArrayList<Chatroom>> mChatroomList;
     private final MutableLiveData<JSONObject> mResponse;
     private UserInfoViewModel userInfoViewModel;
+    /*
+    * This determines which chat room we will navigate to
+    */
+    private int mChatId;
 
     public ChatListViewModel(@NonNull Application application) {
         super(application);
@@ -41,6 +45,14 @@ public class ChatListViewModel extends AndroidViewModel {
         mResponse.setValue(new JSONObject());
         mChatroomList = new MutableLiveData<>();
         mChatroomList.setValue(new ArrayList<>());
+    }
+
+    public void setChatId(int id){
+        mChatId = id;
+    }
+
+    public int getmChatId(){
+        return mChatId;
     }
 
     public ArrayList<Chatroom> getChats() {

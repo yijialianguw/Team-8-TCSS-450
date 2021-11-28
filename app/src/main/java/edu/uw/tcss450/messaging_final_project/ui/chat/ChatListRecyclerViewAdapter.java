@@ -28,6 +28,7 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
     private ArrayList<Chatroom> mChats;
     //private final Map<Chatroom, Boolean> mExpandedFlags;
     //private final ChatListFragment chatListFragment;
+    private ChatListViewModel mChatListViewModel;
 
     //come back to this
     public ChatListRecyclerViewAdapter(Context context, ArrayList<Chatroom> mChats) {
@@ -63,6 +64,10 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
         return mChats.size();
     }
 
+    public void setChatListViewModel(ChatListViewModel chatListViewModel){
+        mChatListViewModel = chatListViewModel;
+    }
+
     /**
      * Objects from this class represent an Individual row View from the List
      * of rows in the Blog Recycler View.
@@ -91,10 +96,13 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
         void setChatRoom(final Chatroom chatroom) {
             mChat = chatroom;
             chatTV.setText(mChat.getChatName());
-            binding.buttonOpen.setOnClickListener(view ->
-                    Navigation.findNavController(mView)
-                            .navigate(ChatListFragmentDirections
-                                    .actionNavigationChatListToNavigationChat()));
+
+            binding.buttonOpen.setOnClickListener(view -> {
+                mChatListViewModel.setChatId(chatroom.getChatId());
+                Navigation.findNavController(mView)
+                        .navigate(ChatListFragmentDirections
+                                .actionNavigationChatListToNavigationChat());
+            });
         }
 
 

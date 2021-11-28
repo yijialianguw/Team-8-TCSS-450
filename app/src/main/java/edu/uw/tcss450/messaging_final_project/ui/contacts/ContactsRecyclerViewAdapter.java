@@ -121,6 +121,10 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
                 //Log.e("ContactCardFragment", "afsaffasfsaf");
             });
 
+            itemView.setOnClickListener(button -> {
+                Log.e("ContactHolder", "contact cllicked");
+            });
+
             // binding.{username-should-be-a-button}.setOnClickListener( button -> {
             //  // TODO: need to send a request to get chat room
             //  // TODO: should be able to have access to chatId of DM
@@ -146,6 +150,7 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
                                 .actionNavigationContactsToNavigationChat());
             });
         }
+
 
 //        void getChatRoom(JSONObject jsonObject){
 //
