@@ -18,11 +18,26 @@ import edu.uw.tcss450.messaging_final_project.R;
 import edu.uw.tcss450.messaging_final_project.databinding.FragmentAccountBinding;
 import edu.uw.tcss450.messaging_final_project.model.PushyTokenViewModel;
 import edu.uw.tcss450.messaging_final_project.model.UserInfoViewModel;
+import edu.uw.tcss450.messaging_final_project.ui.chat.ChatListViewModel;
+import edu.uw.tcss450.messaging_final_project.ui.chat.ChatSendViewModel;
+import edu.uw.tcss450.messaging_final_project.ui.chat.ChatViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class AccountFragment extends Fragment {
+
+    private AccountViewModel mAccountViewModel;
+    private UserInfoViewModel mUserInfoViewModel;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ViewModelProvider provider = new ViewModelProvider(getActivity());
+        mAccountViewModel = provider.get(AccountViewModel.class);
+        mUserInfoViewModel = provider.get(UserInfoViewModel.class);
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,6 +50,9 @@ public class AccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
 
         FragmentAccountBinding binding = FragmentAccountBinding.bind(getView());
+
+        binding.username.setText(binding.username.getText() + " " + mUserInfoViewModel.getEmail()); // TODO: does the userinfoviewmodel not have username? or is email == username?
+        //binding.name.setText(binding.name.getText() + mUserInfoViewModel.get);
 
         binding.buttonSignOut.setOnClickListener(button ->{
             signOut();
