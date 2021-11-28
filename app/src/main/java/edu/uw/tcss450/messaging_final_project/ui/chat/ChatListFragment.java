@@ -53,7 +53,7 @@ public class ChatListFragment extends Fragment {
         //The user is out of messages, go out to the service and get more
         binding.swipeContainer.setOnRefreshListener(() -> {
             //mContactsViewModel.getNextMessages(HARD_CODED_CHAT_ID, mUserModel.getmJwt());
-            Log.e("ChatFrag","adfafa");
+            Log.e("ChatFrag","w");
             mChatListViewModel.getChats(mUserInfoViewModel.getmJwt());
         });
 
@@ -68,6 +68,7 @@ public class ChatListFragment extends Fragment {
         final RecyclerView rv = binding.listRoot;
         rv.setAdapter(new ChatListRecyclerViewAdapter(getContext(), mChatListViewModel.getChats()));
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        ((ChatListRecyclerViewAdapter)rv.getAdapter()).setChatListViewModel(mChatListViewModel);
 
         mChatListViewModel.addChatListObserver(getViewLifecycleOwner(),
                 list -> {

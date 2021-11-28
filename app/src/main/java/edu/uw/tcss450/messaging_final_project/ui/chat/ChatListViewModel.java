@@ -34,6 +34,10 @@ public class ChatListViewModel extends AndroidViewModel {
     private MutableLiveData<ArrayList<Chatroom>> mChatroomList;
     private final MutableLiveData<JSONObject> mResponse;
     private UserInfoViewModel userInfoViewModel;
+    /*
+    * This determines which chat room we will navigate to
+    */
+    private int mChatId;
 
     public ChatListViewModel(@NonNull Application application) {
         super(application);
@@ -41,6 +45,14 @@ public class ChatListViewModel extends AndroidViewModel {
         mResponse.setValue(new JSONObject());
         mChatroomList = new MutableLiveData<>();
         mChatroomList.setValue(new ArrayList<>());
+    }
+
+    public void setChatId(int id){
+        mChatId = id;
+    }
+
+    public int getmChatId(){
+        return mChatId;
     }
 
     public ArrayList<Chatroom> getChats() {
@@ -92,14 +104,16 @@ public class ChatListViewModel extends AndroidViewModel {
 
         try {
             JSONArray jsonArray = result.getJSONArray("rows");
-            ArrayList<Chatroom> chatList = new ArrayList<>();
+            ArrayList<Chatroom> chatList = mChatroomList.getValue();
+            chatList.clear();
 
             for(int i = 0;i < jsonArray.length();i++){
                 JSONObject json = jsonArray.getJSONObject(i);
                 Chatroom chat = new Chatroom(json.getInt("chatid"),
-                        json.getString("chatname"));
+                        json.getString("name"));
 
                 chatList.add(chat);
+                //Log.e("chatids", chat.getChatId());
                 Log.e("Chats",chat.getChatName());
             }
 
@@ -108,7 +122,7 @@ public class ChatListViewModel extends AndroidViewModel {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        mChatroomList.setValue(mChatroomList.getValue());
+        //mChatroomList.setValue(mChatroomList.getValue());
     }
 
     private void handleError(final VolleyError error) {
@@ -119,7 +133,7 @@ public class ChatListViewModel extends AndroidViewModel {
 
     public void getChats(final String jwt) {
         String url =
-                getApplication().getResources().getString(R.string.base_url)+"chats/1";
+                getApplication().getResources().getString(R.string.base_url)+"chatinfo";
         Request request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,

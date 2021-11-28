@@ -19,7 +19,11 @@
         android:id="@+id/navigation_contacts"
         android:name="edu.uw.tcss450.messaging_final_project.ui.contacts.ContactsFragment"
         android:label="@string/title_contacts"
-        tools:layout="@layout/fragment_contacts" />
+        tools:layout="@layout/fragment_contacts" >
+        <action
+            android:id="@+id/action_navigation_contacts_to_navigation_chat"
+            app:destination="@id/navigation_chat" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_chat"
         android:name="edu.uw.tcss450.messaging_final_project.ui.chat.ChatFragment"
@@ -33,7 +37,8 @@
     <fragment
         android:id="@+id/navigation_chat_list"
         android:name="edu.uw.tcss450.messaging_final_project.ui.chat.ChatListFragment"
-        android:label="chats" >
+        android:label="Chats"
+        tools:layout="@layout/fragment_chat_list">
         <action
             android:id="@+id/action_navigation_chat_list_to_navigation_chat"
             app:destination="@id/navigation_chat" />

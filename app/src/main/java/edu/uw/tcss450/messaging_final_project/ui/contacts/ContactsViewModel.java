@@ -87,7 +87,7 @@ public class ContactsViewModel extends AndroidViewModel {
 //        IntFunction<String> getString =
 //                getApplication().getResources()::getString;
 
-        //mResponse.setValue(result);
+        mResponse.setValue(result);
 
         try {
             JSONArray jsonArray = result.getJSONArray("rows");
@@ -109,8 +109,54 @@ public class ContactsViewModel extends AndroidViewModel {
             e.printStackTrace();
         }
         mContactList.setValue(mContactList.getValue());
-        mResponse.setValue(result);
+
+/*
+        try {
+            JSONObject root = result;
+            if(true){
+
+            if (root.has(getString.apply(R.string.keys_json_blogs_response))) {
+                JSONObject response =
+                        root.getJSONObject(getString.apply(
+                                R.string.keys_json_blogs_response));
+
+                if (response.has(getString.apply(R.string.keys_json_blogs_data))) {
+                    JSONArray data = response.getJSONArray(
+                            getString.apply(R.string.keys_json_blogs_data));
+                    for(int i = 0; i < data.length(); i++) {
+                        JSONObject jsonBlog = data.getJSONObject(i);
+                        ContactEntry entry = new ContactEntry.Builder(
+                                jsonBlog.getString(
+                                        getString.apply(
+                                                R.string.keys_json_blogs_pubdate)),
+                                jsonBlog.getString(
+                                        getString.apply(
+                                                R.string.keys_json_blogs_title)))
+                                .addTeaser(jsonBlog.getString(
+                                        getString.apply(
+                                                R.string.keys_json_blogs_teaser)))
+                                .addUrl(jsonBlog.getString(
+                                        getString.apply(
+                                                R.string.keys_json_blogs_url)))
+                                .build();
+                        if (!mContactList.getValue().contains(entry)) {
+                            mContactList.getValue().add(entry);
+                        }
+                    }
+                } else {
+                    Log.e("ERROR!", "No data array");
+                }
+            } else {
+                Log.e("ERROR!", "No response");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.e("ERROR!", e.getMessage());
         }
+
+ */
+        //mContactList.setValue(mContactList.getValue());
+    }
 
     public void getContacts(final String jwt) {
         String url =
