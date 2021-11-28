@@ -16,6 +16,6 @@
     <color name="colorPrimaryDark">#61574e</color>
     <color name="colorAccent">#ae83d4</color>
     
-    <color name= "black_shade_1">#292D36</color>
-    <color name= "colorWhite">#FFFFFF</color>
+    <color name= "backgroundColor">#292D36</color>
+    <color name= "textColor">#FFFFFF</color>
 </resources>
