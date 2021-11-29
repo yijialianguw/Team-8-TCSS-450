@@ -41,7 +41,7 @@ public class WeatherFragment extends Fragment {
     private WeatherViewModel mWeatherViewModel;
     private UserInfoViewModel mUserModel;
 
-    private TextView cityNameTV, temperatureRVTV, conditionTV, temperatureTV;
+    private TextView cityNameTV, temperatureRVTV, conditionTV, temperatureTV, conditionRVTV;
     private RecyclerView weatherRV;
     private TextInputEditText cityEdt;
     private ImageView backIV, iconIV, searchIV;
@@ -95,7 +95,8 @@ public class WeatherFragment extends Fragment {
         // Inflate the layout for this fragment
 
         temperatureTV = view.findViewById(R.id.idTemp);
-        conditionTV = view.findViewById(R.id.idIVCondition);
+        conditionRVTV = view.findViewById(R.id.idIVCondition);
+        conditionTV = view.findViewById(R.id.idTVCondition);
         weatherRV = view.findViewById(R.id.idRvWeather);
         iconIV = view.findViewById(R.id.idIVIcon);
         cityNameTV = view.findViewById(R.id.idTVCityName);
@@ -115,12 +116,16 @@ public class WeatherFragment extends Fragment {
         mWeatherViewModel.addResponseObserver(getViewLifecycleOwner(), response -> {
             try {
                 JSONObject curr = response.getJSONObject("current");
-                String temperature = curr.getString("temp");
+                double temperature = Double.parseDouble(curr.getString("temp"));
                 String condition  = curr.getJSONArray("weather").getJSONObject(0).getString("main");
                 String conditionIcon   = curr.getJSONArray("weather").getJSONObject(0).getString("icon");
 
+                int temp = (int) Math.rint(temperature);
+
                 cityNameTV.setText(cityName);
-                temperatureTV.setText(temperature + "°F");
+                conditionTV.setText(condition);
+
+                temperatureTV.setText(temp + "°F");
 
                 Picasso.get().load("https://openweathermap.org/img/wn/".concat(conditionIcon).concat(".png")).into(iconIV);
 

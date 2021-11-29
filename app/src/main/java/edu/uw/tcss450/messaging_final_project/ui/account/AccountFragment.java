@@ -53,7 +53,9 @@ public class AccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
 
         FragmentAccountBinding binding = FragmentAccountBinding.bind(getView());
-
+        binding.userEmail.setText(mUserInfoViewModel.getEmail());
+        //binding.userName.setText(getFirstName() + " " + getLastName());
+        //binding.userUserName.setText(mUserInfoViewModel.getUserName());
         //binding.username.setText(binding.username.getText() + " " + mUserInfoViewModel.getEmail()); // TODO: does the userinfoviewmodel not have username? or is email == username?
         //binding.name.setText(binding.name.getText() + mUserInfoViewModel.get);
 
