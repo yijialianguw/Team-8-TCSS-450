@@ -41,7 +41,7 @@ public class WeatherFragment extends Fragment {
     private WeatherViewModel mWeatherViewModel;
     private UserInfoViewModel mUserModel;
 
-    private TextView cityNameTV, temperatureTV, conditionTV;
+    private TextView cityNameTV, temperatureRVTV, conditionTV, temperatureTV;
     private RecyclerView weatherRV;
     private TextInputEditText cityEdt;
     private ImageView backIV, iconIV, searchIV;
@@ -94,7 +94,7 @@ public class WeatherFragment extends Fragment {
 
         // Inflate the layout for this fragment
 
-        temperatureTV = view.findViewById(R.id.idTVtemperatureMax);
+        temperatureTV = view.findViewById(R.id.idTemp);
         conditionTV = view.findViewById(R.id.idIVCondition);
         weatherRV = view.findViewById(R.id.idRvWeather);
         iconIV = view.findViewById(R.id.idIVIcon);
@@ -118,10 +118,10 @@ public class WeatherFragment extends Fragment {
                 String temperature = curr.getString("temp");
                 String condition  = curr.getJSONArray("weather").getJSONObject(0).getString("main");
                 String conditionIcon   = curr.getJSONArray("weather").getJSONObject(0).getString("icon");
-                //binding.editWeather.setText(str);
 
                 cityNameTV.setText(cityName);
                 temperatureTV.setText(temperature + "°F");
+
                 Picasso.get().load("https://openweathermap.org/img/wn/".concat(conditionIcon).concat(".png")).into(iconIV);
 
 

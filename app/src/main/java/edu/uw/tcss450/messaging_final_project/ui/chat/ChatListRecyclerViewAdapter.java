@@ -28,6 +28,7 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
     private ArrayList<Chatroom> mChats;
     //private final Map<Chatroom, Boolean> mExpandedFlags;
     //private final ChatListFragment chatListFragment;
+    private ChatListViewModel mChatListViewModel;
 
     //come back to this
     public ChatListRecyclerViewAdapter(Context context, ArrayList<Chatroom> mChats) {
@@ -40,13 +41,14 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
     @Override
     public ChatListRecyclerViewAdapter.ChatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ChatListRecyclerViewAdapter.ChatViewHolder(LayoutInflater
-                    .from(context)
-                    .inflate(R.layout.fragment_chat_card, parent, false));
+                .from(context)
+                .inflate(R.layout.fragment_chat_card, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
         holder.setChatroomName(mChats.get(position).getChatName());
+        holder.setChatRoom(mChats.get(position));
     }
 
     public void filterList(ArrayList<Chatroom> filterlist) {
@@ -62,6 +64,10 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
         return mChats.size();
     }
 
+    public void setChatListViewModel(ChatListViewModel chatListViewModel){
+        mChatListViewModel = chatListViewModel;
+    }
+
     /**
      * Objects from this class represent an Individual row View from the List
      * of rows in the Blog Recycler View.
@@ -71,9 +77,11 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
         public FragmentChatCardBinding binding;
         private Chatroom mChat;
         private TextView chatTV;
+        private View mView;
 
         public ChatViewHolder(View view) {
             super(view);
+            mView = view;
             //chatIV = itemView.findViewById(R.id.idIVChat);
             chatTV = itemView.findViewById(R.id.idTVChatName);
             binding = FragmentChatCardBinding.bind(itemView);
@@ -85,10 +93,23 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
             binding.idTVChatName.setText(chatName);
         }
 
+        void setChatRoom(final Chatroom chatroom) {
+            mChat = chatroom;
+            chatTV.setText(mChat.getChatName());
+
+            binding.buttonOpen.setOnClickListener(view -> {
+                mChatListViewModel.setChatId(chatroom.getChatId());
+                Navigation.findNavController(mView)
+                        .navigate(ChatListFragmentDirections
+                                .actionNavigationChatListToNavigationChat());
+            });
+        }
+
+
     }
 
     //public void setChatroomName(List<Chatroom> rooms) {
-       // mChats = rooms;
+    // mChats = rooms;
     //}
 
 }

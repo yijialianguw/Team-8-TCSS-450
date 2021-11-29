@@ -12,7 +12,5 @@ public class AccountViewModel extends AndroidViewModel {
         super(application);
     }
 
-    public void onSignOutSelected() {
-    //signOut();
-    }
+
 }

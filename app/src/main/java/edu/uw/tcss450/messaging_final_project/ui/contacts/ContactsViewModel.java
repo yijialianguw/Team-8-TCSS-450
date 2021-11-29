@@ -35,14 +35,14 @@ import edu.uw.tcss450.messaging_final_project.databinding.FragmentContactsBindin
 
 public class ContactsViewModel extends AndroidViewModel {
 
-    private MutableLiveData<JSONObject> mResponse;
+    //private MutableLiveData<JSONObject> mResponse;
 
     private MutableLiveData<ArrayList<ContactEntry>> mContactList;
 
     public ContactsViewModel(@NonNull Application application) {
         super(application);
-        mResponse = new MutableLiveData<>();
-        mResponse.setValue(new JSONObject());
+        //mResponse = new MutableLiveData<>();
+        //mResponse.setValue(new JSONObject());
         mContactList = new MutableLiveData<>();
         mContactList.setValue(new ArrayList<>());
 
@@ -57,20 +57,13 @@ public class ContactsViewModel extends AndroidViewModel {
     }
 
 
+
 //    public void addResponseObserver(@NonNull LifecycleOwner owner,
-//                                       @NonNull Observer<? super JSONObject > observer) {
-//        mResponse.observe(owner, observer);
+//                                    @NonNull Observer<? super JSONObject> observer){
+//        mResponse.observe(owner,observer);
 //    }
 
-
-
-    public void addResponseObserver(@NonNull LifecycleOwner owner,
-                                    @NonNull Observer<? super JSONObject> observer){
-        mResponse.observe(owner,observer);
-    }
-
     private void handleError(final VolleyError error) { // TODO: better handling
-        //FragmentContactsBinding binding= FragmentContactsBinding.bind(R.layout.fragment_contacts);
         if (Objects.isNull(error.networkResponse)) {
             Log.e("NETWORK ERROR", error.getMessage());
         }
@@ -84,14 +77,12 @@ public class ContactsViewModel extends AndroidViewModel {
     }
 
     private void handleResult(final JSONObject result) {
-//        IntFunction<String> getString =
-//                getApplication().getResources()::getString;
-
-        mResponse.setValue(result);
+        //mResponse.setValue(result);
 
         try {
             JSONArray jsonArray = result.getJSONArray("rows");
-            ArrayList<ContactEntry> contactList = new ArrayList<>();
+            ArrayList<ContactEntry> contactList = mContactList.getValue();
+            contactList.clear();
 
             for(int i = 0;i < jsonArray.length();i++){
                 JSONObject json = jsonArray.getJSONObject(i);
@@ -100,6 +91,13 @@ public class ContactsViewModel extends AndroidViewModel {
                         json.getString("firstname"),
                         json.getString("lastname"));
                 contactList.add(entry);
+                contactList.add(entry);
+                contactList.add(entry);
+                contactList.add(entry);
+                contactList.add(entry);
+                contactList.add(entry);
+                contactList.add(entry);
+
                 Log.e("Contacts",entry.getUserName());
             }
 
@@ -108,54 +106,8 @@ public class ContactsViewModel extends AndroidViewModel {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        mContactList.setValue(mContactList.getValue());
-
-/*
-        try {
-            JSONObject root = result;
-            if(true){
-
-            if (root.has(getString.apply(R.string.keys_json_blogs_response))) {
-                JSONObject response =
-                        root.getJSONObject(getString.apply(
-                                R.string.keys_json_blogs_response));
-
-                if (response.has(getString.apply(R.string.keys_json_blogs_data))) {
-                    JSONArray data = response.getJSONArray(
-                            getString.apply(R.string.keys_json_blogs_data));
-                    for(int i = 0; i < data.length(); i++) {
-                        JSONObject jsonBlog = data.getJSONObject(i);
-                        ContactEntry entry = new ContactEntry.Builder(
-                                jsonBlog.getString(
-                                        getString.apply(
-                                                R.string.keys_json_blogs_pubdate)),
-                                jsonBlog.getString(
-                                        getString.apply(
-                                                R.string.keys_json_blogs_title)))
-                                .addTeaser(jsonBlog.getString(
-                                        getString.apply(
-                                                R.string.keys_json_blogs_teaser)))
-                                .addUrl(jsonBlog.getString(
-                                        getString.apply(
-                                                R.string.keys_json_blogs_url)))
-                                .build();
-                        if (!mContactList.getValue().contains(entry)) {
-                            mContactList.getValue().add(entry);
-                        }
-                    }
-                } else {
-                    Log.e("ERROR!", "No data array");
-                }
-            } else {
-                Log.e("ERROR!", "No response");
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Log.e("ERROR!", e.getMessage());
-        }
-
- */
         //mContactList.setValue(mContactList.getValue());
+
     }
 
     public void getContacts(final String jwt) {
@@ -183,4 +135,52 @@ public class ContactsViewModel extends AndroidViewModel {
         Volley.newRequestQueue(getApplication().getApplicationContext())
                 .add(request);
     }
+
+
+    private void handleAddContact(final JSONObject response){
+        // TODO: something idk
+    }
+
+    private void handleAddContactError(final VolleyError error){
+        // TODO: let user know maybe
+    }
+
+
+    public void addContacts(final String email, final String jwt) {
+        String url =
+                getApplication().getResources().getString(R.string.base_url)+"contacts";
+
+
+        JSONObject body = new JSONObject();
+        try {
+            body.put("email", email);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        Request request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                body, //no body for this get request
+                this::handleAddContact,
+                this::handleError) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                // add headers <key,value>
+                headers.put("Authorization", jwt);
+                return headers;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //Instantiate the RequestQueue and add the request to the queue
+        Volley.newRequestQueue(getApplication().getApplicationContext())
+                .add(request);
+    }
+
+
 }

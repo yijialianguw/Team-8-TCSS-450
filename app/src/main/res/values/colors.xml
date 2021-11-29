@@ -12,10 +12,13 @@
     <color name="secondaryTextColorFade">#222222</color>
 
 
+    <color name="colorIcon">#222222</color>
+    <color name="colorNavBar">#FFFFFF</color>
+    <color name="colorButton">#ffbe80</color>
     <color name="colorPrimary">#ffbe80</color>
     <color name="colorPrimaryDark">#61574e</color>
     <color name="colorAccent">#ae83d4</color>
-    
-    <color name= "backgroundColor">#292D36</color>
-    <color name= "textColor">#FFFFFF</color>
+    <!-- For Regular Mode -->
+    <color name= "backgroundColor">#FFFFFF</color>
+    <color name= "textColor">#292D36</color>
 </resources>

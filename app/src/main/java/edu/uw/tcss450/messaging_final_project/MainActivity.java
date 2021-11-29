@@ -14,13 +14,18 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
+import com.auth0.android.jwt.JWT;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import edu.uw.tcss450.messaging_final_project.databinding.ActivityMainBinding;
 import edu.uw.tcss450.messaging_final_project.model.NewMessageCountViewModel;
-import edu.uw.tcss450.messaging_final_project.model.PushyTokenViewModel;
 import edu.uw.tcss450.messaging_final_project.model.UserInfoViewModel;
 import edu.uw.tcss450.messaging_final_project.services.PushReceiver;
 import edu.uw.tcss450.messaging_final_project.ui.chat.ChatMessage;
@@ -33,10 +38,12 @@ public class MainActivity extends AppCompatActivity {
     private MainPushMessageReceiver mPushMessageReceiver;
     private ActivityMainBinding binding;
     private NewMessageCountViewModel mNewMessageModel;
+    private TextView cityNameTV, temperatureTV, conditionTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        temperatureTV = findViewById(R.id.idTVtemperatureMax);
 
         /*
          * These bundle values come from when SingInFragment navigates to MainActivity.
@@ -48,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         new ViewModelProvider(this,
                 new UserInfoViewModel.UserInfoViewModelFactory(args.getEmail(), args.getJwt())
-                ).get(UserInfoViewModel.class);
+        ).get(UserInfoViewModel.class);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -142,6 +149,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-
 }
