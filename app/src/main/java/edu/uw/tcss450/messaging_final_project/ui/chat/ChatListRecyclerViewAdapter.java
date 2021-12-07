@@ -28,7 +28,7 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
     private ArrayList<Chatroom> mChats;
     //private final Map<Chatroom, Boolean> mExpandedFlags;
     //private final ChatListFragment chatListFragment;
-
+    private ChatListViewModel mChatListViewModel;
     //come back to this
     public ChatListRecyclerViewAdapter(Context context, ArrayList<Chatroom> mChats) {
         this.context = context;
@@ -63,10 +63,11 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
         return mChats.size();
     }
 
-    /**
-     * Objects from this class represent an Individual row View from the List
-     * of rows in the Blog Recycler View.
-     */
+
+    public void setChatListViewModel(ChatListViewModel chatListViewModel){
+        mChatListViewModel = chatListViewModel;
+    }
+
     public class ChatViewHolder extends RecyclerView.ViewHolder {
         private ImageView chatIV;
         public FragmentChatCardBinding binding;
@@ -80,7 +81,6 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
             //chatIV = itemView.findViewById(R.id.idIVChat);
             chatTV = itemView.findViewById(R.id.idTVChatName);
             binding = FragmentChatCardBinding.bind(itemView);
-
         }
 
 
@@ -91,10 +91,17 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
         void setChatRoom(final Chatroom chatroom) {
             mChat = chatroom;
             chatTV.setText(mChat.getChatName());
-            binding.buttonOpen.setOnClickListener(view ->
-                    Navigation.findNavController(mView)
-                            .navigate(ChatListFragmentDirections
-                                    .actionNavigationChatListToNavigationChat()));
+
+
+
+            binding.buttonOpen.setOnClickListener(view -> {
+                //mChatListViewModel.setChatId(chatroom.getChatId());
+                Navigation.findNavController(mView)
+                        .navigate(ChatListFragmentDirections
+                                .actionNavigationChatListToNavigationChat());
+            });
+            binding.buttonLeave.setOnClickListener(view -> mChatListViewModel.deleteChat(chatroom.getChatId()));
+
         }
 
 

@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -27,6 +28,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import edu.uw.tcss450.messaging_final_project.R;
+import edu.uw.tcss450.messaging_final_project.io.RequestQueueSingleton;
 import edu.uw.tcss450.messaging_final_project.model.UserInfoViewModel;
 
 public class ChatListViewModel extends AndroidViewModel {
@@ -41,6 +43,8 @@ public class ChatListViewModel extends AndroidViewModel {
         mResponse.setValue(new JSONObject());
         mChatroomList = new MutableLiveData<>();
         mChatroomList.setValue(new ArrayList<>());
+        //userInfoViewModel = new ViewModelProvider(getActivity()).get(UserInfoViewModel.class);
+
     }
 
     public ArrayList<Chatroom> getChats() {
@@ -101,7 +105,7 @@ public class ChatListViewModel extends AndroidViewModel {
                         json.getString("name"));
 
                 chatList.add(chat);
-                //Log.e("chatids", chat.getChatId());
+                //Log.e("chatidds", chat.getChatId());
                 Log.e("Chats",chat.getChatName());
             }
 
@@ -145,4 +149,115 @@ public class ChatListViewModel extends AndroidViewModel {
                 .add(request);
     }
 
+    public void deleteChat(final int chatId) {
+        String url = getApplication().getResources().getString(R.string.base_url) + "chats/"
+                + chatId + "/"
+                + userInfoViewModel.getEmail();
+
+        Request request = new JsonObjectRequest(Request.Method.DELETE,
+                url,
+                null,
+                this::handleDeleteResult,
+                this::handleError) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", userInfoViewModel.getmJwt());
+                return headers;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //Instantiate the RequestQueue and add the request to the queue
+        Volley.newRequestQueue(getApplication().getApplicationContext())
+                .add(request);
+    }
+
+    private void handleDeleteResult(final JSONObject result) {
+        try {
+            Log.d("ChatListViewModel DELETE", "Result for delete attempt: " + result.getString("success"));
+        } catch (JSONException e) {
+            throw new IllegalStateException("Unexpected response in ChatListViewModel: " + result);
+        }
+    }
+
+    public void addChat(final String jwt, final String name) {
+        String url = getApplication().getResources().getString(R.string.base_url) + "chats";
+
+        JSONObject body = new JSONObject();
+        try {
+            body.put("name", name);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Request request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                body,
+                response -> handleAddChat(jwt, response),
+                this::handleError) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                // add headers <key,value>
+                headers.put("Authorization", jwt);
+                return headers;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        Volley.newRequestQueue(getApplication().getApplicationContext()).add(request);
+    }
+
+    private void handleAddChat(final String jwt, final JSONObject response) {
+        try {
+            int chatID = response.getInt("chatID");
+            System.out.println(chatID);
+            putMembers(jwt, chatID);
+            getChats(jwt);
+        } catch (JSONException e) {
+            Log.e("JSON PARSE ERROR", "Found in handle Success ChatViewModel");
+            Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
+        }
+    }
+
+    public void putMembers(final String jwt, int chatID) {
+        String url = getApplication().getResources().getString(R.string.base_url) + "chats/" + chatID;
+        //JSONObject body = new JSONObject();
+        /*
+        try {
+            body.put("chatId", chatID);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        */
+
+
+        Request request = new JsonObjectRequest(
+                Request.Method.PUT,
+                url,
+                null,
+                mResponse::setValue,
+                this::handleError) {
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                // add headers <key,value>
+                headers.put("Authorization", jwt);
+                return headers;
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+                RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
+                .addToRequestQueue(request);
+    }
 }

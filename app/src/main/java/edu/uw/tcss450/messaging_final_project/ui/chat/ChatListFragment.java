@@ -10,8 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -27,7 +30,7 @@ public class ChatListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("ContactsFragment", "onCreate");
+        Log.e("chat list fragment", "onCreate");
 
         mUserInfoViewModel = new ViewModelProvider(getActivity()).get(UserInfoViewModel.class);
         mChatListViewModel = new ViewModelProvider(getActivity()).get(ChatListViewModel.class);
@@ -37,7 +40,7 @@ public class ChatListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.e("ContactsFragment", "onCreateView");
+        Log.e("chat list fragment", "onCreateView");
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_chat_list, container, false);
     }
@@ -60,6 +63,7 @@ public class ChatListFragment extends Fragment {
         binding.swipeContainer.setRefreshing(true);
 
 
+
         mChatListViewModel.addResponseObserver(getViewLifecycleOwner(), response ->{
             Log.e("ChatFrag","response refresh");
             binding.swipeContainer.setRefreshing(false);
@@ -69,6 +73,14 @@ public class ChatListFragment extends Fragment {
         rv.setAdapter(new ChatListRecyclerViewAdapter(getContext(), mChatListViewModel.getChats()));
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        FloatingActionButton fab = binding.createChatButton;
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(ChatListFragmentDirections.actionNavigationChatListToAddChatFragment());
+
+            }
+        });
         mChatListViewModel.addChatListObserver(getViewLifecycleOwner(),
                 list -> {
                     /*
@@ -96,6 +108,7 @@ public class ChatListFragment extends Fragment {
     }
 
 
+
 //    public List<ContactEntry> getMessageListByChatId(final int chatId) {
 //        return getOrCreateMapEntry(chatId).getValue();
 //    }
@@ -106,6 +119,8 @@ public class ChatListFragment extends Fragment {
 //        }
 //        return mMessages.get(chatId);
 //    }
+
+
 
 
 

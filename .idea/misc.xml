@@ -22,9 +22,23 @@
         <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/weather_rv_item.xml" value="0.21875" />
         <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2640625" />
         <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/menu/toolbar.xml" value="0.2640625" />
+        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/drawable/card_back.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/drawable/ic_account_black_24dp.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/drawable/ic_contacts_black_24dp.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/drawable/ic_floating_plus.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/drawable/ic_launcher_background.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/drawable/ic_weather_black_24dp.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/layout/fragment_add_chat.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/layout/fragment_chat_card.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/layout/fragment_chat_list.xml" value="0.1" />
         <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/layout/fragment_chat_message.xml" value="0.15625" />
+        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/layout/fragment_contact_card.xml" value="0.1" />
+        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/layout/fragment_contacts.xml" value="0.1" />
+        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/layout/fragment_select_contacts_card.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/menu/bottom_nav_menu.xml" value="0.15989583333333332" />
       </map>
     </option>
