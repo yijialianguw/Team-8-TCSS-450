@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/idRLContact"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="3dp">
+    android:layout_margin="3dp"
+    android:elevation="3dp"
+    tools:elevation="10dp">
 
     <!--image view for displaying the first letter of contact-->
     <ImageView
         android:id="@+id/idIVContact"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_margin="8dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:padding="3dp"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@drawable/ic_account_black_24dp" />
 
     <!--text view for displaying user name-->
     <TextView
@@ -27,5 +32,36 @@
         android:layout_toRightOf="@id/idIVContact"
         android:text="Contact Name"
         android:textColor="@color/primaryDarkColor" />
+
+    <Button
+        android:id="@+id/button_yes"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="230dp"
+        android:text="Yes" />
+
+    <Button
+        android:id="@+id/button_no"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="310dp"
+        android:text="No" />
+
+    <ImageButton
+        android:id="@+id/dots"
+        style="?android:attr/actionOverflowButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:minWidth="48dp"
+        android:scaleX="1.75"
+        android:scaleY="1.75"
+        tools:ignore="TouchTargetSizeCheck"
+        tools:layout_marginStart="385dp" />
+
 
 </RelativeLayout>

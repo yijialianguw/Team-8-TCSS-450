@@ -7,7 +7,7 @@ public class ContactEntry {
     private String memberId;
     private String firstName;
     private String lastName;
-
+    private boolean isInvite = false;
 
     // constructor
     public ContactEntry(final String memberId,
@@ -18,6 +18,14 @@ public class ContactEntry {
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public boolean isInvite(){
+        return isInvite;
+    }
+
+    public void setInvite(final boolean invite){
+        isInvite = invite;
     }
 
     public String getUserName() {

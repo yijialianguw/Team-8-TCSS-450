@@ -8,7 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -23,32 +23,27 @@ import org.json.JSONObject;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.IntFunction;
 
 import edu.uw.tcss450.messaging_final_project.R;
-import edu.uw.tcss450.messaging_final_project.databinding.FragmentContactCardBinding;
-import edu.uw.tcss450.messaging_final_project.databinding.FragmentContactsBinding;
+import edu.uw.tcss450.messaging_final_project.model.UserInfoViewModel;
 
 
 public class ContactsViewModel extends AndroidViewModel {
 
-    private MutableLiveData<JSONObject> mResponse;
+    //private MutableLiveData<JSONObject> mResponse;
 
     private MutableLiveData<ArrayList<ContactEntry>> mContactList;
 
     public ContactsViewModel(@NonNull Application application) {
         super(application);
-        mResponse = new MutableLiveData<>();
-        mResponse.setValue(new JSONObject());
         mContactList = new MutableLiveData<>();
         mContactList.setValue(new ArrayList<>());
 
     }
 
-    public ArrayList<ContactEntry> getContacts(){
+    public ArrayList<ContactEntry> getContactsList(){
         return mContactList.getValue();
     }
     public void addContactListObserver(@NonNull LifecycleOwner owner,
@@ -58,13 +53,7 @@ public class ContactsViewModel extends AndroidViewModel {
 
 
 
-    public void addResponseObserver(@NonNull LifecycleOwner owner,
-                                    @NonNull Observer<? super JSONObject> observer){
-        mResponse.observe(owner,observer);
-    }
-
     private void handleError(final VolleyError error) { // TODO: better handling
-        //FragmentContactsBinding binding= FragmentContactsBinding.bind(R.layout.fragment_contacts);
         if (Objects.isNull(error.networkResponse)) {
             Log.e("NETWORK ERROR", error.getMessage());
         }
@@ -78,12 +67,20 @@ public class ContactsViewModel extends AndroidViewModel {
     }
 
     private void handleResult(final JSONObject result) {
-        mResponse.setValue(result);
-
         try {
+            ArrayList<ContactEntry> contactList = mContactList.getValue();
+            contactList.clear();
+            JSONArray jsonArrayInvites = result.getJSONArray("invites");
+            for(int i = 0 ;i < jsonArrayInvites.length();i++){
+                JSONObject jsonInvite = jsonArrayInvites.getJSONObject(i);
+                ContactEntry entry = new ContactEntry(jsonInvite.getString("memberid"),
+                        jsonInvite.getString("username"),
+                        jsonInvite.getString("firstname"),
+                        jsonInvite.getString("lastname"));
+                entry.setInvite(true);
+                contactList.add(entry);
+            }
             JSONArray jsonArray = result.getJSONArray("rows");
-            ArrayList<ContactEntry> contactList = new ArrayList<>();
-
             for(int i = 0;i < jsonArray.length();i++){
                 JSONObject json = jsonArray.getJSONObject(i);
                 ContactEntry entry = new ContactEntry(json.getString("memberid"),
@@ -91,11 +88,14 @@ public class ContactsViewModel extends AndroidViewModel {
                         json.getString("firstname"),
                         json.getString("lastname"));
                 contactList.add(entry);
+//                contactList.add(entry);
+//                contactList.add(entry);
+//                contactList.add(entry);
+//                contactList.add(entry);
+//                contactList.add(entry);
                 Log.e("Contacts",entry.getUserName());
             }
-
             mContactList.setValue(contactList);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -129,20 +129,68 @@ public class ContactsViewModel extends AndroidViewModel {
                 .add(request);
     }
 
+    /**
+     * Accepts a contact invite.
+     * @param memberid memberid of user that originally sent the invite
+     * @param jwt
+     */
+    public void acceptInvite(final String memberid, final String jwt) {
+        String url =
+                getApplication().getResources().getString(R.string.base_url)+"contacts";
 
-    private void handleAddContact(final JSONObject response){
-        // TODO: something idk
+        JSONObject body = new JSONObject();
+        try {
+            body.put("memberid", memberid);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        Request request = new JsonObjectRequest(
+                Request.Method.PUT,
+                url,
+                body, //no body for this get request
+                this::handleSomething,
+                this::handleError) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                // add headers <key,value>
+                headers.put("Authorization", jwt);
+                return headers;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //Instantiate the RequestQueue and add the request to the queue
+        Volley.newRequestQueue(getApplication().getApplicationContext())
+                .add(request);
     }
 
-    private void handleAddContactError(final VolleyError error){
+
+
+
+    private void handleSomething(final JSONObject response){
+        // idk
+
+        mContactList.setValue(mContactList.getValue());
+    }
+
+    private void handleInviteContactError(final VolleyError error){
         // TODO: let user know maybe
     }
 
 
-    public void addContacts(final String email, final String jwt) {
+    /**
+     * Sends and contact invite to another user.
+     * @param email email of user that is being invited
+     * @param jwt
+     */
+    public void sendInvite(final String email, final String jwt) {
         String url =
                 getApplication().getResources().getString(R.string.base_url)+"contacts";
-
 
         JSONObject body = new JSONObject();
         try {
@@ -156,7 +204,48 @@ public class ContactsViewModel extends AndroidViewModel {
                 Request.Method.POST,
                 url,
                 body, //no body for this get request
-                this::handleAddContact,
+                this::handleSomething,
+                this::handleError) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                // add headers <key,value>
+                headers.put("Authorization", jwt);
+                return headers;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //Instantiate the RequestQueue and add the request to the queue
+        Volley.newRequestQueue(getApplication().getApplicationContext())
+                .add(request);
+    }
+
+
+    /**
+     * Deletes a contact.
+     * @param memberid memberid of user that is being deleted
+     * @param jwt
+     */
+    public void deleteContact(final String memberid, final String jwt) {
+        String url =
+                getApplication().getResources().getString(R.string.base_url)+"contacts?memberid="+memberid;
+
+//        JSONObject body = new JSONObject();
+//        try {
+//            body.put("memberid", memberid);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+
+
+        Request request = new JsonObjectRequest(
+                Request.Method.DELETE,
+                url,
+                null, // DELETE in volley dont have body
+                this::handleSomething,
                 this::handleError) {
             @Override
             public Map<String, String> getHeaders() {

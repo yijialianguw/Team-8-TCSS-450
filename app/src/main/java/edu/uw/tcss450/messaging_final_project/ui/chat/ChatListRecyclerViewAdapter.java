@@ -29,6 +29,7 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
     //private final Map<Chatroom, Boolean> mExpandedFlags;
     //private final ChatListFragment chatListFragment;
     private ChatListViewModel mChatListViewModel;
+
     //come back to this
     public ChatListRecyclerViewAdapter(Context context, ArrayList<Chatroom> mChats) {
         this.context = context;
@@ -93,9 +94,8 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
             chatTV.setText(mChat.getChatName());
 
 
-
             binding.buttonOpen.setOnClickListener(view -> {
-                //mChatListViewModel.setChatId(chatroom.getChatId());
+                mChatListViewModel.setChatId(chatroom.getChatId());
                 Navigation.findNavController(mView)
                         .navigate(ChatListFragmentDirections
                                 .actionNavigationChatListToNavigationChat());

@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.569" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Username:"
@@ -44,7 +44,7 @@
         app:layout_constraintVertical_bias="0.519" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name:"
@@ -67,7 +67,7 @@
         app:layout_constraintVertical_bias="0.959" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Password:"
