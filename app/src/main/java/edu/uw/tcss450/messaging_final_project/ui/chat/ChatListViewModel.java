@@ -36,6 +36,7 @@ public class ChatListViewModel extends AndroidViewModel {
     private MutableLiveData<ArrayList<Chatroom>> mChatroomList;
     private final MutableLiveData<JSONObject> mResponse;
     private UserInfoViewModel userInfoViewModel;
+
     /*
     * This determines which chat room we will navigate to
     */
@@ -47,6 +48,7 @@ public class ChatListViewModel extends AndroidViewModel {
         mResponse.setValue(new JSONObject());
         mChatroomList = new MutableLiveData<>();
         mChatroomList.setValue(new ArrayList<>());
+
         //userInfoViewModel = new ViewModelProvider(getActivity()).get(UserInfoViewModel.class);
 
     }
@@ -161,10 +163,10 @@ public class ChatListViewModel extends AndroidViewModel {
                 .add(request);
     }
 
-    public void deleteChat(final int chatId) {
+    public void deleteChat(final String jwt, final int chatId, String email) {
         String url = getApplication().getResources().getString(R.string.base_url) + "chats/"
                 + chatId + "/"
-                + userInfoViewModel.getEmail();
+                + email;
 
         Request request = new JsonObjectRequest(Request.Method.DELETE,
                 url,
@@ -174,7 +176,7 @@ public class ChatListViewModel extends AndroidViewModel {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", userInfoViewModel.getmJwt());
+                headers.put("Authorization", jwt);
                 return headers;
             }
         };
@@ -194,7 +196,7 @@ public class ChatListViewModel extends AndroidViewModel {
         }
     }
 
-    public void addChat(final String jwt, final String name) {
+    public void addChat(final String jwt, final String name, final String email) {
         String url = getApplication().getResources().getString(R.string.base_url) + "chats";
 
         JSONObject body = new JSONObject();
@@ -207,7 +209,7 @@ public class ChatListViewModel extends AndroidViewModel {
                 Request.Method.POST,
                 url,
                 body,
-                response -> handleAddChat(jwt, response),
+                response -> handleAddChat(jwt, response, email),
                 this::handleError) {
             @Override
             public Map<String, String> getHeaders() {
@@ -225,11 +227,12 @@ public class ChatListViewModel extends AndroidViewModel {
         Volley.newRequestQueue(getApplication().getApplicationContext()).add(request);
     }
 
-    private void handleAddChat(final String jwt, final JSONObject response) {
+    private void handleAddChat(final String jwt, final JSONObject response, final String email) {
         try {
             int chatID = response.getInt("chatID");
+            //String email = response.getString("email");
             System.out.println(chatID);
-            putMembers(jwt, chatID);
+            putMembers(jwt, chatID, email);
             getChats(jwt);
         } catch (JSONException e) {
             Log.e("JSON PARSE ERROR", "Found in handle Success ChatViewModel");
@@ -237,8 +240,9 @@ public class ChatListViewModel extends AndroidViewModel {
         }
     }
 
-    public void putMembers(final String jwt, int chatID) {
-        String url = getApplication().getResources().getString(R.string.base_url) + "chats/" + chatID;
+    public void putMembers(final String jwt, int chatID, String email) {
+        //int chatID = mResponse.getValue("chatID");
+        String url = getApplication().getResources().getString(R.string.base_url) + "chats/" + chatID + "/" + email;
         //JSONObject body = new JSONObject();
         /*
         try {
