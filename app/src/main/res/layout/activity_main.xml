@@ -37,19 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".MainActivity">
-
-        // FOR CONTACTS
-        <!--Recycler view for displaying list of contacts-->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/idRVContacts"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <!--fab for adding a new contact-->
-
-
-    </RelativeLayout>
+        tools:context=".MainActivity"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

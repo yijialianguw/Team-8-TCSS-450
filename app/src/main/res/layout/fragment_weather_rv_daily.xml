@@ -3,7 +3,7 @@
     android:layout_width="100dp"
     android:layout_gravity="center"
     android:layout_margin="4dp"
-
+    android:orientation="horizontal"
     android:background="@android:color/transparent"
     android:layout_height="wrap_content">
 
@@ -13,50 +13,56 @@
         android:background="@drawable/card_back">
 
         <TextView
-            android:id="@+id/idTVday"
+            android:id="@+id/idTVtime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="4dp"
-            android:text="Day"
+            android:text="Time"
             android:textAlignment="center"
             android:textColor="@color/primaryTextColor" />
 
         <TextView
-            android:id="@+id/idTVtemperatureMax"
-            android:layout_width="match_parent"
+            android:id="@+id/idTVtemperatureHour"
+            android:layout_width="45dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/idTVday"
+            android:layout_below="@+id/idTVtime"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="-4dp"
+            android:layout_marginEnd="28dp"
             android:gravity="center"
             android:text="20"
-            android:textAlignment="center"
             android:textColor="@color/primaryTextColor"
             android:textSize="20sp" />
 
         <ImageView
+            android:id="@+id/idIVConditionHour"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_below="@+id/idTVtemperatureMax"
-            android:id="@+id/idIVCondition"
+            android:layout_below="@+id/idTVtemperatureHour"
             android:layout_centerHorizontal="true"
-            android:layout_margin="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
             android:padding="4dp"
-            android:src="@mipmap/ic_launcher"
-            />
+            android:src="@mipmap/ic_launcher" />
 
         <TextView
-            android:id="@+id/idTVWindSpeed"
+            android:id="@+id/idTVWindSpeedHour"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/idIVCondition"
+            android:layout_below="@+id/idIVConditionHour"
             android:layout_centerHorizontal="true"
-            android:layout_margin="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
             android:gravity="center"
             android:padding="3dp"
             android:text="13"
             android:textAlignment="center"
-            android:textColor="@color/primaryTextColor"
-            />
+            android:textColor="@color/primaryTextColor" />
 
     </RelativeLayout>
 

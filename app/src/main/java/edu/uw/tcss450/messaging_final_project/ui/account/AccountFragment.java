@@ -24,6 +24,8 @@ import edu.uw.tcss450.messaging_final_project.model.UserInfoViewModel;
 import edu.uw.tcss450.messaging_final_project.ui.chat.ChatListViewModel;
 import edu.uw.tcss450.messaging_final_project.ui.chat.ChatSendViewModel;
 import edu.uw.tcss450.messaging_final_project.ui.chat.ChatViewModel;
+import edu.uw.tcss450.messaging_final_project.ui.contacts.ContactEntry;
+import edu.uw.tcss450.messaging_final_project.ui.contacts.ContactsViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +34,7 @@ public class AccountFragment extends Fragment {
 
     private AccountViewModel mAccountViewModel;
     private UserInfoViewModel mUserInfoViewModel;
+    private ContactEntry mContactsViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,11 +56,9 @@ public class AccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
 
         FragmentAccountBinding binding = FragmentAccountBinding.bind(getView());
-        binding.userEmail.setText(mUserInfoViewModel.getEmail());
-        //binding.userName.setText(getFirstName() + " " + getLastName());
-        //binding.userUserName.setText(mUserInfoViewModel.getUserName());
-        //binding.username.setText(binding.username.getText() + " " + mUserInfoViewModel.getEmail()); // TODO: does the userinfoviewmodel not have username? or is email == username?
-        //binding.name.setText(binding.name.getText() + mUserInfoViewModel.get);
+        binding.userEmail.setText(mUserInfoViewModel.getmEmail());
+        //binding.userName.setText(mUserInfoViewModel.getmName()); // TODO: does the userinfoviewmodel not have username? or is email == username?
+        //binding.userUserName.setText(mUserInfoViewModel.getmUserName());
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("sharedPrefs", MODE_PRIVATE);
         final SharedPreferences.Editor editor
