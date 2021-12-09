@@ -9,7 +9,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
-public class LocationViewModel {
+public class LocationViewModel extends ViewModel {
+
     private MutableLiveData<Location> mLocation;
 
     public LocationViewModel() {
@@ -30,4 +31,5 @@ public class LocationViewModel {
     public Location getCurrentLocation() {
         return new Location(mLocation.getValue());
     }
+
 }

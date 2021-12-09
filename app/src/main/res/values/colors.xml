@@ -11,8 +11,10 @@
 
     <color name="secondaryTextColorFade">#222222</color>
 
-
-    <color name= "backgroundColorWeather">#FFF0BD</color>
+    e3d5a6
+    FFF0BD
+    dbcea0
+    <color name= "backgroundColorWeather">#cfb18a</color>
     <color name="colorIcon">#222222</color>
     <color name="colorNavBar">#FFFFFF</color>
     <color name="colorButton">#ffbe80</color>

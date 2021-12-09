@@ -1,7 +1,5 @@
 package edu.uw.tcss450.messaging_final_project.ui.weather;
 
-import static java.sql.DriverManager.println;
-
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -18,7 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.squareup.picasso.Picasso;
@@ -27,8 +25,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -37,6 +33,7 @@ import java.util.Locale;
 
 import edu.uw.tcss450.messaging_final_project.R;
 import edu.uw.tcss450.messaging_final_project.databinding.FragmentWeatherBinding;
+import edu.uw.tcss450.messaging_final_project.model.LocationViewModel;
 import edu.uw.tcss450.messaging_final_project.model.UserInfoViewModel;
 
 /**
@@ -47,8 +44,8 @@ public class WeatherFragment extends Fragment {
 
     private WeatherViewModel mWeatherViewModel;
     private UserInfoViewModel mUserModel;
+    private LocationViewModel mLocationModel;
 
-    private TextView cityNameTV, temperatureRVTV, conditionTV, temperatureTV, conditionRVTV;
     private RecyclerView weatherRV;
     private TextInputEditText cityEdt;
     private ImageView backIV, iconIV, searchIV, iconIV1, iconIV2, iconIV3, iconIV4, iconIV5;
@@ -74,18 +71,12 @@ public class WeatherFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weather, container, false);
 
-        // Inflate the layout for this fragment
-       // temperatureTV = view.findViewById(R.id.idTemp);
-       // conditionRVTV = view.findViewById(R.id.idIVCondition);
-       // conditionTV = view.findViewById(R.id.idTVCondition);
-       // weatherRV = view.findViewById(R.id.idRvWeather);
         iconIV = view.findViewById(R.id.idIVIcon);
         iconIV1 = view.findViewById(R.id.idIVIconDay1);
         iconIV2 = view.findViewById(R.id.idIVIconDay2);
         iconIV3 = view.findViewById(R.id.idIVIconDay3);
         iconIV4 = view.findViewById(R.id.idIVIconDay4);
         iconIV5 = view.findViewById(R.id.idIVIconDay5);
-       // cityNameTV = view.findViewById(R.id.idTVCityName);
         weatherRVModelArrayList = new ArrayList<WeatherForecast>();
         return view;
     }
@@ -100,6 +91,13 @@ public class WeatherFragment extends Fragment {
         rv.setAdapter(new WeatherRecyclerViewAdapter(getContext(), weatherRVModelArrayList));
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         //((WeatherRecyclerViewAdapter)rv.getAdapter()).setWeatherViewModel(mWeatherViewModel);
+
+        mLocationModel = new ViewModelProvider(getActivity())
+                .get(LocationViewModel.class);
+        mLocationModel.addLocationObserver(getViewLifecycleOwner(), location -> {
+                    longitude = location.getLongitude();
+                    latitude = location.getLongitude();
+                });
 
         mWeatherViewModel.addResponseObserver(getViewLifecycleOwner(), response -> {
             try {
