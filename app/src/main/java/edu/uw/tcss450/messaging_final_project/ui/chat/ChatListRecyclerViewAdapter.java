@@ -51,8 +51,8 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
     @Override
     public ChatListRecyclerViewAdapter.ChatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ChatListRecyclerViewAdapter.ChatViewHolder(LayoutInflater
-                    .from(context)
-                    .inflate(R.layout.fragment_chat_card, parent, false));
+                .from(context)
+                .inflate(R.layout.fragment_chat_card, parent, false));
     }
 
     @Override
@@ -124,7 +124,7 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
             switch (menuItem.getItemId()){
                 case R.id.delete:{
                     mChatListViewModel.setChatId(mChat.getChatId());
-                    mChatListViewModel.deleteChat(mUserInfoViewModel.getmJwt(), mChat.getChatId(), mUserInfoViewModel.getEmail());
+                    mChatListViewModel.deleteChat(mUserInfoViewModel.getmJwt(), mChat.getChatId(), mUserInfoViewModel.getmEmail());
                     Log.e("ChatListRVHolder", mChat.getChatName() + ":" + mChat.getChatId());
                     ArrayList<Chatroom> list = mChats;//mChatListViewModel.getChatroomList();
                     for(int i = 0 ;i < list.size();i++){
@@ -190,7 +190,7 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
     }
 
     //public void setChatroomName(List<Chatroom> rooms) {
-       // mChats = rooms;
+    // mChats = rooms;
     //}
 
 }

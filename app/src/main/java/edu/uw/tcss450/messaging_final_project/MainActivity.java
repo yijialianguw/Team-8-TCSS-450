@@ -20,7 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-//import com.auth0.android.jwt.JWT;
+import com.auth0.android.jwt.JWT;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        temperatureTV = findViewById(R.id.idTVtemperature);
 
         /*
          * These bundle values come from when SingInFragment navigates to MainActivity.
@@ -74,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         mNewMessageModel = new ViewModelProvider(this).get(NewMessageCountViewModel.class);
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if (destination.getId() == R.id.navigation_chat_list) {
+            if (destination.getId() == R.id.navigation_chat) {
                 //When the user navigates to the chats page, reset the new message count.
                 //This will need some extra logic for your project as it should have
                 //multiple chat rooms.
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mNewMessageModel.addMessageCountObserver(this, count -> {
-            BadgeDrawable badge = binding.navView.getOrCreateBadge(R.id.navigation_chat_list);
+            BadgeDrawable badge = binding.navView.getOrCreateBadge(R.id.navigation_chat);
             badge.setMaxCharacterCount(2);
             if (count > 0) {
                 //new messages! update and show the notification badge.

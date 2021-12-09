@@ -1,11 +1,14 @@
 package edu.uw.tcss450.messaging_final_project.ui.account;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -21,6 +24,8 @@ import edu.uw.tcss450.messaging_final_project.model.UserInfoViewModel;
 import edu.uw.tcss450.messaging_final_project.ui.chat.ChatListViewModel;
 import edu.uw.tcss450.messaging_final_project.ui.chat.ChatSendViewModel;
 import edu.uw.tcss450.messaging_final_project.ui.chat.ChatViewModel;
+import edu.uw.tcss450.messaging_final_project.ui.contacts.ContactEntry;
+import edu.uw.tcss450.messaging_final_project.ui.contacts.ContactsViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +34,7 @@ public class AccountFragment extends Fragment {
 
     private AccountViewModel mAccountViewModel;
     private UserInfoViewModel mUserInfoViewModel;
+    private ContactEntry mContactsViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,16 +56,63 @@ public class AccountFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
 
         FragmentAccountBinding binding = FragmentAccountBinding.bind(getView());
+        binding.userEmail.setText(mUserInfoViewModel.getmEmail());
+        //binding.userName.setText(mUserInfoViewModel.getmName()); // TODO: does the userinfoviewmodel not have username? or is email == username?
+        //binding.userUserName.setText(mUserInfoViewModel.getmUserName());
 
-        binding.username.setText(binding.username.getText() + " " + mUserInfoViewModel.getEmail()); // TODO: does the userinfoviewmodel not have username? or is email == username?
-        //binding.name.setText(binding.name.getText() + mUserInfoViewModel.get);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("sharedPrefs", MODE_PRIVATE);
+        final SharedPreferences.Editor editor
+                = sharedPreferences.edit();
+        final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
+
+        binding.switchDarkMode.setOnClickListener(
+                new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view)
+                    {
+                        // When user taps the enable/disable
+                        // dark mode button
+                        if (isDarkModeOn) {
+
+                            // if dark mode is on it
+                            // will turn it off
+                            AppCompatDelegate
+                                    .setDefaultNightMode(
+                                            AppCompatDelegate
+                                                    .MODE_NIGHT_NO);
+                            // it will set isDarkModeOn
+                            // boolean to false
+                            editor.putBoolean(
+                                    "isDarkModeOn", false);
+                            editor.apply();
+
+                        }
+                        else {
+
+                            // if dark mode is off
+                            // it will turn it on
+                            AppCompatDelegate
+                                    .setDefaultNightMode(
+                                            AppCompatDelegate
+                                                    .MODE_NIGHT_YES);
+
+                            // it will set isDarkModeOn
+                            // boolean to true
+                            editor.putBoolean(
+                                    "isDarkModeOn", true);
+                            editor.apply();
+                        }
+                    }
+                });
+
 
         binding.buttonSignOut.setOnClickListener(button ->{
             signOut();
         });
 
-    }
 
+    }
 
     private void signOut() {
         SharedPreferences prefs =
@@ -77,5 +130,7 @@ public class AccountFragment extends Fragment {
                         .getmJwt()
         );
     }
+
+
 
 }

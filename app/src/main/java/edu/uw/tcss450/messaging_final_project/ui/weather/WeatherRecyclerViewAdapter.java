@@ -12,68 +12,69 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import edu.uw.tcss450.messaging_final_project.R;
+import edu.uw.tcss450.messaging_final_project.databinding.FragmentContactCardBinding;
 
-public class WeatherRecyclerViewAdapter extends RecyclerView.Adapter<WeatherRecyclerViewAdapter.WeatherViewHolder> {
+public class WeatherRecyclerViewAdapter extends RecyclerView.Adapter<WeatherRecyclerViewAdapter.MyViewHolder> {
 
+    // creating variables for context and array list.
     private Context context;
-    private ArrayList<WeatherEntry> weatherEntryArrayList;
+    private ArrayList<WeatherForecast> weatherForecastArrayList;
 
-    public WeatherRecyclerViewAdapter(Context context, ArrayList<WeatherEntry> weatherEntryArrayList) {
+    // creating a constructor
+    public WeatherRecyclerViewAdapter(Context context, ArrayList<WeatherForecast> weatherForecastArrayList) {
         this.context = context;
-        this.weatherEntryArrayList = weatherEntryArrayList;
+        this.weatherForecastArrayList = weatherForecastArrayList;
     }
+
+    /**public void setWeatherViewModel(WeatherViewModel mWeatherViewModel) {
+        this.mWeatherViewModel = mWeatherViewModel;
+    }*/
 
     @NonNull
     @Override
-    public WeatherViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.fragment_weather_rv_item,
-                parent, false);
-        return new WeatherViewHolder(view);
+    public WeatherRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new MyViewHolder(LayoutInflater
+                .from(parent.getContext())
+                .inflate(R.layout.fragment_weather_rv_daily, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WeatherViewHolder holder, int position) {
-        WeatherEntry modal = weatherEntryArrayList.get(position);
-        holder.temperatureTV.setText(modal.getTemperature() + "°F");
-        Picasso.get().load("https://openweathermap.org/img/wn/".concat(modal.getIcon()).concat(".png")).into(holder.conditionIV);
-        holder.windTV.setText(modal.getWindSpeed() + "Km/h");
-        SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-        SimpleDateFormat output = new SimpleDateFormat("hh:mm aa");
-        try{
-            Date t = input.parse(modal.getTime());
-            holder.timeTV.setText(output.format(t));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        WeatherForecast weather = weatherForecastArrayList.get(position);
+        holder.temperatureMaxTV.setText(weather.getTemperatureMax() + "°F");
+        Picasso.get().load("https://openweathermap.org/img/wn/".concat(weather.getIcon()).concat(".png")).into(holder.conditionIV);
+        holder.windTV.setText(weather.getWindSpeed() + "m/h");
     }
 
     @Override
     public int getItemCount() {
-        return weatherEntryArrayList.size();
+        return weatherForecastArrayList.size();
     }
 
-    public class WeatherViewHolder extends RecyclerView.ViewHolder{
-        public TextView windTV, temperatureTV, timeTV;
-        public ImageView conditionIV;
+    public class MyViewHolder extends RecyclerView.ViewHolder{
+        private ImageView conditionIV;
+        private TextView windTV, temperatureMaxTV,  dayTV;
+        private FragmentContactCardBinding binding;
+        private View mItemView;
 
-        public WeatherViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            windTV = itemView.findViewById(R.id.idTVWindSpeed);
-            temperatureTV = itemView.findViewById(R.id.idTVtemperature);
-            timeTV = itemView.findViewById(R.id.idTVtime);
-            conditionIV = itemView.findViewById(R.id.idIVCondition);
+
+            this.mItemView = itemView;
+            // initializing our image view and text view.
+            windTV = itemView.findViewById(R.id.idTVWindSpeedHour);
+            temperatureMaxTV = itemView.findViewById(R.id.idTVtemperatureHour);
+            dayTV = itemView.findViewById(R.id.idTVtime);
+            conditionIV = itemView.findViewById(R.id.idIVConditionHour);
         }
     }
 
-    void setWeather (final WeatherEntry weather) {
+  void setWeather (final WeatherForecast weather) {
 
-    }
+  }
 }
 
 

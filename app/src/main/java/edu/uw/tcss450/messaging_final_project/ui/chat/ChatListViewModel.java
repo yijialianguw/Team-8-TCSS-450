@@ -38,8 +38,8 @@ public class ChatListViewModel extends AndroidViewModel {
     private UserInfoViewModel userInfoViewModel;
 
     /*
-    * This determines which chat room we will navigate to
-    */
+     * This determines which chat room we will navigate to
+     */
     private int mChatId;
 
     public ChatListViewModel(@NonNull Application application) {
