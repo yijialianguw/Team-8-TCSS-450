@@ -70,7 +70,7 @@ public class ChatListFragment extends Fragment {
         });
 
         final RecyclerView rv = binding.listRoot;
-        rv.setAdapter(new ChatListRecyclerViewAdapter(getContext(), mChatListViewModel.getChats()));
+        rv.setAdapter(new ChatListRecyclerViewAdapter(getContext(), mChatListViewModel.getChats(), mUserInfoViewModel));
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         ((ChatListRecyclerViewAdapter)rv.getAdapter()).setChatListViewModel(mChatListViewModel);
 
