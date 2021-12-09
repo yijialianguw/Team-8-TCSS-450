@@ -97,7 +97,7 @@ public class ContactsViewModel extends AndroidViewModel {
                 contactList.add(entry);
                 contactList.add(entry);
                 contactList.add(entry);
-
+               
                 Log.e("Contacts",entry.getUserName());
             }
 

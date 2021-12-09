@@ -1,37 +1,36 @@
 package edu.uw.tcss450.messaging_final_project.ui.contacts;
 
-import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import edu.uw.tcss450.messaging_final_project.R;
 import edu.uw.tcss450.messaging_final_project.databinding.FragmentContactCardBinding;
+import edu.uw.tcss450.messaging_final_project.model.UserInfoViewModel;
 
 public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRecyclerViewAdapter.MyViewHolder> {
 
     // creating variables for context and array list.
     //private Context context;
     private ArrayList<ContactEntry> contactEntryArrayList;
+    private ContactsViewModel mContactsViewModel;
+    private UserInfoViewModel mUserInfoViewModel;
 
     // creating a constructor
     public ContactsRecyclerViewAdapter(ArrayList<ContactEntry> contactEntryArrayList) {
         //this.context = context;
         this.contactEntryArrayList = contactEntryArrayList;
         //Log.e("Recycler", "Constructor");
+
     }
 
     public void setContactEntryArrayList(ArrayList<ContactEntry> contactEntryArrayList) {
@@ -53,10 +52,15 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         ContactEntry contact = contactEntryArrayList.get(position);
-        holder.setContactName(contact.getUserName());
-        //Log.e("Recycler", "onBindViewHolder");
-        // set click listener
-        holder.setChatButtonListener(1);
+        holder.setContact(contact);
+        holder.setContactName();
+        holder.setMenuButton();
+
+        holder.setYesButton(contact.getMemberId());
+
+
+        holder.setInviteVisibility();
+
     }
 
     // below method is use for filtering data in our array list
@@ -98,66 +102,91 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
         return contactEntryArrayList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public void setContactsViewModel(ContactsViewModel viewModel){
+        mContactsViewModel = viewModel;
+    }
+
+    public void setUserInfoViewModel(UserInfoViewModel userInfoViewModel){
+        mUserInfoViewModel = userInfoViewModel;
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder implements PopupMenu.OnMenuItemClickListener{
         // on below line creating a variable
         // for our image view and text view.
-        private ImageView contactIV;
-        private TextView contactTV;
         private FragmentContactCardBinding binding;
         private View mItemView;
+
+        private ContactEntry mContactEntry;
 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             this.mItemView = itemView;
-            // initializing our image view and text view.
-            contactIV = itemView.findViewById(R.id.idIVContact);
-            contactTV = itemView.findViewById(R.id.idTVContactName);
+
             binding = FragmentContactCardBinding.bind(itemView);
+
             binding.buttonNo.setVisibility(View.GONE);
             binding.buttonYes.setVisibility(View.GONE);
-            binding.buttonYes.setOnClickListener(button -> {
-                //Log.e("ContactCardFragment", "afsaffasfsaf");
-            });
-
-            itemView.setOnClickListener(button -> {
-                Log.e("ContactHolder", "contact cllicked");
-            });
-
-            // binding.{username-should-be-a-button}.setOnClickListener( button -> {
-            //  // TODO: need to send a request to get chat room
-            //  // TODO: should be able to have access to chatId of DM
-            //
-
-            // TODO: have a delete button for deleting contacts
 
         }
 
-        void setContactName(final String contactName) {
-            binding.idTVContactName.setText(contactName);
+        public void setContact(ContactEntry contactEntry){
+            mContactEntry = contactEntry;
         }
 
-        void setChatButtonListener(final int chatId){
-            // set on click listener to button
-            // use view model to send a request to web service
-            // once response gets back, naviagte to chat
-            // contactsfragment should have a navigateToChat method
-
-            binding.buttonYes.setOnClickListener(button -> {
-                Navigation.findNavController(mItemView)
-                        .navigate(ContactsFragmentDirections
-                                .actionNavigationContactsToNavigationChat());
+        public void setYesButton(final String memberid){
+            binding.buttonYes.setOnClickListener((button)->{
+                mContactsViewModel.acceptInvite(memberid,mUserInfoViewModel.getmJwt());
+                mContactEntry.setInvite(false);
             });
         }
 
+        public void setMenuButton(){
+            binding.dots.setOnClickListener((button)->{
+                showPopup();
+            });
+        }
 
-//        void getChatRoom(JSONObject jsonObject){
-//
-//        }
+        public void setNoButton(final String memberid){
+            // TODO: delete contact
+        }
+
+        public void setInviteVisibility(){
+            if(mContactEntry.isInvite()){
+                binding.buttonNo.setVisibility(View.VISIBLE);
+                binding.buttonYes.setVisibility(View.VISIBLE);
+                binding.idTVContactName.setText("NEW INVITE:\n"+binding.idTVContactName.getText());
+            } else {
+                binding.buttonNo.setVisibility(View.GONE);
+                binding.buttonYes.setVisibility(View.GONE);
+            }
+
+        }
+
+        void setContactName() {
+            binding.idTVContactName.setText(mContactEntry.getUserName());
+        }
+
+        public void showPopup(){
+            PopupMenu popupMenu = new PopupMenu(mItemView.getContext(), mItemView);
+            popupMenu.setOnMenuItemClickListener(this);
+            popupMenu.inflate(R.menu.popup_menu);
+            popupMenu.show();
+        }
 
 
-
-
+        @Override
+        public boolean onMenuItemClick(MenuItem menuItem) {
+            Log.e("ContactsRVHolder", mContactEntry.getFirstName() + ": " + mContactEntry.getMemberId());
+            mContactsViewModel.deleteContact(mContactEntry.getMemberId(), mUserInfoViewModel.getmJwt());
+            ArrayList<ContactEntry> list = mContactsViewModel.getContactsList();
+            for(int i = 0;i < list.size() ;i++){
+                if(mContactEntry.getMemberId().equals(list.get(i).getMemberId())){
+                    list.remove(i);
+                }
+            }
+            return false;
+        }
     }
 }

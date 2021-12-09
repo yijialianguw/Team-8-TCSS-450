@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -73,7 +72,11 @@ public class ContactsFragment extends Fragment {
 
 
         final RecyclerView rv = binding.recyclerContacts;
-        rv.setAdapter(new ContactsRecyclerViewAdapter(mContactsViewModel.getContacts()));
+        rv.setAdapter(new ContactsRecyclerViewAdapter(mContactsViewModel.getContactsList()));
+
+        ((ContactsRecyclerViewAdapter)rv.getAdapter()).setUserInfoViewModel(mUserInfoViewModel);
+        ((ContactsRecyclerViewAdapter)rv.getAdapter()).setContactsViewModel(mContactsViewModel);
+
         //rv.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
@@ -110,7 +113,7 @@ public class ContactsFragment extends Fragment {
 
 
         binding.buttonAddContact.setOnClickListener(button ->{
-            mContactsViewModel.addContacts(binding.contactTextInput.getText().toString(), mUserInfoViewModel.getmJwt());
+            mContactsViewModel.sendInvite(binding.contactTextInput.getText().toString(), mUserInfoViewModel.getmJwt());
         });
 
 

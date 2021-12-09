@@ -4,40 +4,30 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.403125" />
+        <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/drawable/card_back.xml" value="0.23489583333333333" />
         <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/drawable/ic_launcher_background.xml" value="0.403125" />
         <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/drawable/ic_weather_black_24.xml" value="0.28020833333333334" />
         <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/contacts_rv_item.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fargment_contacts.xml" value="0.2640625" />
-        <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fragment_account.xml" value="0.33" />
-        <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fragment_chat_card.xml" value="0.2911458333333333" />
-        <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fragment_chat_list.xml" value="0.2109375" />
-        <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fragment_chat_message.xml" value="0.2911458333333333" />
-        <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fragment_contact_card.xml" value="0.2911458333333333" />
+        <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fragement_contanct_card.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fragment_account.xml" value="0.25" />
+        <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fragment_chat_message.xml" value="0.21875" />
+        <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fragment_contact_card.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fragment_contacts.xml" value="0.2640625" />
         <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fragment_home.xml" value="0.21875" />
         <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fragment_messages.xml" value="0.2640625" />
         <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fragment_weather.xml" value="0.33" />
-        <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fragment_weather_rv_daily.xml" value="0.5" />
-        <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fragment_weather_rv_item.xml" value="0.3836050724637681" />
-        <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fragment_weather_rv_week.xml" value="0.26197916666666665" />
+        <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fragment_weather_rv_item.xml" value="0.1" />
+        <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/weather_rv_item.xml" value="0.21875" />
         <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2640625" />
         <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/menu/toolbar.xml" value="0.2640625" />
-        <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/mipmap-anydpi-v26/ic_spooki_icon.xml" value="0.30416666666666664" />
-        <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/mipmap-anydpi-v26/ic_spooki_icon_round.xml" value="0.30416666666666664" />
-        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/drawable/ic_messages_black_24dp.xml" value="0.1" />
-        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/drawable/ic_send.xml" value="0.1" />
-        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/drawable/ic_send_dark.xml" value="0.1" />
-        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/drawable/ic_weather_black_24dp.xml" value="0.1" />
-        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/layout/fragment_chat.xml" value="0.1" />
-        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/layout/fragment_chat_card.xml" value="0.15443840579710144" />
-        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/layout/fragment_chat_list.xml" value="0.14666666666666667" />
-        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/layout/fragment_chat_message.xml" value="0.1" />
-        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/layout/fragment_home.xml" value="0.15443840579710144" />
-        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/layout/fragment_weather.xml" value="0.1" />
-        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
-        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/menu/toolbar.xml" value="0.15989583333333332" />
-        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.19166666666666668" />
-        <entry key="..\:/Users/potaf/Desktop/tcss450/Team-8-TCSS-450-Client/app/src/main/res/layout/fragment_weather.xml" value="0.3645833333333333" />
+        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/layout/fragment_chat_card.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/layout/fragment_chat_list.xml" value="0.1" />
+        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/layout/fragment_chat_message.xml" value="0.15625" />
+        <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/menu/bottom_nav_menu.xml" value="0.15989583333333332" />
+        <entry key="..\:/Users/potaf/Desktop/tcss450/Team-8-TCSS-450-Client/app/src/main/res/layout/activity_main.xml" value="0.25769927536231885" />
+        <entry key="..\:/Users/potaf/Desktop/tcss450/Team-8-TCSS-450-Client/app/src/main/res/layout/fragment_account.xml" value="0.21197916666666666" />
       </map>
     </option>
   </component>
