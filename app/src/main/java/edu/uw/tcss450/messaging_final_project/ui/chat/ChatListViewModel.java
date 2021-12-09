@@ -191,6 +191,7 @@ public class ChatListViewModel extends AndroidViewModel {
     private void handleDeleteResult(final JSONObject result) {
         try {
             Log.d("ChatListViewModel DELETE", "Result for delete attempt: " + result.getString("success"));
+            mChatroomList.setValue(mChatroomList.getValue());
         } catch (JSONException e) {
             throw new IllegalStateException("Unexpected response in ChatListViewModel: " + result);
         }

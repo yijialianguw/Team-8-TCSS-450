@@ -129,11 +129,6 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
             binding.buttonNo.setVisibility(View.GONE);
             binding.buttonYes.setVisibility(View.GONE);
 
-
-
-
-            // TODO: have a delete button for deleting contacts
-
         }
 
         public void setContact(ContactEntry contactEntry){
