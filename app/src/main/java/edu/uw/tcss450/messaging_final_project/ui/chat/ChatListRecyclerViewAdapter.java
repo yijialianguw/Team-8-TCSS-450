@@ -5,9 +5,11 @@ import android.graphics.drawable.Icon;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +27,7 @@ import java.util.stream.Collectors;
 import edu.uw.tcss450.messaging_final_project.R;
 import edu.uw.tcss450.messaging_final_project.databinding.FragmentChatCardBinding;
 import edu.uw.tcss450.messaging_final_project.model.UserInfoViewModel;
+import edu.uw.tcss450.messaging_final_project.ui.contacts.ContactEntry;
 
 public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRecyclerViewAdapter.ChatViewHolder>{
 
@@ -33,7 +36,7 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
     //private final Map<Chatroom, Boolean> mExpandedFlags;
     //private final ChatListFragment chatListFragment;
     private ChatListViewModel mChatListViewModel;
-    private Chatroom chatroom;
+    //private Chatroom chatroom;
     private UserInfoViewModel mUserInfoViewModel;
 
 
@@ -80,13 +83,14 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
     }
 
 
-    public class ChatViewHolder extends RecyclerView.ViewHolder {
+    public class ChatViewHolder extends RecyclerView.ViewHolder implements PopupMenu.OnMenuItemClickListener{
         private ImageView chatIV;
         public FragmentChatCardBinding binding;
         private Chatroom mChat;
         private TextView chatTV;
         private View mView;
         //UserInfoViewModel mUserInfoViewModel;
+
 
 
         public ChatViewHolder(View view) {
@@ -98,6 +102,48 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
 
         }
 
+        public void setChatroom(Chatroom chatroom){
+
+        }
+
+        public void setMenuButton(){
+            binding.dots.setOnClickListener((button)->{
+                showPopup();
+            });
+        }
+
+        public void showPopup(){
+            PopupMenu popupMenu = new PopupMenu(mView.getContext(), mView);
+            popupMenu.setOnMenuItemClickListener(this);
+            popupMenu.inflate(R.menu.popup_menu_chat);
+            popupMenu.show();
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem menuItem) {
+            switch (menuItem.getItemId()){
+                case R.id.delete:{
+                    mChatListViewModel.setChatId(mChat.getChatId());
+                    mChatListViewModel.deleteChat(mUserInfoViewModel.getmJwt(), mChat.getChatId(), mUserInfoViewModel.getEmail());
+                    Log.e("ChatListRVHolder", mChat.getChatName() + ":" + mChat.getChatId());
+                    ArrayList<Chatroom> list = mChats;//mChatListViewModel.getChatroomList();
+                    for(int i = 0 ;i < list.size();i++){
+                        if(mChat.getChatId()==list.get(i).getChatId()){
+                            list.remove(i);
+                        }
+                    }
+                    break;
+                }
+                case R.id.edit:{
+                    mChatListViewModel.setChatId(mChat.getChatId());
+                    System.out.println(mChatListViewModel.getmChatId());
+                    Navigation.findNavController(mView).navigate(ChatListFragmentDirections.actionNavigationChatListToAddChatContactFragment());
+                }
+            }
+
+            return false;
+        }
+
 
         void setChatroomName(final String chatName) {
             binding.idTVChatName.setText(chatName);
@@ -107,24 +153,33 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
             mChat = chatroom;
             chatTV.setText(mChat.getChatName());
 
-
-            binding.buttonOpen.setOnClickListener(view -> {
+            mView.setOnClickListener((button)->{
                 mChatListViewModel.setChatId(chatroom.getChatId());
                 System.out.println(mChatListViewModel.getmChatId());
                 Navigation.findNavController(mView)
                         .navigate(ChatListFragmentDirections
                                 .actionNavigationChatListToNavigationChat());
             });
-            binding.buttonLeave.setOnClickListener(view -> {
-                mChatListViewModel.setChatId(chatroom.getChatId());
-                mChatListViewModel.deleteChat(mUserInfoViewModel.getmJwt(), chatroom.getChatId(), mUserInfoViewModel.getEmail());
-                Log.e("ChatListRV",mUserInfoViewModel.getEmail());
-            });
-            binding.buttonEdit.setOnClickListener(view -> {
-                mChatListViewModel.setChatId(chatroom.getChatId());
-                System.out.println(mChatListViewModel.getmChatId());
-                Navigation.findNavController(view).navigate(ChatListFragmentDirections.actionNavigationChatListToAddChatContactFragment());
-            });
+            setMenuButton();
+
+
+//            binding.buttonOpen.setOnClickListener(view -> {
+//                mChatListViewModel.setChatId(chatroom.getChatId());
+//                System.out.println(mChatListViewModel.getmChatId());
+//                Navigation.findNavController(mView)
+//                        .navigate(ChatListFragmentDirections
+//                                .actionNavigationChatListToNavigationChat());
+//            });
+//            binding.buttonLeave.setOnClickListener(view -> {
+//                mChatListViewModel.setChatId(chatroom.getChatId());
+//                mChatListViewModel.deleteChat(mUserInfoViewModel.getmJwt(), chatroom.getChatId(), mUserInfoViewModel.getEmail());
+//                Log.e("ChatListRV",mUserInfoViewModel.getEmail());
+//            });
+//            binding.buttonEdit.setOnClickListener(view -> {
+//                mChatListViewModel.setChatId(chatroom.getChatId());
+//                System.out.println(mChatListViewModel.getmChatId());
+//                Navigation.findNavController(view).navigate(ChatListFragmentDirections.actionNavigationChatListToAddChatContactFragment());
+//            });
         }
 
         public Chatroom getChatroom() {
