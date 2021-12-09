@@ -42,5 +42,27 @@
         <action
             android:id="@+id/action_navigation_chat_list_to_navigation_chat"
             app:destination="@id/navigation_chat" />
+        <action
+            android:id="@+id/action_navigation_chat_list_to_addChatFragment"
+            app:destination="@id/navigation_add_chat" />
+        <action
+            android:id="@+id/action_navigation_chat_list_to_addChatContactFragment"
+            app:destination="@id/addChatContactFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_add_chat"
+        android:name="edu.uw.tcss450.messaging_final_project.ui.chat.AddChatFragment"
+        android:label="AddChatFragment" >
+        <action
+            android:id="@+id/action_navigation_add_chat_to_navigation_chat_list"
+            app:destination="@id/navigation_chat_list" />
+    </fragment>
+    <fragment
+        android:id="@+id/addChatContactFragment"
+        android:name="edu.uw.tcss450.messaging_final_project.ui.chat.AddChatContactFragment"
+        android:label="AddChatContactFragment" >
+        <action
+            android:id="@+id/action_addChatContactFragment_to_navigation_chat_list"
+            app:destination="@id/navigation_chat_list" />
     </fragment>
 </navigation>

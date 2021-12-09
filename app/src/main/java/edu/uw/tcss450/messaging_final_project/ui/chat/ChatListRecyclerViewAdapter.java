@@ -10,8 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
+import edu.uw.tcss450.messaging_final_project.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 
 import edu.uw.tcss450.messaging_final_project.R;
 import edu.uw.tcss450.messaging_final_project.databinding.FragmentChatCardBinding;
+import edu.uw.tcss450.messaging_final_project.model.UserInfoViewModel;
 
 public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRecyclerViewAdapter.ChatViewHolder>{
 
@@ -29,6 +32,9 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
     //private final Map<Chatroom, Boolean> mExpandedFlags;
     //private final ChatListFragment chatListFragment;
     private ChatListViewModel mChatListViewModel;
+    private Chatroom chatroom;
+    private UserInfoViewModel mUserInfoViewModel;
+
 
     //come back to this
     public ChatListRecyclerViewAdapter(Context context, ArrayList<Chatroom> mChats) {
@@ -64,20 +70,23 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
         return mChats.size();
     }
 
+
     public void setChatListViewModel(ChatListViewModel chatListViewModel){
         mChatListViewModel = chatListViewModel;
     }
+    public void setUserInfoViewModel(UserInfoViewModel userInfoViewModel){
+        mUserInfoViewModel = userInfoViewModel;
+    }
 
-    /**
-     * Objects from this class represent an Individual row View from the List
-     * of rows in the Blog Recycler View.
-     */
+
     public class ChatViewHolder extends RecyclerView.ViewHolder {
         private ImageView chatIV;
         public FragmentChatCardBinding binding;
         private Chatroom mChat;
         private TextView chatTV;
         private View mView;
+        //UserInfoViewModel mUserInfoViewModel;
+
 
         public ChatViewHolder(View view) {
             super(view);
@@ -97,12 +106,29 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
             mChat = chatroom;
             chatTV.setText(mChat.getChatName());
 
+
             binding.buttonOpen.setOnClickListener(view -> {
                 mChatListViewModel.setChatId(chatroom.getChatId());
+                System.out.println(mChatListViewModel.getmChatId());
                 Navigation.findNavController(mView)
                         .navigate(ChatListFragmentDirections
                                 .actionNavigationChatListToNavigationChat());
             });
+            binding.buttonLeave.setOnClickListener(view -> {
+                mChatListViewModel.setChatId(chatroom.getChatId());
+                //TODO : make UserInfoViewModel work here
+                mChatListViewModel.deleteChat(mUserInfoViewModel.getmJwt(), chatroom.getChatId(), mUserInfoViewModel.getEmail());
+                System.out.println(mUserInfoViewModel.getEmail());
+            });
+            binding.buttonEdit.setOnClickListener(view -> {
+                mChatListViewModel.setChatId(chatroom.getChatId());
+                System.out.println(mChatListViewModel.getmChatId());
+                Navigation.findNavController(view).navigate(ChatListFragmentDirections.actionNavigationChatListToAddChatContactFragment());
+            });
+        }
+
+        public Chatroom getChatroom() {
+            return mChat;
         }
 
 
