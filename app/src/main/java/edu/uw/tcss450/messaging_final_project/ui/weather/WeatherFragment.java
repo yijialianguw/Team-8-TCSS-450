@@ -58,8 +58,8 @@ public class WeatherFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        latitude = 41.89705550448851;
-        longitude = -87.65438071838535;
+        latitude = 47.2451695634249;
+        longitude = -122.43801744410511;
         ViewModelProvider provider = new ViewModelProvider(getActivity());
         mUserModel = provider.get(UserInfoViewModel.class);
         mWeatherViewModel = provider.get(WeatherViewModel.class);
