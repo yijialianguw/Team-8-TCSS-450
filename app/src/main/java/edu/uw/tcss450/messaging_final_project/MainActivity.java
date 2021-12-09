@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_weather, R.id.navigation_account)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        //NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
         mNewMessageModel = new ViewModelProvider(this).get(NewMessageCountViewModel.class);
 
