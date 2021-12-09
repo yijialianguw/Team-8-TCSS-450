@@ -3,6 +3,7 @@ package edu.uw.tcss450.messaging_final_project.ui.chat;
 import android.content.Context;
 import android.graphics.drawable.Icon;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,10 +38,10 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
 
 
     //come back to this
-    public ChatListRecyclerViewAdapter(Context context, ArrayList<Chatroom> mChats) {
+    public ChatListRecyclerViewAdapter(Context context, ArrayList<Chatroom> mChats, UserInfoViewModel userInfoViewModel) {
         this.context = context;
         this.mChats = mChats;
-        //mExpandedFlags = mChats.stream().collect(Collectors.toMap(Function.identity(), blog->false));
+        mUserInfoViewModel = userInfoViewModel;
     }
 
     @NonNull
@@ -116,9 +117,8 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
             });
             binding.buttonLeave.setOnClickListener(view -> {
                 mChatListViewModel.setChatId(chatroom.getChatId());
-                //TODO : make UserInfoViewModel work here
                 mChatListViewModel.deleteChat(mUserInfoViewModel.getmJwt(), chatroom.getChatId(), mUserInfoViewModel.getEmail());
-                System.out.println(mUserInfoViewModel.getEmail());
+                Log.e("ChatListRV",mUserInfoViewModel.getEmail());
             });
             binding.buttonEdit.setOnClickListener(view -> {
                 mChatListViewModel.setChatId(chatroom.getChatId());
