@@ -53,7 +53,7 @@ public class AccountFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         FragmentAccountBinding binding = FragmentAccountBinding.bind(getView());
         binding.userEmail.setText(mUserInfoViewModel.getmEmail());
@@ -65,12 +65,25 @@ public class AccountFragment extends Fragment {
                 = sharedPreferences.edit();
         final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
 
+        if (isDarkModeOn) {
+
+            AppCompatDelegate
+                    .setDefaultNightMode(
+                            AppCompatDelegate
+                                    .MODE_NIGHT_YES);
+            // it will set isDarkModeOn
+            // boolean to false
+            editor.putBoolean(
+                    "isDarkModeOn", true);
+            editor.apply();
+            binding.switchDarkMode.setChecked(true);
+        }
+
         binding.switchDarkMode.setOnClickListener(
                 new View.OnClickListener() {
 
                     @Override
-                    public void onClick(View view)
-                    {
+                    public void onClick(View view) {
                         // When user taps the enable/disable
                         // dark mode button
                         if (isDarkModeOn) {
@@ -87,8 +100,7 @@ public class AccountFragment extends Fragment {
                                     "isDarkModeOn", false);
                             editor.apply();
 
-                        }
-                        else {
+                        } else {
 
                             // if dark mode is off
                             // it will turn it on
@@ -107,7 +119,7 @@ public class AccountFragment extends Fragment {
                 });
 
 
-        binding.buttonSignOut.setOnClickListener(button ->{
+        binding.buttonSignOut.setOnClickListener(button -> {
             signOut();
         });
 
@@ -130,7 +142,6 @@ public class AccountFragment extends Fragment {
                         .getmJwt()
         );
     }
-
 
 
 }
