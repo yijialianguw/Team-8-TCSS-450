@@ -1,6 +1,7 @@
 package edu.uw.tcss450.messaging_final_project.ui.weather;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,17 +17,17 @@ import java.util.ArrayList;
 
 import edu.uw.tcss450.messaging_final_project.R;
 import edu.uw.tcss450.messaging_final_project.databinding.FragmentContactCardBinding;
+import edu.uw.tcss450.messaging_final_project.databinding.FragmentWeatherRvDailyBinding;
 
 public class WeatherRecyclerViewAdapter extends RecyclerView.Adapter<WeatherRecyclerViewAdapter.MyViewHolder> {
 
     // creating variables for context and array list.
-    private Context context;
     private ArrayList<WeatherForecast> weatherForecastArrayList;
 
     // creating a constructor
     public WeatherRecyclerViewAdapter(Context context, ArrayList<WeatherForecast> weatherForecastArrayList) {
-        this.context = context;
         this.weatherForecastArrayList = weatherForecastArrayList;
+        Log.e("WeatherRV", "contruct");
     }
 
     /**public void setWeatherViewModel(WeatherViewModel mWeatherViewModel) {
@@ -44,9 +45,7 @@ public class WeatherRecyclerViewAdapter extends RecyclerView.Adapter<WeatherRecy
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         WeatherForecast weather = weatherForecastArrayList.get(position);
-        holder.temperatureMaxTV.setText(weather.getTemperatureMax() + "°F");
-        Picasso.get().load("https://openweathermap.org/img/wn/".concat(weather.getIcon()).concat(".png")).into(holder.conditionIV);
-        holder.windTV.setText(weather.getWindSpeed() + "m/h");
+        holder.setWeatherForecast(weather);
     }
 
     @Override
@@ -55,26 +54,29 @@ public class WeatherRecyclerViewAdapter extends RecyclerView.Adapter<WeatherRecy
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        private ImageView conditionIV;
-        private TextView windTV, temperatureMaxTV,  dayTV;
-        private FragmentContactCardBinding binding;
-        private View mItemView;
+
+        private WeatherForecast mWeatherForecast;
+        private FragmentWeatherRvDailyBinding binding;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            this.mItemView = itemView;
-            // initializing our image view and text view.
-            windTV = itemView.findViewById(R.id.idTVWindSpeedHour);
-            temperatureMaxTV = itemView.findViewById(R.id.idTVtemperatureHour);
-            dayTV = itemView.findViewById(R.id.idTVtime);
-            conditionIV = itemView.findViewById(R.id.idIVConditionHour);
+            this.binding = FragmentWeatherRvDailyBinding.bind(itemView);
         }
+
+        private void setData(){
+            binding.idTVtime.setText(mWeatherForecast.getHour()+"");
+            binding.idTVtemperatureHour.setText(mWeatherForecast.getTemperature());
+            Picasso.get().load("https://openweathermap.org/img/wn/".concat(mWeatherForecast.getIcon()).concat(".png")).into(binding.idIVConditionHour);
+            binding.idTVWindSpeedHour.setText(mWeatherForecast.getWindSpeed());
+        }
+
+        public void setWeatherForecast(final WeatherForecast weatherForecast){
+            this.mWeatherForecast = weatherForecast;
+            setData();
+        }
+
     }
 
-  void setWeather (final WeatherForecast weather) {
-
-  }
 }
 
 

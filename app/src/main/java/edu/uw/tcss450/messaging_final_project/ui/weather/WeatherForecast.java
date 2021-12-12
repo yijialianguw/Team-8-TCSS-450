@@ -2,43 +2,26 @@ package edu.uw.tcss450.messaging_final_project.ui.weather;
 
 public class WeatherForecast {
 
-    private String day;
-    private String temperatureMax;
-    private String temperatureMin;
+    private String temperature;
     private String icon;
     private String windSpeed;
+    private int hour;
 
-    public WeatherForecast(String day, String temperatureMax, String temperatureMin,
+    public WeatherForecast(int hour, String temperature,
                            String icon, String windSpeed){
-        this.day = day;
-        this.temperatureMax = temperatureMax;
-        this.temperatureMin = temperatureMin;
+        this.hour = hour;
+        this.temperature = temperature;
         this.icon = icon;
         this.windSpeed = windSpeed;
     }
 
-    public String getDay() {
-        return day;
+    public int getHour(){
+        return this.hour;
     }
 
-    public void setDay(String day) {
-        this.day = day;
-    }
 
-    public String getTemperatureMax() {
-        return temperatureMax;
-    }
-
-    public void setTemperatureMax(String temperatureMax) {
-        this.temperatureMax = temperatureMax;
-    }
-
-    public String getTemperatureMin() {
-        return temperatureMin;
-    }
-
-    public void setTemperatureMin(String temperatureMin) {
-        this.temperatureMin = temperatureMin;
+    public String getTemperature() {
+        return temperature;
     }
 
     public String getIcon() {
@@ -53,8 +36,5 @@ public class WeatherForecast {
         return windSpeed;
     }
 
-    public void setWindSpeed(String windSpeed) {
-        this.windSpeed = windSpeed;
-    }
 
 }

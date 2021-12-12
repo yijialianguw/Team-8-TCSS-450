@@ -1,6 +1,7 @@
 package edu.uw.tcss450.messaging_final_project;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
@@ -25,6 +26,7 @@ import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import edu.uw.tcss450.messaging_final_project.databinding.ActivityMainBinding;
+import edu.uw.tcss450.messaging_final_project.databinding.FragmentAccountBinding;
 import edu.uw.tcss450.messaging_final_project.model.NewMessageCountViewModel;
 import edu.uw.tcss450.messaging_final_project.model.UserInfoViewModel;
 import edu.uw.tcss450.messaging_final_project.services.PushReceiver;
@@ -52,6 +54,19 @@ public class MainActivity extends AppCompatActivity {
          */
         MainActivityArgs args = MainActivityArgs.fromBundle(getIntent().getExtras());
 
+        SharedPreferences sharedPreferences = this.getSharedPreferences("sharedPrefs", MODE_PRIVATE);
+        final SharedPreferences.Editor editor
+                = sharedPreferences.edit();
+        final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
+        if (isDarkModeOn) {
+            AppCompatDelegate
+                    .setDefaultNightMode(
+                            AppCompatDelegate
+                                    .MODE_NIGHT_YES);
+            // it will set isDarkModeOn
+
+        }
+
         new ViewModelProvider(this,
                 new UserInfoViewModel.UserInfoViewModelFactory(args.getEmail(), args.getJwt())
                 ).get(UserInfoViewModel.class);
@@ -73,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         mNewMessageModel = new ViewModelProvider(this).get(NewMessageCountViewModel.class);
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if (destination.getId() == R.id.navigation_chat) {
+            if (destination.getId() == R.id.navigation_chat_list) {
                 //When the user navigates to the chats page, reset the new message count.
                 //This will need some extra logic for your project as it should have
                 //multiple chat rooms.
@@ -82,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mNewMessageModel.addMessageCountObserver(this, count -> {
-            BadgeDrawable badge = binding.navView.getOrCreateBadge(R.id.navigation_chat);
+            BadgeDrawable badge = binding.navView.getOrCreateBadge(R.id.navigation_chat_list);
             badge.setMaxCharacterCount(2);
             if (count > 0) {
                 //new messages! update and show the notification badge.
@@ -139,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //If the user is not on the chat screen, update the
                 // NewMessageCountView Model
-                if (nd.getId() != R.id.navigation_chat) {
+                if (nd.getId() != R.id.navigation_chat_list) {
                     mNewMessageModel.increment();
                 }
                 //Inform the view model holding chatroom messages of the new
