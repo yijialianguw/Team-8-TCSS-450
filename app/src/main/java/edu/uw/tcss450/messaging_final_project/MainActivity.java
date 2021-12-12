@@ -1,6 +1,7 @@
 package edu.uw.tcss450.messaging_final_project;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
@@ -25,6 +26,7 @@ import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import edu.uw.tcss450.messaging_final_project.databinding.ActivityMainBinding;
+import edu.uw.tcss450.messaging_final_project.databinding.FragmentAccountBinding;
 import edu.uw.tcss450.messaging_final_project.model.NewMessageCountViewModel;
 import edu.uw.tcss450.messaging_final_project.model.UserInfoViewModel;
 import edu.uw.tcss450.messaging_final_project.services.PushReceiver;
@@ -51,6 +53,19 @@ public class MainActivity extends AppCompatActivity {
          * This action has those 'jwt' and 'email' arguments.
          */
         MainActivityArgs args = MainActivityArgs.fromBundle(getIntent().getExtras());
+
+        SharedPreferences sharedPreferences = this.getSharedPreferences("sharedPrefs", MODE_PRIVATE);
+        final SharedPreferences.Editor editor
+                = sharedPreferences.edit();
+        final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
+        if (isDarkModeOn) {
+            AppCompatDelegate
+                    .setDefaultNightMode(
+                            AppCompatDelegate
+                                    .MODE_NIGHT_YES);
+            // it will set isDarkModeOn
+
+        }
 
         new ViewModelProvider(this,
                 new UserInfoViewModel.UserInfoViewModelFactory(args.getEmail(), args.getJwt())

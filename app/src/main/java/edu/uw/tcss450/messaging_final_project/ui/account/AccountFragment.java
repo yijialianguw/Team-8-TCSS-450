@@ -66,16 +66,6 @@ public class AccountFragment extends Fragment {
         final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
 
         if (isDarkModeOn) {
-
-            AppCompatDelegate
-                    .setDefaultNightMode(
-                            AppCompatDelegate
-                                    .MODE_NIGHT_YES);
-            // it will set isDarkModeOn
-            // boolean to false
-            editor.putBoolean(
-                    "isDarkModeOn", true);
-            editor.apply();
             binding.switchDarkMode.setChecked(true);
         }
 
