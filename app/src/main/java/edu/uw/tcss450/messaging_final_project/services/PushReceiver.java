@@ -48,7 +48,9 @@ public class PushReceiver extends BroadcastReceiver {
                 message = ChatMessage.createFromJsonString(intent.getStringExtra("message"));
                 chatId = intent.getIntExtra("chatid", -1);
             } else if(typeOfMessage.equals("contactReq")){
+                Log.e("JPsuh got contact","afasf");
                 contactEntry = ContactEntry.createFromJSONString(intent.getStringExtra("contact"));
+                Log.e("2Psuh got contact","afasf");
             }
 
         } catch (JSONException e) {
@@ -126,6 +128,7 @@ public class PushReceiver extends BroadcastReceiver {
     }
 
     private void contactReqFront(Context context, Intent intent, ContactEntry contactEntry){
+        Log.e("Pushy contact reciever","idk");
         Intent i = new Intent(RECEIVED_NEW_MESSAGE);
         i.putExtra("contactEntry", contactEntry);
         i.putExtras(intent.getExtras());

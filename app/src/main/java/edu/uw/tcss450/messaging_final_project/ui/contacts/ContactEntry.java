@@ -27,7 +27,11 @@ public class ContactEntry implements Serializable {
 
     public static ContactEntry createFromJSONString(final String json) throws JSONException {
         final JSONObject JSON = new JSONObject(json);
-        return new ContactEntry(JSON.getString("memberid"),JSON.getString("username"),JSON.getString("firstname"),JSON.getString("lastname"));
+        String memberid = JSON.getString("memberid");
+        String email = JSON.getString("email");
+        String first = JSON.getString("firstname");
+        String last = JSON.getString("lastname");
+        return new ContactEntry(memberid,email,first,last);
     }
 
     public boolean isInvite(){

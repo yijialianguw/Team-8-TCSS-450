@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.google.android.material.badge.BadgeDrawable;
@@ -160,8 +161,10 @@ public class MainActivity extends AppCompatActivity {
                 //Inform the view model holding chatroom messages of the new
                 //message.
                 mChatModel.addMessage(intent.getIntExtra("chatid", -1), cm);
-            } else if(intent.hasExtra("contactReq")){
+            } else if(intent.hasExtra("contactEntry")){
+                Log.e("Pushy contact main","got stuff");
                 ContactEntry contactEntry = (ContactEntry) intent.getSerializableExtra("contactEntry");
+                contactEntry.setInvite(true);
                 mContactsViewModel.addContact(contactEntry);
             }
         }
