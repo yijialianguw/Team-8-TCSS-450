@@ -15,23 +15,19 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
-import com.auth0.android.jwt.JWT;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import edu.uw.tcss450.messaging_final_project.databinding.ActivityMainBinding;
-import edu.uw.tcss450.messaging_final_project.databinding.FragmentAccountBinding;
 import edu.uw.tcss450.messaging_final_project.model.NewMessageCountViewModel;
 import edu.uw.tcss450.messaging_final_project.model.UserInfoViewModel;
 import edu.uw.tcss450.messaging_final_project.services.PushReceiver;
 import edu.uw.tcss450.messaging_final_project.ui.chat.ChatMessage;
 import edu.uw.tcss450.messaging_final_project.ui.chat.ChatViewModel;
+import edu.uw.tcss450.messaging_final_project.ui.contacts.ContactEntry;
+import edu.uw.tcss450.messaging_final_project.ui.contacts.ContactsViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -137,9 +133,13 @@ public class MainActivity extends AppCompatActivity {
      */
     private class MainPushMessageReceiver extends BroadcastReceiver {
 
-        private ChatViewModel mModel =
+        private ChatViewModel mChatModel =
                 new ViewModelProvider(MainActivity.this)
                         .get(ChatViewModel.class);
+
+        private ContactsViewModel mContactsViewModel =
+                new ViewModelProvider(MainActivity.this)
+                        .get(ContactsViewModel.class);
 
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -154,12 +154,15 @@ public class MainActivity extends AppCompatActivity {
 
                 //If the user is not on the chat screen, update the
                 // NewMessageCountView Model
-                if (nd.getId() != R.id.navigation_chat_list) {
+                if (nd.getId() != R.id.navigation_chat_list && nd.getId() != R.id.navigation_chat) {
                     mNewMessageModel.increment();
                 }
                 //Inform the view model holding chatroom messages of the new
                 //message.
-                mModel.addMessage(intent.getIntExtra("chatid", -1), cm);
+                mChatModel.addMessage(intent.getIntExtra("chatid", -1), cm);
+            } else if(intent.hasExtra("contactReq")){
+                ContactEntry contactEntry = (ContactEntry) intent.getSerializableExtra("contactEntry");
+                mContactsViewModel.addContact(contactEntry);
             }
         }
     }
