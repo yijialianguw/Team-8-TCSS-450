@@ -29,6 +29,8 @@
         <entry key="..\:/Users/potaf/Desktop/tcss450/Team-8-TCSS-450-Client/app/src/main/res/layout/activity_main.xml" value="0.25769927536231885" />
         <entry key="..\:/Users/potaf/Desktop/tcss450/Team-8-TCSS-450-Client/app/src/main/res/layout/fragment_account.xml" value="0.33" />
         <entry key="..\:/Users/potaf/Desktop/tcss450/Team-8-TCSS-450-Client/app/src/main/res/layout/fragment_home.xml" value="0.3026041666666667" />
+        <entry key="..\:/Users/potaf/Desktop/tcss450/Team-8-TCSS-450-Client/app/src/main/res/layout/fragment_weather.xml" value="0.315625" />
+        <entry key="..\:/Users/potaf/Desktop/tcss450/Team-8-TCSS-450-Client/app/src/main/res/layout/fragment_weather_rv_daily.xml" value="0.315625" />
       </map>
     </option>
   </component>

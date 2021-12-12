@@ -46,11 +46,7 @@ public class WeatherFragment extends Fragment {
     private UserInfoViewModel mUserModel;
     private LocationViewModel mLocationModel;
 
-    private RecyclerView weatherRV;
-    private TextInputEditText cityEdt;
     private ImageView backIV, iconIV, searchIV, iconIV1, iconIV2, iconIV3, iconIV4, iconIV5;
-    private ArrayList<WeatherForecast> weatherRVModelArrayList;
-    private WeatherRecyclerViewAdapter weatherRecyclerViewAdapter;
     private String cityName;
     private double longitude;
     private double latitude;
@@ -71,13 +67,13 @@ public class WeatherFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weather, container, false);
 
+
         iconIV = view.findViewById(R.id.idIVIcon);
         iconIV1 = view.findViewById(R.id.idIVIconDay1);
         iconIV2 = view.findViewById(R.id.idIVIconDay2);
         iconIV3 = view.findViewById(R.id.idIVIconDay3);
         iconIV4 = view.findViewById(R.id.idIVIconDay4);
         iconIV5 = view.findViewById(R.id.idIVIconDay5);
-        weatherRVModelArrayList = new ArrayList<WeatherForecast>();
         return view;
     }
 
@@ -88,9 +84,8 @@ public class WeatherFragment extends Fragment {
         FragmentWeatherBinding binding = FragmentWeatherBinding.bind(getView());
 
         final RecyclerView rv = binding.idRvWeather;
-        rv.setAdapter(new WeatherRecyclerViewAdapter(getContext(), weatherRVModelArrayList));
-        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //((WeatherRecyclerViewAdapter)rv.getAdapter()).setWeatherViewModel(mWeatherViewModel);
+        rv.setAdapter(new WeatherRecyclerViewAdapter(getContext(), mWeatherViewModel.getWeatherForecasts()));
+        rv.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
 
         mLocationModel = new ViewModelProvider(getActivity())
                 .get(LocationViewModel.class);
@@ -98,6 +93,14 @@ public class WeatherFragment extends Fragment {
                     longitude = location.getLongitude();
                     latitude = location.getLongitude();
                 });
+
+        binding.swipeContainer.setOnRefreshListener(()->{
+            mWeatherViewModel.connect(String.valueOf(latitude), String.valueOf(longitude), mUserModel.getmJwt());
+        });
+
+        mWeatherViewModel.addWeatherObserver(getViewLifecycleOwner(),(list)->{
+            rv.getAdapter().notifyDataSetChanged();
+        });
 
         mWeatherViewModel.addResponseObserver(getViewLifecycleOwner(), response -> {
             try {

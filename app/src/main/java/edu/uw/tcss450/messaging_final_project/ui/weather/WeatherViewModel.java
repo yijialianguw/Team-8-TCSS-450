@@ -14,10 +14,12 @@ import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -31,12 +33,27 @@ public class WeatherViewModel extends AndroidViewModel {
 
     private MutableLiveData<JSONObject> mResponse;
 
+    private MutableLiveData<ArrayList<WeatherForecast>> mWeatherForecasts;
+
 
     public WeatherViewModel(@NonNull Application application) {
         super(application);
         mResponse = new MutableLiveData<>();
         mResponse.setValue(new JSONObject());
+        ArrayList<WeatherForecast> tmp = new ArrayList<>();
+        mWeatherForecasts = new MutableLiveData<>();
+        mWeatherForecasts.setValue(tmp);
     }
+
+    public ArrayList<WeatherForecast> getWeatherForecasts(){
+        return mWeatherForecasts.getValue();
+    }
+
+    public void addWeatherObserver(@NonNull LifecycleOwner owner,
+                                    @NonNull Observer<ArrayList<WeatherForecast>> observer) {
+        mWeatherForecasts.observe(owner, observer);
+    }
+
 
     public void addResponseObserver(@NonNull LifecycleOwner owner,
                                     @NonNull Observer<? super JSONObject> observer) {
@@ -98,6 +115,36 @@ public class WeatherViewModel extends AndroidViewModel {
 
     private void handleSuccess(final JSONObject response) {
         mResponse.setValue(response);
+
+        populateForecasts(response);
+
+
+    }
+
+    private void populateForecasts(final JSONObject response){
+        try {
+            JSONArray hourly= response.getJSONArray("hourly");
+            mWeatherForecasts.getValue().clear();
+            for(int i = 0 ;i < hourly.length();i++){
+                JSONObject hour = hourly.getJSONObject(i);
+                String temp = hour.getString("temp");
+                String time = hour.getString("dt");
+                String icon = hour.getJSONArray("weather").getJSONObject(0).getString("icon");
+                String wind_speed = hour.getString("wind_speed");
+//                Log.e("WeatherVM",69+"");
+//                Log.e("WeatherVM",temp);
+//                Log.e("WeatherVM",icon);
+//                Log.e("WeatherVM",wind_speed);
+
+                mWeatherForecasts.getValue().add(new WeatherForecast(69,temp,icon,wind_speed));
+                // TODO: 69 is just a placeholder until we can get the actaul hour
+            }
+
+            mWeatherForecasts.setValue(mWeatherForecasts.getValue());
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 
