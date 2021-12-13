@@ -61,7 +61,7 @@ public class WeatherRecyclerViewAdapter extends RecyclerView.Adapter<WeatherRecy
         }
 
         private void setData(){
-            binding.idTVtime.setText(mWeatherForecast.getHourly()+"");
+            binding.idTVtime.setText(mWeatherForecast.getHourly());
             binding.idTVtemperatureHour.setText(mWeatherForecast.getTemperature()+"°F");
             Picasso.get().load("https://openweathermap.org/img/wn/".concat(mWeatherForecast.getIcon()).concat(".png")).into(binding.idIVConditionHour);
             binding.idTVWindSpeedHour.setText(mWeatherForecast.getWindSpeed()+" m/h");
