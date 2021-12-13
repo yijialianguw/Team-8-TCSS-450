@@ -1,6 +1,11 @@
 package edu.uw.tcss450.messaging_final_project.ui.contacts;
 
-public class ContactEntry {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.Serializable;
+
+public class ContactEntry implements Serializable {
     // variables for our user name
     // and contact number.
     private String userName;
@@ -18,6 +23,15 @@ public class ContactEntry {
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public static ContactEntry createFromJSONString(final String json) throws JSONException {
+        final JSONObject JSON = new JSONObject(json);
+        String memberid = JSON.getString("memberid");
+        String email = JSON.getString("email");
+        String first = JSON.getString("firstname");
+        String last = JSON.getString("lastname");
+        return new ContactEntry(memberid,email,first,last);
     }
 
     public boolean isInvite(){

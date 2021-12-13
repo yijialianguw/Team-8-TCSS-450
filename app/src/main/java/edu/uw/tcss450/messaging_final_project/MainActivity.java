@@ -1,6 +1,7 @@
 package edu.uw.tcss450.messaging_final_project;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
@@ -15,12 +16,8 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
-//import com.auth0.android.jwt.JWT;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -30,6 +27,8 @@ import edu.uw.tcss450.messaging_final_project.model.UserInfoViewModel;
 import edu.uw.tcss450.messaging_final_project.services.PushReceiver;
 import edu.uw.tcss450.messaging_final_project.ui.chat.ChatMessage;
 import edu.uw.tcss450.messaging_final_project.ui.chat.ChatViewModel;
+import edu.uw.tcss450.messaging_final_project.ui.contacts.ContactEntry;
+import edu.uw.tcss450.messaging_final_project.ui.contacts.ContactsViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        temperatureTV = findViewById(R.id.idTVtemperature);
 
         /*
          * These bundle values come from when SingInFragment navigates to MainActivity.
@@ -52,6 +50,19 @@ public class MainActivity extends AppCompatActivity {
          * This action has those 'jwt' and 'email' arguments.
          */
         MainActivityArgs args = MainActivityArgs.fromBundle(getIntent().getExtras());
+
+        SharedPreferences sharedPreferences = this.getSharedPreferences("sharedPrefs", MODE_PRIVATE);
+        final SharedPreferences.Editor editor
+                = sharedPreferences.edit();
+        final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
+        if (isDarkModeOn) {
+            AppCompatDelegate
+                    .setDefaultNightMode(
+                            AppCompatDelegate
+                                    .MODE_NIGHT_YES);
+            // it will set isDarkModeOn
+
+        }
 
         new ViewModelProvider(this,
                 new UserInfoViewModel.UserInfoViewModelFactory(args.getEmail(), args.getJwt())
@@ -65,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_chat, R.id.navigation_contacts, R.id.navigation_home,
+                R.id.navigation_chat, R.id.navigation_contacts,
                 R.id.navigation_weather, R.id.navigation_account)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -123,9 +134,13 @@ public class MainActivity extends AppCompatActivity {
      */
     private class MainPushMessageReceiver extends BroadcastReceiver {
 
-        private ChatViewModel mModel =
+        private ChatViewModel mChatModel =
                 new ViewModelProvider(MainActivity.this)
                         .get(ChatViewModel.class);
+
+        private ContactsViewModel mContactsViewModel =
+                new ViewModelProvider(MainActivity.this)
+                        .get(ContactsViewModel.class);
 
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -140,12 +155,17 @@ public class MainActivity extends AppCompatActivity {
 
                 //If the user is not on the chat screen, update the
                 // NewMessageCountView Model
-                if (nd.getId() != R.id.navigation_chat) {
+                if (nd.getId() != R.id.navigation_chat_list && nd.getId() != R.id.navigation_chat) {
                     mNewMessageModel.increment();
                 }
                 //Inform the view model holding chatroom messages of the new
                 //message.
-                mModel.addMessage(intent.getIntExtra("chatid", -1), cm);
+                mChatModel.addMessage(intent.getIntExtra("chatid", -1), cm);
+            } else if(intent.hasExtra("contactEntry")){
+                Log.e("Pushy contact main","got stuff");
+                ContactEntry contactEntry = (ContactEntry) intent.getSerializableExtra("contactEntry");
+                contactEntry.setInvite(true);
+                mContactsViewModel.addContact(contactEntry);
             }
         }
     }

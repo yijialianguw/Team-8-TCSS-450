@@ -14,13 +14,15 @@ public class UserInfoViewModel extends ViewModel {
         mJwt = jwt;
     }
 
-    public String getEmail() {
+    public String getmEmail() {
         return mEmail;
     }
 
     public String getmJwt() {
         return mJwt;
     }
+
+
 
     public static class UserInfoViewModelFactory implements ViewModelProvider.Factory {
 

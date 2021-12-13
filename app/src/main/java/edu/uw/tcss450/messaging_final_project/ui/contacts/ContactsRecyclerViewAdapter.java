@@ -58,6 +58,8 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
 
         holder.setYesButton(contact.getMemberId());
 
+        holder.setNoButton(contact.getMemberId());
+
 
         holder.setInviteVisibility();
 
@@ -129,11 +131,6 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
             binding.buttonNo.setVisibility(View.GONE);
             binding.buttonYes.setVisibility(View.GONE);
 
-
-
-
-            // TODO: have a delete button for deleting contacts
-
         }
 
         public void setContact(ContactEntry contactEntry){
@@ -154,7 +151,9 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
         }
 
         public void setNoButton(final String memberid){
-            // TODO: delete contact
+            binding.buttonNo.setOnClickListener((button)->{
+                mContactsViewModel.deleteContact(memberid, mUserInfoViewModel.getmJwt());
+            });
         }
 
         public void setInviteVisibility(){

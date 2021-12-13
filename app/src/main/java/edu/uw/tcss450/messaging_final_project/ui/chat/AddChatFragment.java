@@ -76,7 +76,7 @@ public class AddChatFragment extends Fragment {
         if(name.length() < 2){
             binding.enterName.setError("Please enter a valid chat room name");
         }else{
-            mChatListViewModel.addChat(mUserInfoViewModel.getmJwt(), name, mUserInfoViewModel.getEmail());
+            mChatListViewModel.addChat(mUserInfoViewModel.getmJwt(), name, mUserInfoViewModel.getmEmail());
         }
     }
 

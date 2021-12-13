@@ -34,8 +34,8 @@ public class ChatListViewModel extends AndroidViewModel {
     private UserInfoViewModel userInfoViewModel;
 
     /*
-    * This determines which chat room we will navigate to
-    */
+     * This determines which chat room we will navigate to
+     */
     private int mChatId;
 
     public ChatListViewModel(@NonNull Application application) {
@@ -173,6 +173,7 @@ public class ChatListViewModel extends AndroidViewModel {
     private void handleDeleteResult(final JSONObject result) {
         try {
             Log.d("ChatListViewModel DELETE", "Result for delete attempt: " + result.getString("success"));
+            mChatroomList.setValue(mChatroomList.getValue());
         } catch (JSONException e) {
             throw new IllegalStateException("Unexpected response in ChatListViewModel: " + result);
         }

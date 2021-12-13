@@ -3,5 +3,9 @@
     <item android:id="@+id/edit"
         android:title="Edit"/>
     <item android:id="@+id/delete"
+<<<<<<< HEAD
         android:title="Leave"/>
+=======
+        android:title="Delete"/>
+>>>>>>> main
 </menu>

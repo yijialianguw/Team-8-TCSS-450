@@ -1,33 +1,27 @@
 package edu.uw.tcss450.messaging_final_project.ui.weather;
 
-public class WeatherEntry {
+public class WeatherForecast {
 
-    private String time;
     private String temperature;
     private String icon;
     private String windSpeed;
+    private int hour;
 
-    public WeatherEntry(String time, String temperature, String icon, String windSpeed){
-        this.time = time;
+    public WeatherForecast(int hour, String temperature,
+                           String icon, String windSpeed){
+        this.hour = hour;
         this.temperature = temperature;
         this.icon = icon;
         this.windSpeed = windSpeed;
     }
 
-    public String getTime() {
-        return time;
+    public int getHour(){
+        return this.hour;
     }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
 
     public String getTemperature() {
         return temperature;
-    }
-
-    public void setTemperature(String temperature) {
-        this.temperature = temperature;
     }
 
     public String getIcon() {
@@ -42,7 +36,5 @@ public class WeatherEntry {
         return windSpeed;
     }
 
-    public void setWindSpeed(String windSpeed) {
-        this.windSpeed = windSpeed;
-    }
+
 }

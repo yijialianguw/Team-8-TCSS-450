@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/chat_card"
     android:layout_width="match_parent"
-    android:layout_height="85dp"
+    android:layout_height="75dp"
     android:layout_margin="3dp">
 
     <!--image view for displaying the first letter of contact-->
@@ -14,42 +16,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
 
         android:text="Chat Name"
         android:textColor="@color/primaryDarkColor" />
 
-    <Button
-        android:id="@+id/button_leave"
-        android:layout_width="90dp"
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="304dp"
-        android:layout_marginBottom="7dp"
-        android:text="leave" />
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="13dp"
+        app:srcCompat="@drawable/ic_chat_notification" />
 
-    <Button
-        android:id="@+id/button_open"
-        android:layout_width="85dp"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="-380dp"
-        android:layout_marginBottom="7dp"
-        android:layout_toStartOf="@+id/button_leave"
-        android:text="open" />
-
-    <Button
-        android:id="@+id/button_edit"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="64dp"
-        android:layout_marginBottom="7dp"
-        android:layout_toStartOf="@+id/button_open"
-        android:text="edit" />
+    <ImageButton
+        android:id="@+id/dots"
+        style="?android:attr/actionOverflowButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:minWidth="48dp"
+        android:scaleX="1.75"
+        android:scaleY="1.75"
+        tools:ignore="TouchTargetSizeCheck" />
     <!--
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/text_chat_members"

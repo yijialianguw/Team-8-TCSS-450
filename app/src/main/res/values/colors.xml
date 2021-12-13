@@ -11,11 +11,17 @@
 
     <color name="secondaryTextColorFade">#222222</color>
 
-
+    e3d5a6
+    FFF0BD
+    dbcea0
+    <color name= "backgroundColorWeather">#cfb18a</color>
+    <color name="colorIcon">#222222</color>
+    <color name="colorNavBar">#FFFFFF</color>
+    <color name="colorButton">#ffbe80</color>
     <color name="colorPrimary">#ffbe80</color>
     <color name="colorPrimaryDark">#61574e</color>
     <color name="colorAccent">#ae83d4</color>
-    
-    <color name= "black_shade_1">#292D36</color>
-    <color name= "colorWhite">#FFFFFF</color>
+    <!-- For Regular Mode -->
+    <color name= "backgroundColor">#FFFFFF</color>
+    <color name= "textColor">#292D36</color>
 </resources>
