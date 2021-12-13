@@ -108,6 +108,11 @@ public class ContactsViewModel extends AndroidViewModel {
 
     }
 
+    /**
+     * get users list of contacts
+     *
+     * @param jwt
+     */
     public void getContacts(final String jwt) {
         String url =
                 getApplication().getResources().getString(R.string.base_url)+"contacts";
