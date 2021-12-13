@@ -20,9 +20,11 @@ import org.json.JSONObject;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.TimeZone;
 
 import edu.uw.tcss450.messaging_final_project.io.RequestQueueSingleton;
 
@@ -159,15 +161,33 @@ public class WeatherViewModel extends AndroidViewModel {
             for(int i = 0 ;i < hourly.length();i++){
                 JSONObject hour = hourly.getJSONObject(i);
                 String temp = hour.getString("temp");
-                String time = hour.getString("dt");
                 String icon = hour.getJSONArray("weather").getJSONObject(0).getString("icon");
                 String wind_speed = hour.getString("wind_speed");
-//                Log.e("WeatherVM",69+"");
-//                Log.e("WeatherVM",temp);
-//                Log.e("WeatherVM",icon);
-//                Log.e("WeatherVM",wind_speed);
 
-                mWeatherForecasts.getValue().add(new WeatherForecast(69,temp,icon,wind_speed));
+
+                // setting up time
+                String time = hour.getString("dt");
+                String date = new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new java.util.Date (Integer.valueOf(time)*1000));
+                Log.e("WeatherVM", date);
+                String time_hour = date.substring(11, 13);
+                Log.e("WeatherVM", time_hour);
+                if (time_hour.startsWith("0")) {
+                    if(Integer.valueOf(time_hour) == 0)
+                    {
+                        time_hour = "12AM";
+                    } else {
+                        time_hour = time_hour.substring(1, 2) + "AM";
+                    }
+                } else if (Integer.valueOf(time_hour) == 10 || Integer.valueOf(time_hour) == 11) {
+                    time_hour = time_hour + "AM";
+                } else if (Integer.valueOf(time_hour) == 12) {
+                        time_hour = time_hour + "PM";
+                } else if (Integer.valueOf(time_hour) > 12) {
+                    time_hour = String.valueOf(Integer.valueOf(time_hour) - 12) + "PM";
+                }
+
+                Log.e("Weather", time_hour);
+                mWeatherForecasts.getValue().add(new WeatherForecast(time_hour,temp,icon,wind_speed));
                 // TODO: 69 is just a placeholder until we can get the actaul hour
             }
 

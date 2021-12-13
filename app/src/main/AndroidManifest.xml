@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="edu.uw.tcss450.messaging_final_project">
 
     <!-- Location Permissions -->
@@ -25,8 +26,7 @@
         android:roundIcon="@mipmap/ic_spooki_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp">
-        <activity android:name="edu.uw.tcss450.messaging_final_project.MainActivity"
-            android:windowSoftInputMode="adjustNothing">
+        <activity android:name="edu.uw.tcss450.messaging_final_project.MainActivity">
         </activity>
         <activity android:name="edu.uw.tcss450.messaging_final_project.AuthActivity"
             android:exported="true">

@@ -227,6 +227,8 @@ public class WeatherFragment extends Fragment {
 
     private String getDayName (String epoch){
         Date date1 = new Date (Integer.valueOf(epoch)*1000);
+        String date = new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new java.util.Date (Integer.valueOf(epoch)*1000));
+        Log.e("WeatherVM", date);
         Calendar c = Calendar.getInstance();
         c.setTime(date1);
 

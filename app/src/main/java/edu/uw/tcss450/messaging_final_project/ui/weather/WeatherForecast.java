@@ -1,23 +1,18 @@
 package edu.uw.tcss450.messaging_final_project.ui.weather;
 
-import android.os.Build;
+import android.util.Log;
 
-import androidx.annotation.RequiresApi;
-
-import java.time.Instant;
-import java.time.LocalTime;
-import java.time.ZoneOffset;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.TimeZone;
 
 public class WeatherForecast {
 
     private String temperature;
     private String icon;
     private String windSpeed;
-    private int hour;
+    private String hour;
 
-    public WeatherForecast(int hour, String temperature,
+    public WeatherForecast(String hour, String temperature,
                            String icon, String windSpeed){
         this.hour = hour;
         this.temperature = temperature;
@@ -25,8 +20,8 @@ public class WeatherForecast {
         this.windSpeed = windSpeed;
     }
 
-    public int getHourly(){
-        return getTimeHour(this.hour);
+    public String getHourly(){
+        return this.hour;
     }
 
 
@@ -46,13 +41,5 @@ public class WeatherForecast {
         return String.valueOf(Math.round(Float.parseFloat(windSpeed)));
     }
 
-    public int getTimeHour(int epoch) {
-        Date date1 = new Date (Integer.valueOf(epoch)*1000);
-        Calendar c = Calendar.getInstance();
-        c.setTime(date1);
-
-        int hourOfDay = c.get(Calendar.HOUR_OF_DAY);
-        return hourOfDay;
-    }
 
 }

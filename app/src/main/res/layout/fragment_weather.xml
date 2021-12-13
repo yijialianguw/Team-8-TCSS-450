@@ -68,7 +68,8 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.822" />
+        app:layout_constraintVertical_bias="0.822"
+        tools:ignore="ImageContrastCheck" />
 
     <TextView
         android:id="@+id/idTVDay3"
@@ -182,7 +183,7 @@
         android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.76"
+        app:layout_constraintHorizontal_bias="0.795"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.01"
@@ -254,6 +255,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Today"
+        android:textColor="@color/textColor"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -475,6 +477,7 @@
         android:layout_marginTop="29dp"
         android:layout_marginBottom="200dp"
         android:text="City"
+        android:textColor="@color/textColor"
         app:layout_constraintBottom_toTopOf="@+id/swipe_container"
         app:layout_constraintEnd_toStartOf="@+id/editCity"
         app:layout_constraintStart_toStartOf="parent"
@@ -488,9 +491,12 @@
         android:layout_marginTop="29dp"
         android:layout_marginBottom="58dp"
         android:text="State"
+        android:textColor="@color/textColor"
         app:layout_constraintBottom_toTopOf="@+id/idDayC"
         app:layout_constraintEnd_toStartOf="@+id/editState"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/editCity"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
