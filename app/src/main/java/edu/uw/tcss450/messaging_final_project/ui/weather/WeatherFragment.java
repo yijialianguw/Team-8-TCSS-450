@@ -96,6 +96,7 @@ public class WeatherFragment extends Fragment {
 
         binding.swipeContainer.setOnRefreshListener(()->{
             mWeatherViewModel.connect(String.valueOf(latitude), String.valueOf(longitude), mUserModel.getmJwt());
+            binding.swipeContainer.setRefreshing(false);
         });
 
         mWeatherViewModel.addWeatherObserver(getViewLifecycleOwner(),(list)->{

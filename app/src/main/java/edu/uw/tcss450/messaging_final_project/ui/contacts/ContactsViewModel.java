@@ -51,6 +51,11 @@ public class ContactsViewModel extends AndroidViewModel {
         mContactList.observe(owner, observer);
     }
 
+    public void addContact(ContactEntry contactEntry){
+        mContactList.getValue().add(contactEntry);
+        mContactList.setValue(mContactList.getValue());
+    }
+
 
 
     private void handleError(final VolleyError error) { // TODO: better handling
@@ -178,6 +183,20 @@ public class ContactsViewModel extends AndroidViewModel {
         mContactList.setValue(mContactList.getValue());
     }
 
+    private void handleDelete(final JSONObject response) {
+        try {
+            ArrayList<ContactEntry> list = mContactList.getValue();
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getMemberId().equals(response.getString("memberid"))) {
+                    list.remove(i);
+                }
+            }
+            mContactList.setValue(list);
+        }catch(JSONException e){
+
+        }
+    }
+
     private void handleInviteContactError(final VolleyError error){
         // TODO: let user know maybe
     }
@@ -233,19 +252,13 @@ public class ContactsViewModel extends AndroidViewModel {
         String url =
                 getApplication().getResources().getString(R.string.base_url)+"contacts?memberid="+memberid;
 
-//        JSONObject body = new JSONObject();
-//        try {
-//            body.put("memberid", memberid);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
 
 
         Request request = new JsonObjectRequest(
                 Request.Method.DELETE,
                 url,
                 null, // DELETE in volley dont have body
-                this::handleSomething,
+                this::handleDelete,
                 this::handleError) {
             @Override
             public Map<String, String> getHeaders() {

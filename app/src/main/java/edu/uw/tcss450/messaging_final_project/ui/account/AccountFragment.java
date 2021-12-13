@@ -31,6 +31,7 @@ import edu.uw.tcss450.messaging_final_project.ui.contacts.ContactsViewModel;
  * A simple {@link Fragment} subclass.
  */
 public class AccountFragment extends Fragment {
+    private String IS_DARK = "isDarkModeOn";
 
     private AccountViewModel mAccountViewModel;
     private UserInfoViewModel mUserInfoViewModel;
@@ -63,7 +64,7 @@ public class AccountFragment extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("sharedPrefs", MODE_PRIVATE);
         final SharedPreferences.Editor editor
                 = sharedPreferences.edit();
-        final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
+        final boolean isDarkModeOn = sharedPreferences.getBoolean(IS_DARK, false);
 
         if (isDarkModeOn) {
             binding.switchDarkMode.setChecked(true);
@@ -87,7 +88,7 @@ public class AccountFragment extends Fragment {
                             // it will set isDarkModeOn
                             // boolean to false
                             editor.putBoolean(
-                                    "isDarkModeOn", false);
+                                    IS_DARK, false);
                             editor.apply();
 
                         } else {
@@ -102,7 +103,7 @@ public class AccountFragment extends Fragment {
                             // it will set isDarkModeOn
                             // boolean to true
                             editor.putBoolean(
-                                    "isDarkModeOn", true);
+                                    IS_DARK, true);
                             editor.apply();
                         }
                     }
