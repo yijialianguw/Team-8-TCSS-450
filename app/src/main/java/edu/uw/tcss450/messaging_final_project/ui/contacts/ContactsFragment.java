@@ -97,12 +97,7 @@ public class ContactsFragment extends Fragment {
 
         mContactsViewModel.addContactListObserver(getViewLifecycleOwner(),
                 list -> {
-                    /*
-                     * This solution needs work on the scroll position. As a group,
-                     * you will need to come up with some solution to manage the
-                     * recyclerview scroll position. You also should consider a
-                     * solution for when the keyboard is on the screen.
-                     */
+
                     //inform the RV that the underlying list has (possibly) changed
                     //Log.e("Contact Frag", "list observed" + list.size());
                     rv.getAdapter().notifyDataSetChanged();
@@ -117,27 +112,7 @@ public class ContactsFragment extends Fragment {
         });
 
 
-//        mContactsViewModel.addContactListObserver(getViewLifecycleOwner(), contactList -> {
-//            if (!contactList.isEmpty()) {
-//                binding.listRoot.setAdapter(
-//                        new ContactsRecyclerViewAdapter(getContext(),blogList));
-//                binding.layoutWait.setVisibility(View.GONE);
-//            }
-//        });
-
     }
-
-
-//    public List<ContactEntry> getMessageListByChatId(final int chatId) {
-//        return getOrCreateMapEntry(chatId).getValue();
-//    }
-//
-//    private MutableLiveData<List<ContactEntry>> getOrCreateMapEntry(final int chatId) {
-//        if(!mMessages.containsKey(chatId)) {
-//            mMessages.put(chatId, new MutableLiveData<>(new ArrayList<>()));
-//        }
-//        return mMessages.get(chatId);
-//    }
 
 
 

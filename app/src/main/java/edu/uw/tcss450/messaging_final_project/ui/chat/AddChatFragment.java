@@ -68,6 +68,9 @@ public class AddChatFragment extends Fragment {
 
     }
 
+    /**
+     * create a chat with a name at least 2 characters long
+     */
     private void createChat() {
         String name = binding.enterName.getText().toString().trim();
         if(name.length() < 2){

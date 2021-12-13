@@ -153,21 +153,42 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.632" />
 
+
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editCity"
-        android:layout_width="264dp"
+        android:layout_width="164dp"
         android:layout_height="48dp"
         android:importantForAutofill="no"
         android:inputType="text"
         android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.435"
+        app:layout_constraintHorizontal_bias="0.182"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.01"
         app:tint="@color/textColor">
         android:textSize="14sp">
+
+
+    </com.google.android.material.textfield.TextInputEditText>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editState"
+        android:layout_width="64dp"
+        android:layout_height="48dp"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:singleLine="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.76"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01"
+        app:tint="@color/textColor">
+        android:textSize="14sp">
+
 
     </com.google.android.material.textfield.TextInputEditText>
 
@@ -175,13 +196,15 @@
         android:id="@+id/idSearch"
         android:layout_width="24dp"
         android:layout_height="18dp"
+        android:scaleX="2"
+        android:scaleY="2"
         android:src="@drawable/ic_search_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.857"
+        app:layout_constraintHorizontal_bias="0.899"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintVertical_bias="0.04"
         app:tint="@color/textColor"></ImageView>
 
     <TextView
@@ -443,5 +466,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.813" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginBottom="200dp"
+        android:text="City"
+        app:layout_constraintBottom_toTopOf="@+id/swipe_container"
+        app:layout_constraintEnd_toStartOf="@+id/editCity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginBottom="58dp"
+        android:text="State"
+        app:layout_constraintBottom_toTopOf="@+id/idDayC"
+        app:layout_constraintEnd_toStartOf="@+id/editState"
+        app:layout_constraintStart_toEndOf="@+id/editCity"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

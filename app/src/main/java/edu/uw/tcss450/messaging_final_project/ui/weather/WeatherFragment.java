@@ -16,16 +16,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -95,7 +92,8 @@ public class WeatherFragment extends Fragment {
         });
 
         binding.swipeContainer.setOnRefreshListener(()->{
-            mWeatherViewModel.connect(String.valueOf(latitude), String.valueOf(longitude), mUserModel.getmJwt());
+            mWeatherViewModel.connectCoord(String.valueOf(latitude), String.valueOf(longitude), mUserModel.getmJwt());
+            binding.swipeContainer.setRefreshing(false);
         });
 
         mWeatherViewModel.addWeatherObserver(getViewLifecycleOwner(),(list)->{
@@ -189,7 +187,20 @@ public class WeatherFragment extends Fragment {
             }
         });
         // TODO: add button that get weather data
-        mWeatherViewModel.connect(String.valueOf(latitude), String.valueOf(longitude), mUserModel.getmJwt());
+        mWeatherViewModel.connectCoord(String.valueOf(latitude), String.valueOf(longitude), mUserModel.getmJwt());
+
+
+        binding.idSearch.setOnClickListener((button)->{
+            String city = binding.editCity.getText().toString();
+            String state = binding.editState.getText().toString();
+            if(city.length() > 1 && state.length() > 1){
+                mWeatherViewModel.connectLocation(city,state,mUserModel.getmJwt());
+                cityName = city.toUpperCase().substring(0,1) +  city.toLowerCase().substring(1);
+                binding.idTVCityName.setText(cityName);
+            }
+        });
+
+
     }
 
     private String getCityName (double longitude, double latitude){

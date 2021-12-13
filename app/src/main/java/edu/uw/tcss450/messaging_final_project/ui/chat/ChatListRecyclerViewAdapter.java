@@ -33,8 +33,6 @@ public class ChatListRecyclerViewAdapter extends RecyclerView.Adapter<ChatListRe
 
     private Context context;
     private ArrayList<Chatroom> mChats;
-    //private final Map<Chatroom, Boolean> mExpandedFlags;
-    //private final ChatListFragment chatListFragment;
     private ChatListViewModel mChatListViewModel;
     //private Chatroom chatroom;
     private UserInfoViewModel mUserInfoViewModel;

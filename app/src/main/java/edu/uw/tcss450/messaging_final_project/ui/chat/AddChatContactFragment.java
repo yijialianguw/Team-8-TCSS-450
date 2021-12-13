@@ -11,18 +11,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import edu.uw.tcss450.messaging_final_project.MainActivity;
 import edu.uw.tcss450.messaging_final_project.R;
-import edu.uw.tcss450.messaging_final_project.databinding.FragmentAddChatBinding;
 import edu.uw.tcss450.messaging_final_project.databinding.FragmentAddChatContactBinding;
-import edu.uw.tcss450.messaging_final_project.databinding.FragmentContactsBinding;
 import edu.uw.tcss450.messaging_final_project.model.UserInfoViewModel;
-import edu.uw.tcss450.messaging_final_project.ui.contacts.ContactsRecyclerViewAdapter;
 import edu.uw.tcss450.messaging_final_project.ui.contacts.ContactsViewModel;
 
 public class AddChatContactFragment extends Fragment {
@@ -81,7 +75,7 @@ public class AddChatContactFragment extends Fragment {
         int chatID = mChatListViewModel.getmChatId();
         String contact = binding.enterContact.getText().toString().trim();
         if(contact.contains("@")){
-            mChatListViewModel.putMembers(mUserInfoViewModel.getmJwt(), chatID, contact);
+            mChatListViewModel.addMember(mUserInfoViewModel.getmJwt(), chatID, contact);
         }else{
             binding.enterContact.setError("Please enter a valid contact email");
         }
