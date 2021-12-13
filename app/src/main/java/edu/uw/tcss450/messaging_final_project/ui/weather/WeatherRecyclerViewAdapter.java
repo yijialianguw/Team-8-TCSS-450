@@ -5,8 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,7 +14,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import edu.uw.tcss450.messaging_final_project.R;
-import edu.uw.tcss450.messaging_final_project.databinding.FragmentContactCardBinding;
 import edu.uw.tcss450.messaging_final_project.databinding.FragmentWeatherRvDailyBinding;
 
 public class WeatherRecyclerViewAdapter extends RecyclerView.Adapter<WeatherRecyclerViewAdapter.MyViewHolder> {
@@ -31,8 +28,8 @@ public class WeatherRecyclerViewAdapter extends RecyclerView.Adapter<WeatherRecy
     }
 
     /**public void setWeatherViewModel(WeatherViewModel mWeatherViewModel) {
-        this.mWeatherViewModel = mWeatherViewModel;
-    }*/
+     this.mWeatherViewModel = mWeatherViewModel;
+     }*/
 
     @NonNull
     @Override
@@ -64,10 +61,10 @@ public class WeatherRecyclerViewAdapter extends RecyclerView.Adapter<WeatherRecy
         }
 
         private void setData(){
-            binding.idTVtime.setText(mWeatherForecast.getHour()+"");
-            binding.idTVtemperatureHour.setText(mWeatherForecast.getTemperature());
+            binding.idTVtime.setText(mWeatherForecast.getHourly()+"");
+            binding.idTVtemperatureHour.setText(mWeatherForecast.getTemperature()+"°F");
             Picasso.get().load("https://openweathermap.org/img/wn/".concat(mWeatherForecast.getIcon()).concat(".png")).into(binding.idIVConditionHour);
-            binding.idTVWindSpeedHour.setText(mWeatherForecast.getWindSpeed());
+            binding.idTVWindSpeedHour.setText(mWeatherForecast.getWindSpeed()+" m/h");
         }
 
         public void setWeatherForecast(final WeatherForecast weatherForecast){
@@ -78,5 +75,4 @@ public class WeatherRecyclerViewAdapter extends RecyclerView.Adapter<WeatherRecy
     }
 
 }
-
 

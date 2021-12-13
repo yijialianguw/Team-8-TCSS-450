@@ -90,9 +90,9 @@ public class WeatherFragment extends Fragment {
         mLocationModel = new ViewModelProvider(getActivity())
                 .get(LocationViewModel.class);
         mLocationModel.addLocationObserver(getViewLifecycleOwner(), location -> {
-                    longitude = location.getLongitude();
-                    latitude = location.getLongitude();
-                });
+            longitude = location.getLongitude();
+            latitude = location.getLongitude();
+        });
 
         binding.swipeContainer.setOnRefreshListener(()->{
             mWeatherViewModel.connect(String.valueOf(latitude), String.valueOf(longitude), mUserModel.getmJwt());
@@ -224,7 +224,7 @@ public class WeatherFragment extends Fragment {
         String dayString;
         switch (dayOfWeek) {
             case 1: dayString = "Sunday";
-                    break;
+                break;
             case 2: dayString = "Monday";
                 break;
             case 3: dayString = "Tuesday";
