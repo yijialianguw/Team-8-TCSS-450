@@ -191,8 +191,8 @@ public class WeatherFragment extends Fragment {
 
 
         binding.idSearch.setOnClickListener((button)->{
-            String city = binding.editCity.getText().toString();
-            String state = binding.editState.getText().toString();
+            String city = binding.editCity.getText().toString().trim();
+            String state = binding.editState.getText().toString().trim();
             if(city.length() > 1 && state.length() > 1){
                 mWeatherViewModel.connectLocation(city,state,mUserModel.getmJwt());
                 cityName = city.toUpperCase().substring(0,1) +  city.toLowerCase().substring(1);
