@@ -170,11 +170,19 @@ public class WeatherViewModel extends AndroidViewModel {
                 String date = new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(new java.util.Date (Integer.valueOf(time)*1000));
                 Log.e("WeatherVM", date);
                 String time_hour = date.substring(11, 13);
-                if (time_hour == "00") {
-                    time_hour = "12AM";;
-                } else if (time_hour.startsWith("0")) {
-                    time_hour = time_hour.substring(1, 2)+"AM";
-                }else if (Integer.valueOf(time_hour) > 12) {
+                Log.e("WeatherVM", time_hour);
+                if (time_hour.startsWith("0")) {
+                    if(time_hour.substring(1,2) == "0")
+                    {
+                        time_hour = "12AM";
+                    } else {
+                        time_hour = time_hour.substring(1, 2) + "AM";
+                    }
+                } else if (time_hour == "10" || time_hour == "11") {
+                    time_hour = time_hour + "AM";
+                } else if (time_hour == "12") {
+                        time_hour = time_hour + "PM";
+                } else if (Integer.valueOf(time_hour) > 12) {
                     time_hour = String.valueOf(Integer.valueOf(time_hour) - 12) + "PM";
                 }
                 Log.e("Weather", time_hour);
