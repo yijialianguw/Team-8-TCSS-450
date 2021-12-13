@@ -172,19 +172,20 @@ public class WeatherViewModel extends AndroidViewModel {
                 String time_hour = date.substring(11, 13);
                 Log.e("WeatherVM", time_hour);
                 if (time_hour.startsWith("0")) {
-                    if(time_hour.substring(1,2) == "0")
+                    if(Integer.valueOf(time_hour) == 0)
                     {
                         time_hour = "12AM";
                     } else {
                         time_hour = time_hour.substring(1, 2) + "AM";
                     }
-                } else if (time_hour == "10" || time_hour == "11") {
+                } else if (Integer.valueOf(time_hour) == 10 || Integer.valueOf(time_hour) == 11) {
                     time_hour = time_hour + "AM";
-                } else if (time_hour == "12") {
+                } else if (Integer.valueOf(time_hour) == 12) {
                         time_hour = time_hour + "PM";
                 } else if (Integer.valueOf(time_hour) > 12) {
                     time_hour = String.valueOf(Integer.valueOf(time_hour) - 12) + "PM";
                 }
+
                 Log.e("Weather", time_hour);
                 mWeatherForecasts.getValue().add(new WeatherForecast(time_hour,temp,icon,wind_speed));
                 // TODO: 69 is just a placeholder until we can get the actaul hour
