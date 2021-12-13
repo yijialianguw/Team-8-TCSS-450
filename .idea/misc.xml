@@ -18,6 +18,7 @@
         <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fragment_home.xml" value="0.21875" />
         <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fragment_messages.xml" value="0.2640625" />
         <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fragment_weather.xml" value="0.33" />
+        <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fragment_weather_rv_daily.xml" value="0.67" />
         <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/fragment_weather_rv_item.xml" value="0.1" />
         <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/layout/weather_rv_item.xml" value="0.21875" />
         <entry key="..\:/Users/cup_k/Team-8-TCSS-450/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2640625" />
@@ -27,10 +28,7 @@
         <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/layout/fragment_chat_message.xml" value="0.15625" />
         <entry key="..\:/Users/jeffs/Desktop/Team-8-TCSS-450/app/src/main/res/menu/bottom_nav_menu.xml" value="0.15989583333333332" />
         <entry key="..\:/Users/potaf/Desktop/tcss450/Team-8-TCSS-450-Client/app/src/main/res/layout/activity_main.xml" value="0.25769927536231885" />
-        <entry key="..\:/Users/potaf/Desktop/tcss450/Team-8-TCSS-450-Client/app/src/main/res/layout/fragment_account.xml" value="0.33" />
-        <entry key="..\:/Users/potaf/Desktop/tcss450/Team-8-TCSS-450-Client/app/src/main/res/layout/fragment_home.xml" value="0.3026041666666667" />
-        <entry key="..\:/Users/potaf/Desktop/tcss450/Team-8-TCSS-450-Client/app/src/main/res/layout/fragment_weather.xml" value="0.315625" />
-        <entry key="..\:/Users/potaf/Desktop/tcss450/Team-8-TCSS-450-Client/app/src/main/res/layout/fragment_weather_rv_daily.xml" value="0.315625" />
+        <entry key="..\:/Users/potaf/Desktop/tcss450/Team-8-TCSS-450-Client/app/src/main/res/layout/fragment_account.xml" value="0.21197916666666666" />
       </map>
     </option>
   </component>

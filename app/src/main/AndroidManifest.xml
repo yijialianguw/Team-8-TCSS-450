@@ -25,10 +25,13 @@
         android:roundIcon="@mipmap/ic_spooki_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp">
-        <activity android:name="edu.uw.tcss450.messaging_final_project.MainActivity"></activity>
+        <activity android:name="edu.uw.tcss450.messaging_final_project.MainActivity"
+            android:windowSoftInputMode="adjustNothing">
+        </activity>
         <activity android:name="edu.uw.tcss450.messaging_final_project.AuthActivity"
             android:exported="true">
-            <intent-filter>
+
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

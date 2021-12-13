@@ -19,7 +19,7 @@
     <color name="colorPrimary">#ae83d4</color>
     <color name="colorPrimaryDark">#43484f</color>
     <color name="colorAccent">#ae83d4</color>
-
+    <color name= "weatherColor">#FFFFFF</color>
     <!-- For Dark Mode -->
     <color name= "backgroundColor">#292D36</color>
     <color name= "textColor">#FFFFFF</color>

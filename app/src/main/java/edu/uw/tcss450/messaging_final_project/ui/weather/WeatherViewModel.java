@@ -50,7 +50,7 @@ public class WeatherViewModel extends AndroidViewModel {
     }
 
     public void addWeatherObserver(@NonNull LifecycleOwner owner,
-                                    @NonNull Observer<ArrayList<WeatherForecast>> observer) {
+                                   @NonNull Observer<ArrayList<WeatherForecast>> observer) {
         mWeatherForecasts.observe(owner, observer);
     }
 
